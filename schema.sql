@@ -19,6 +19,11 @@ create table public.classes (
   updated_at timestamptz default now()
 );
 
+-- Permisiuni de acces pentru utilizatorii logați (proiectele Supabase noi nu le dau automat).
+grant usage on schema public to authenticated;
+grant select, insert, update on public.profiles to authenticated;
+grant select, insert, update on public.classes to authenticated;
+
 -- Securitate: fiecare își modifică doar datele lui.
 alter table public.profiles enable row level security;
 alter table public.classes enable row level security;
@@ -51,3 +56,10 @@ end;
 $$;
 revoke execute on function public.scoate_din_clasa(text) from public, anon;
 grant execute on function public.scoate_din_clasa(text) to authenticated;
+
+-- Verifică dacă un nume de utilizator e liber (folosit la înregistrare, înainte de login).
+create or replace function public.username_liber(p_username text) returns boolean
+language sql security definer set search_path = '' stable as $$
+  select not exists (select 1 from public.profiles where username = lower(p_username));
+$$;
+grant execute on function public.username_liber(text) to anon, authenticated;
