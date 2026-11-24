@@ -294,7 +294,7 @@ function shuffleQ(q){if(q.o.length<=2)return Object.assign({},q);const p=shuffle
 // >>> CONFIGURARE: pune aici cheia "anon public" / "publishable" din Supabase (Project Settings → API Keys)
 const SUPABASE_URL='https://wawkhmqthbntzfczstzd.supabase.co';
 const SUPABASE_KEY='sb_publishable_i4K4uI-efXcJfPj_DwHR-A_RmM7dbiV';
-const EMAIL_DOMAIN='@capital18.app'; // conturile folosesc numele de utilizator; e-mailul e doar intern
+const userOf=user=>(user&&user.user_metadata&&user.user_metadata.username)||((user&&user.email)||'').split('@')[0];
 const DB_KEY='capital18_db_v1',SES_KEY='capital18_session',MODE_KEY='capital18_mode';
 const memStore={};
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return memStore[k]==null?null:memStore[k]}},set(k,v){try{localStorage.setItem(k,v)}catch(e){memStore[k]=v}},del(k){try{localStorage.removeItem(k)}catch(e){delete memStore[k]}}};
@@ -433,6 +433,7 @@ function viewRegister(){return `<div class="landing">
  <form data-f="register" autocomplete="off">
   <div class="seg" role="radiogroup"><label><input type="radio" name="role" value="elev" checked><span>🎒 Sunt elev</span></label><label><input type="radio" name="role" value="profesor"><span>🏫 Sunt profesor</span></label></div>
   <label class="f">Nume afișat</label><input name="name" required maxlength="30" placeholder="ex: Andrei P.">
+  ${isDemo()?'':'<label class="f">E-mail</label><input name="email" type="email" required maxlength="120" placeholder="ex: andrei@gmail.com" autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="email">'}
   <label class="f">Nume de utilizator</label><input name="u" required maxlength="20" placeholder="ex: andrei.p" autocapitalize="none" autocorrect="off" spellcheck="false">
   <div class="only-elev"><label class="f">Clasa</label><select name="grade"><option value="IX">a IX-a</option><option value="X">a X-a</option><option value="XI">a XI-a</option><option value="XII">a XII-a</option></select>
   <label class="f">Cod clasă de la profesor (opțional)</label><input name="code" maxlength="6" placeholder="ex: BANI26" autocapitalize="characters"></div>
@@ -447,7 +448,7 @@ function viewLogin(){return `<div class="landing">
  <button class="x" onclick="history.length>1?history.back():go('#/')" aria-label="Înapoi">←</button>
  <h1>Intră în cont</h1>
  <form data-f="login">
-  <label class="f">Nume de utilizator</label><input name="u" required autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="username">
+  ${isDemo()?'<label class="f">Nume de utilizator</label><input name="u" required autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="username">':'<label class="f">E-mail</label><input name="u" type="email" required autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="email">'}
   <label class="f">Parolă</label><input name="pw" type="password" required autocomplete="current-password">
   <div class="err" id="err"></div>
   <button class="btn mt">Intră</button>
@@ -683,7 +684,12 @@ function busy(form,on,label){const b=document.querySelector(`form[data-f=${form}
 async function cloudRegister(d,u,role){
  const err=m=>{const e=$('#err');if(e)e.textContent=m};busy('register',true,'Se creează contul…');
  try{
-  const {data,error}=await sb.auth.signUp({email:u+EMAIL_DOMAIN,password:d.pw});
+  const email=String(d.email||'').trim().toLowerCase();
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email))throw new Error('EMAIL');
+  const free=await sb.rpc('username_liber',{p_username:u});
+  if(free.error)throw free.error;
+  if(free.data===false)throw new Error('TAKEN');
+  const {data,error}=await sb.auth.signUp({email,password:d.pw,options:{data:{username:u}}});
   if(error)throw error;
   if(!data.session)throw new Error('CONFIRM');
   authId=data.user.id;cloudUser=u;await loadCloud();
@@ -695,20 +701,21 @@ async function cloudRegister(d,u,role){
   go(role==='profesor'?'#/class':'#/learn');toast(msg);
  }catch(e){
   cloudUser=null;authId=null;const m=String(e&&e.message||e);
-  err(m==='CONFIRM'?'Contul există, dar Supabase cere confirmare pe e-mail. Dezactivează „Confirm email” în Supabase.':/already|registered|exists/i.test(m)?'Numele de utilizator e deja luat.':/fetch|network/i.test(m)?'Nu ne putem conecta. Verifică internetul.':'Eroare: '+m);
+  err(m==='CONFIRM'?'Contul a fost creat. Confirmă-l din e-mailul primit, apoi intră în cont.':m==='EMAIL'?'Scrie o adresă de e-mail validă.':m==='TAKEN'?'Numele de utilizator e deja luat.':/already|registered|exists/i.test(m)?'Există deja un cont cu acest e-mail. Intră în cont.':/invalid/i.test(m)&&/email/i.test(m)?'Adresa de e-mail nu e validă.':/fetch|network/i.test(m)?'Nu ne putem conecta. Verifică internetul.':'Eroare: '+m);
   busy('register',false,'Creează contul');
  }
 }
 async function cloudLogin(u,pw){
  const err=m=>{const e=$('#err');if(e)e.textContent=m};busy('login',true,'Se intră…');
  try{
-  const {data,error}=await sb.auth.signInWithPassword({email:u+EMAIL_DOMAIN,password:pw});
+  if(!u.includes('@'))throw new Error('NEED_EMAIL');
+  const {data,error}=await sb.auth.signInWithPassword({email:u,password:pw});
   if(error)throw error;
-  authId=data.user.id;cloudUser=u;await loadCloud();await ensureProfile(u);
+  authId=data.user.id;cloudUser=userOf(data.user);u=cloudUser;await loadCloud();await ensureProfile(u);
   go(db.users[u].role==='profesor'?'#/class':'#/learn');
  }catch(e){
   cloudUser=null;authId=null;const m=String(e&&e.message||e);
-  err(/invalid|credentials/i.test(m)?'Nume de utilizator sau parolă greșită.':/fetch|network/i.test(m)?'Nu ne putem conecta. Verifică internetul.':'Eroare: '+m);
+  err(m==='NEED_EMAIL'?'Intră cu adresa de e-mail.':/not confirmed/i.test(m)?'Confirmă-ți întâi contul din e-mailul primit.':/invalid|credentials/i.test(m)?'E-mail sau parolă greșită.':/fetch|network/i.test(m)?'Nu ne putem conecta. Verifică internetul.':'Eroare: '+m);
   busy('login',false,'Intră');
  }
 }
@@ -753,7 +760,7 @@ async function boot(){
  $('#app').innerHTML='<div class="landing"><div class="logo" style="font-size:1.5rem;justify-content:center">Capital<b>18</b></div><p class="center muted">Se încarcă…</p></div>';
  try{
   const {data:{session}}=await sb.auth.getSession();
-  if(session){authId=session.user.id;cloudUser=(session.user.email||'').split('@')[0];await loadCloud();await ensureProfile(cloudUser)}
+  if(session){authId=session.user.id;cloudUser=userOf(session.user);await loadCloud();await ensureProfile(cloudUser)}
  }catch(e){cloudUser=null;authId=null;db=emptyDb();setTimeout(()=>toast('Nu ne putem conecta la server. Verifică internetul.'),100)}
  render();
 }
