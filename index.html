@@ -1,0 +1,764 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Capital18 – educație financiară pentru liceeni</title>
+<meta name="description" content="Lecții scurte despre bani, situații reale și Capitalul tău de 18 ani.">
+<meta name="theme-color" content="#0F8A6F">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<meta name="apple-mobile-web-app-title" content="Capital18">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="data:image/png;base64,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">
+<link rel="icon" type="image/png" href="data:image/png;base64,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">
+<style>
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+:root{--bg:#F6F4EE;--card:#fff;--ink:#17302B;--muted:#64756F;--line:#E5E0D4;--teal:#0F8A6F;--teal-d:#0B6A55;--teal-l:#E2F4EE;--gold:#F4B400;--gold-d:#C48F00;--gold-l:#FFF4D2;--red:#E0504F;--red-d:#B53A39;--red-l:#FDEBEA;--blue:#2F6FD6;--blue-l:#E6EFFC;--r:18px}
+html,body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-rounded,"SF Pro Rounded","Nunito","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;font-size:16px;line-height:1.45}
+body{min-height:100vh;min-height:100dvh}
+#app{max-width:520px;margin:0 auto;min-height:100vh;min-height:100dvh;position:relative}
+h1,h2,h3{margin:0 0 .4em;line-height:1.2}h1{font-size:1.6rem}h2{font-size:1.22rem}h3{font-size:1.05rem}
+p{margin:.3em 0 .8em}a{color:var(--teal)}
+.muted{color:var(--muted)}.small{font-size:.86rem}.center{text-align:center}.mt{margin-top:14px}.row{display:flex;gap:10px;align-items:center}.grow{flex:1;min-width:0}
+.btn{display:block;width:100%;border:0;border-radius:16px;padding:14px 18px;font:inherit;font-weight:800;font-size:.98rem;letter-spacing:.03em;text-transform:uppercase;cursor:pointer;background:var(--teal);color:#fff;box-shadow:0 4px 0 var(--teal-d);transition:transform .05s;text-align:center;text-decoration:none}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 var(--teal-d)}
+.btn.gold{background:var(--gold);color:#3b2a00;box-shadow:0 4px 0 var(--gold-d)}
+.btn.ghost{background:#fff;color:var(--teal);box-shadow:0 4px 0 var(--line);border:2px solid var(--line)}
+.btn.red{background:var(--red);box-shadow:0 4px 0 var(--red-d)}
+.btn[disabled]{background:#E4E1D8;color:#A39E91;box-shadow:0 4px 0 #CFCABD;cursor:not-allowed;transform:none}
+.btn.sm{display:inline-block;width:auto;padding:9px 14px;font-size:.78rem;border-radius:12px}
+.btn+.btn{margin-top:12px}
+.link{background:none;border:0;color:var(--teal);font:inherit;font-weight:700;cursor:pointer;padding:6px}
+.card{background:var(--card);border:2px solid var(--line);border-radius:var(--r);padding:16px;margin-bottom:14px}
+.card.gold{background:var(--gold-l);border-color:#F2DC94}
+.card.teal{background:var(--teal-l);border-color:#BFE6D8}
+.card.blue{background:var(--blue-l);border-color:#C7DAF7}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;background:var(--teal-l);color:var(--teal-d)}
+.pill.gold{background:var(--gold-l);color:#7a5a00}.pill.red{background:var(--red-l);color:var(--red-d)}.pill.gray{background:#EEEBE3;color:var(--muted)}
+label.f{display:block;font-weight:700;font-size:.88rem;margin:12px 0 6px}
+input,select,textarea{width:100%;font:inherit;font-size:1rem;padding:13px 14px;border:2px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--teal)}
+textarea{min-height:90px;resize:vertical}
+.seg{display:flex;background:#EAE6DB;border-radius:14px;padding:4px;gap:4px}
+.seg label,.seg button{flex:1;text-align:center;padding:10px 6px;border-radius:11px;font-weight:800;font-size:.85rem;cursor:pointer;color:var(--muted);border:0;background:none;font-family:inherit}
+.seg input{display:none}
+.seg input:checked+span,.seg .on{color:var(--ink)}
+.seg label:has(input:checked),.seg button.on{background:#fff;box-shadow:0 2px 0 var(--line);color:var(--ink)}
+.err{color:var(--red-d);font-weight:700;font-size:.9rem;margin-top:10px;min-height:1em}
+/* top & nav */
+.top{position:sticky;top:0;z-index:5;background:rgba(246,244,238,.95);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-between;gap:8px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;border-bottom:2px solid var(--line)}
+.logo{font-weight:900;font-size:1.15rem;color:var(--teal-d);display:flex;align-items:center;gap:6px}
+.logo b{background:var(--gold);color:#3b2a00;border-radius:8px;padding:0 6px}
+.stats{display:flex;gap:12px}
+.stat{display:flex;align-items:center;gap:3px;font-weight:900;font-size:.95rem}
+.stat.fire{color:#E8590C}.stat.xp{color:var(--blue)}.stat.coin{color:var(--gold-d)}
+main{padding:16px 16px calc(100px + env(safe-area-inset-bottom))}
+.nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:#fff;border-top:2px solid var(--line);display:flex;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:6}
+.nav a{flex:1;text-align:center;text-decoration:none;color:var(--muted);font-size:.68rem;font-weight:800;padding:6px 0 5px;border-radius:12px;margin:0 2px}
+.nav a .i{display:block;font-size:1.45rem;line-height:1.25;filter:grayscale(1);opacity:.65}
+.nav a.on{color:var(--teal-d);background:var(--teal-l)}.nav a.on .i{filter:none;opacity:1}
+/* path */
+.unit{margin:4px 0 30px}
+.unit-h{border-radius:var(--r);padding:16px;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.18);margin-bottom:22px;background:var(--c)}
+.unit-h small{opacity:.85;font-weight:700;text-transform:uppercase;letter-spacing:.05em;font-size:.72rem}
+.unit-h h2{margin:2px 0 4px;font-size:1.25rem}
+.unit-h .tag{display:inline-block;background:rgba(255,255,255,.22);padding:4px 10px;border-radius:99px;font-size:.76rem;font-weight:700;margin-top:6px}
+.path{display:flex;flex-direction:column;align-items:center;gap:26px;padding-top:12px}
+.nwrap{display:flex;flex-direction:column;align-items:center}
+.node{width:78px;height:72px;border-radius:50%;border:0;font-size:1.9rem;cursor:pointer;position:relative;background:var(--c);box-shadow:0 7px 0 var(--cd);color:#fff;font-family:inherit}
+.node:active{transform:translateY(4px);box-shadow:0 3px 0 var(--cd)}
+.node.done{background:var(--gold);box-shadow:0 7px 0 var(--gold-d)}
+.node.locked{background:#E2DED3;box-shadow:0 7px 0 #C9C4B6;cursor:default;font-size:1.5rem}
+.node.cur::after{content:'START';position:absolute;top:-36px;left:50%;transform:translateX(-50%);background:#fff;color:var(--cd);border:2px solid var(--line);padding:3px 10px;border-radius:10px;font-size:.72rem;font-weight:900;animation:bob 1.4s ease-in-out infinite;white-space:nowrap}
+.node.hw::before{content:'📌';position:absolute;right:-8px;top:-6px;font-size:1.1rem}
+@keyframes bob{50%{transform:translate(-50%,-5px)}}
+.nlbl{font-size:.8rem;font-weight:800;color:var(--muted);text-align:center;margin-top:12px;max-width:170px}
+/* run */
+.run{min-height:100vh;min-height:100dvh;display:flex;flex-direction:column;padding:calc(14px + env(safe-area-inset-top)) 16px 0}
+.run-top{display:flex;align-items:center;gap:12px}
+.x{background:none;border:0;font-size:1.7rem;color:var(--muted);cursor:pointer;padding:2px 6px;line-height:1}
+.bar{flex:1;height:16px;background:#E4E0D5;border-radius:99px;overflow:hidden}
+.bar>i{display:block;height:100%;background:var(--teal);border-radius:99px;transition:width .35s}
+.bar.gold>i{background:var(--gold)}
+.bar.sm{height:10px}
+.run-body{flex:1;padding:24px 0}
+.q-k{font-size:.78rem;font-weight:900;color:var(--blue);text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px}
+.q{font-size:1.28rem;font-weight:800;margin-bottom:20px}
+.opt{display:block;width:100%;text-align:left;font:inherit;font-size:1rem;font-weight:700;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:16px;padding:14px 16px;margin-bottom:11px;cursor:pointer;color:var(--ink)}
+.opt.sel{border-color:var(--blue);background:var(--blue-l);color:#1d4fa0}
+.opt.right{border-color:var(--teal);background:var(--teal-l);color:var(--teal-d)}
+.opt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red-d)}
+.opt[disabled]{cursor:default}
+.run-foot{position:sticky;bottom:0;margin:0 -16px;padding:16px 16px calc(16px + env(safe-area-inset-bottom));border-top:2px solid var(--line);background:var(--bg)}
+.run-foot.ok{background:var(--teal-l);border-color:#BFE6D8}
+.run-foot.bad{background:var(--red-l);border-color:#F5C9C7}
+.fb-t{font-weight:900;font-size:1.2rem;margin-bottom:4px}
+.ok .fb-t{color:var(--teal-d)}.bad .fb-t{color:var(--red-d)}
+.fb-x{font-size:.95rem;margin-bottom:14px}
+.ok .btn{background:var(--teal)}.bad .btn{background:var(--red);box-shadow:0 4px 0 var(--red-d)}
+.tipcard{background:#fff;border:2px solid var(--line);border-radius:var(--r);padding:18px;font-size:1.05rem}
+.big-emoji{font-size:4rem;text-align:center;margin:10px 0}
+.tiles{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:18px 0}
+.tile{border:2px solid var(--line);border-radius:16px;overflow:hidden;text-align:center;background:#fff}
+.tile b{display:block;font-size:.7rem;text-transform:uppercase;padding:5px;color:#fff;background:var(--tc,var(--teal))}
+.tile span{display:block;font-size:1.3rem;font-weight:900;padding:10px 4px}
+/* lists */
+.li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:2px solid var(--line)}
+.li:last-child{border-bottom:0}
+.av{width:46px;height:46px;border-radius:50%;background:var(--teal-l);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex:none}
+.av.lg{width:92px;height:92px;font-size:3.2rem;margin:0 auto 8px;border:4px solid #fff;box-shadow:0 0 0 2px var(--line)}
+.rank{width:26px;font-weight:900;color:var(--muted);text-align:center;flex:none}
+.li.me{background:var(--gold-l);margin:0 -16px;padding:12px 16px;border-radius:12px}
+.metrics{display:flex;gap:10px;flex-wrap:wrap;font-size:.8rem;font-weight:700;color:var(--muted);margin-top:2px}
+.sitgrid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.sit{background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:var(--r);padding:14px;cursor:pointer;text-align:left;font:inherit;color:var(--ink);position:relative}
+.sit .e{font-size:2rem}.sit h3{font-size:.95rem;margin:6px 0 6px}
+.sit .ck{position:absolute;right:10px;top:10px}
+.steps{counter-reset:s;list-style:none;padding:0;margin:0}
+.steps li{counter-increment:s;position:relative;padding:8px 0 8px 42px;border-bottom:1px dashed var(--line)}
+.steps li:last-child{border-bottom:0}
+.steps li::before{content:counter(s);position:absolute;left:0;top:7px;width:28px;height:28px;border-radius:50%;background:var(--teal);color:#fff;font-weight:900;display:flex;align-items:center;justify-content:center;font-size:.85rem}
+.badges{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.bdg{text-align:center;font-size:.68rem;font-weight:800;color:var(--muted)}
+.bdg i{display:flex;align-items:center;justify-content:center;width:58px;height:58px;margin:0 auto 4px;border-radius:50%;font-style:normal;font-size:1.8rem;background:var(--gold-l);border:3px solid var(--gold)}
+.bdg.off i{filter:grayscale(1);opacity:.35;background:#EEE;border-color:#DDD}
+.hero{background:linear-gradient(150deg,#0F8A6F,#0B5D4B);color:#fff;border-radius:22px;padding:20px;margin-bottom:14px;box-shadow:0 6px 0 #084536;position:relative;overflow:hidden}
+.hero .amt{font-size:2.6rem;font-weight:900;line-height:1.1;margin:6px 0}
+.hero .coin{position:absolute;right:-14px;top:-14px;font-size:6rem;opacity:.25;transform:rotate(-12deg)}
+.hero .bar{background:rgba(255,255,255,.25)}.hero .bar>i{background:var(--gold)}
+.avpick{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.avpick button{font-size:1.9rem;padding:8px 0;border-radius:14px;border:2px solid var(--line);background:#fff;cursor:pointer;position:relative}
+.avpick button.on{border-color:var(--teal);background:var(--teal-l)}
+.avpick button.lock{opacity:.45}
+.avpick button small{position:absolute;bottom:1px;right:4px;font-size:.6rem;font-weight:900;color:var(--muted)}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:14px}
+.kpi{background:#fff;border:2px solid var(--line);border-radius:16px;padding:12px}
+.kpi b{display:block;font-size:1.45rem;font-weight:900}
+.kpi span{font-size:.75rem;font-weight:700;color:var(--muted)}
+.code{font-family:ui-monospace,Menlo,Consolas,monospace;font-size:1.6rem;font-weight:900;letter-spacing:.18em;background:#fff;border:2px dashed var(--teal);border-radius:12px;padding:6px 12px;display:inline-block}
+#toast{position:fixed;left:50%;top:calc(16px + env(safe-area-inset-top));transform:translate(-50%,-140%);background:var(--ink);color:#fff;padding:12px 18px;border-radius:14px;font-weight:800;z-index:50;transition:transform .3s;max-width:90%;text-align:center;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+#toast.on{transform:translate(-50%,0)}
+#sheet{position:fixed;inset:0;z-index:40;display:none}
+#sheet.on{display:block}
+#sheet .bg{position:absolute;inset:0;background:rgba(10,30,25,.45)}
+#sheet .pane{position:absolute;left:50%;bottom:0;transform:translateX(-50%);width:100%;max-width:520px;background:var(--bg);border-radius:24px 24px 0 0;padding:20px 18px calc(22px + env(safe-area-inset-bottom));max-height:88vh;overflow:auto;animation:up .25s ease-out}
+@keyframes up{from{transform:translate(-50%,100%)}}
+.landing{padding:calc(36px + env(safe-area-inset-top)) 22px 30px;min-height:100vh;display:flex;flex-direction:column}
+.landing .mascot{font-size:5rem;text-align:center;margin:18px 0 6px}
+.feat{display:flex;gap:12px;align-items:flex-start;margin:12px 0}
+.feat i{font-style:normal;font-size:1.6rem;flex:none}
+.demo{display:flex;gap:8px;flex-wrap:wrap}
+.hr{height:2px;background:var(--line);margin:16px 0}
+</style>
+</head>
+<body>
+<div id="app"></div>
+<div id="toast"></div>
+<div id="sheet"><div class="bg" data-a="closesheet"></div><div class="pane" id="sheetpane"></div></div>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+'use strict';
+/* ================= CONȚINUT ================= */
+const UNITS=[
+{id:'u1',title:'Nevoi vs. dorințe',emoji:'🧭',c:'#3A8FD9',cd:'#2A6FAD',tag:'📊 Bugetul de bază: de aici pornește tot',lessons:[
+ {id:'u1l1',title:'Ce chiar îți trebuie',emoji:'🧭',tip:'<b>Nevoia</b> = fără ea ai o problemă reală (mâncare, transport la școală, telefon de bază).<br><b>Dorința</b> = îți face viața mai plăcută, dar poate aștepta. Nu e greșit să ai dorințe, important e să le alegi tu, nu impulsul.',qs:[
+  {q:'Care dintre acestea este o NEVOIE pentru un elev?',o:['Abonamentul de transport la școală','Al treilea hanorac de anul ăsta','Un skin nou în joc','Bubble tea în fiecare zi'],a:0,x:'Fără transport nu ajungi la școală. Restul sunt dorințe, adică lucruri care pot fi amânate.'},
+  {q:'Vrei adidași de 600 lei. Ce întrebare te ajută cel mai mult să decizi?',o:['Îi au și prietenii mei?','Câte săptămâni de bani de buzunar mă costă?','Sunt la reducere?','Arată bine în poze?'],a:1,x:'Transformă prețul în timp. Dacă primești 100 lei pe săptămână, adidașii costă 6 săptămâni.'},
+  {q:'Ce înseamnă „regula celor 24 de ore”?',o:['Aștepți o zi înainte de o cumpărătură neplanificată','Cumperi doar în primele 24 de ore ale reducerii','Returnezi orice în 24 de ore','Cheltuiești maximum 24 lei pe zi'],a:0,x:'Multe cumpărături impulsive dispar după o zi. Dacă tot o vrei și mâine, probabil chiar o vrei.'},
+  {q:'Telefonul tău merge bine, dar a apărut un model nou. Ce este noul telefon?',o:['Nevoie','Dorință'],a:1,x:'Dacă cel vechi funcționează, cel nou e o dorință. Poți să-l vrei, dar planifică-l.'}]},
+ {id:'u1l2',title:'Bugetul 50/30/20',emoji:'🥧',tip:'Un buget simplu: <b>50%</b> nevoi, <b>30%</b> dorințe, <b>20%</b> economii.<br>Trucul care chiar funcționează: <b>pune deoparte întâi</b>, cheltuie după.',qs:[
+  {q:'Primești 400 lei pe lună. După regula 50/30/20, cât pui deoparte?',o:['40 lei','80 lei','120 lei','200 lei'],a:1,x:'20% din 400 = 80 lei.'},
+  {q:'Ce înseamnă „plătește-te pe tine primul”?',o:['Pui economiile deoparte imediat ce primești banii','Îți cumperi ceva ție înainte de alții','Plătești datoriile la final','Ceri bani în avans'],a:0,x:'Dacă aștepți să „rămână ceva” la final de lună, de obicei nu rămâne nimic.'},
+  {q:'Care este cel mai bun obiectiv de economisire?',o:['Vreau să am bani','Strâng 600 lei pentru căști până în martie, adică 150 lei pe lună','Economisesc când îmi rămâne ceva','Nu mai cheltui nimic'],a:1,x:'Un obiectiv bun are o sumă, un termen și un pas lunar clar.'},
+  {q:'Unde e cel mai bine să ții banii puși deoparte?',o:['În portofel, cu banii de cheltuială','Într-un cont sau o pușculiță separată, greu de folosit zilnic','La un prieten','În contul din joc'],a:1,x:'Banii pe care îi vezi zilnic se cheltuie mai ușor. Separă-i.'}]}]},
+{id:'u2',title:'Cheltuieli mici și abonamente',emoji:'☕',c:'#E07A2E',cd:'#B45E1E',tag:'📊 23% nu înțeleg cheltuielile mici · 1 din 7 a dat bani pe Bolt săptămâna trecută',lessons:[
+ {id:'u2l1',title:'Banii care pleacă pe nesimțite',emoji:'🚕',tip:'O cheltuială mică repetată nu pare o decizie, dar se adună. <b>15 lei pe zi înseamnă 450 lei pe lună.</b> În chestionarul nostru, Bolt apare de 3 ori mai des la „ultimele 7 zile” decât la „primele cheltuieli”, pentru că nu îl percepem ca pe o decizie.',qs:[
+  {q:'Iei un Bolt de 18 lei de 3 ori pe săptămână. Cât te costă într-o lună (4 săptămâni)?',o:['54 lei','120 lei','216 lei','300 lei'],a:2,x:'18 × 3 × 4 = 216 lei. Cam cât o pereche de căști bune.'},
+  {q:'O cafea de 12 lei în fiecare zi de școală (20 de zile pe lună). Cât te costă într-un an școlar (9 luni)?',o:['240 lei','1.080 lei','2.160 lei','4.320 lei'],a:2,x:'12 × 20 × 9 = 2.160 lei.'},
+  {q:'Care e primul pas ca să controlezi cheltuielile mici?',o:['Să le notezi timp de 7 zile','Să nu mai ieși din casă','Să ceri mai mulți bani','Să plătești doar cu cardul'],a:0,x:'Nu poți schimba ce nu vezi. O săptămână de notițe îți arată unde se duc banii.'},
+  {q:'De ce plățile cu cardul sau telefonul par „mai ieftine”?',o:['Au mereu discount','Nu vezi banii plecând din mână','Banca plătește o parte','Nu par mai ieftine'],a:1,x:'Plata „fără durere” te face să cheltui mai mult. Activează notificările pentru fiecare plată.'}]},
+ {id:'u2l2',title:'Abonamente și taxări automate',emoji:'🔁',tip:'O perioadă gratuită de probă devine <b>plată automată</b> dacă nu anulezi. În chestionarul nostru, abonamentele uitate au fost <b>cea mai des întâlnită pățanie</b>, iar 2 elevi nu și-au primit banii înapoi nici după e-mailuri.',qs:[
+  {q:'Te abonezi la o probă gratuită de 7 zile. Ce faci imediat?',o:['Nimic, o să-mi amintesc','Pun un memento cu 1–2 zile înainte de final','Șterg aplicația și se anulează singur','Scot cardul din telefon'],a:1,x:'Un memento în calendar te scapă de cea mai frecventă capcană.'},
+  {q:'Dacă ștergi aplicația de pe telefon, se anulează abonamentul?',o:['Da','Nu, trebuie anulat din cont, App Store sau Google Play'],a:1,x:'Abonamentul e legat de cont, nu de aplicația instalată.'},
+  {q:'Ai 4 abonamente de câte 25 lei pe lună, dar folosești doar 2. Cât pierzi pe an?',o:['50 lei','300 lei','600 lei','1.200 lei'],a:2,x:'2 × 25 × 12 = 600 lei pe lucruri pe care nu le folosești.'},
+  {q:'Ți s-au luat bani pentru un abonament pe care l-ai anulat. Care e primul pas bun?',o:['Postezi pe TikTok','Scrii firmei, cu dovada anulării, iar dacă nu rezolvă, contești plata la bancă','Îți închizi contul bancar','Aștepți să se rezolve singur'],a:1,x:'Păstrează dovezile (capturi, e-mailuri). Banca poate contesta tranzacția (chargeback).'}]}]},
+{id:'u3',title:'Taxele din salariu',emoji:'💼',c:'#0F8A6F',cd:'#0B6A55',tag:'📊 Subiectul nr. 1: 40% dintre elevi nu îl înțeleg',lessons:[
+ {id:'u3l1',title:'Brut vs. net',emoji:'🧾',tip:'<b>Brut</b> = suma din contract. <b>Net</b> = ce primești efectiv în cont.<br>Din brut se rețin: <b>25% pensie (CAS)</b>, <b>10% sănătate (CASS)</b> și <b>10% impozit pe venit</b>, calculat după ce scazi CAS și CASS.',qs:[
+  {q:'Ce sumă ajunge efectiv în contul tău?',o:['Salariul brut','Salariul net','Costul angajatorului','Bonusul'],a:1,x:'Netul e suma care ajunge efectiv la tine.'},
+  {q:'Pentru ce plătești CAS (25%)?',o:['Pensia ta de mai târziu','Asigurarea mașinii','Taxa pe telefon','Concediul'],a:0,x:'CAS merge la sistemul public de pensii.'},
+  {q:'Pentru ce plătești CASS (10%)?',o:['Pentru sănătate: medic de familie, spital, rețete compensate','Transport în comun','Facultate','Pensie'],a:0,x:'CASS îți dă dreptul la servicii medicale din sistemul public.'},
+  {q:'Anunțul spune 5.000 lei brut. Cât primești, aproximativ, net (fără deduceri)?',o:['5.000 lei','4.500 lei','≈ 2.925 lei','≈ 1.500 lei'],a:2,x:'5.000 − 1.250 (CAS) − 500 (CASS) = 3.250. Impozit 10% = 325. Net ≈ 2.925 lei, adică cam 58%.'}]},
+ {id:'u3l2',title:'Primul fluturaș de salariu',emoji:'📬',tip:'Regulă rapidă: <b>netul e cam 58–60% din brut</b>. Când discuți un job, întreabă mereu dacă suma e brută sau netă. Salariul minim brut în România e 4.325 lei de la 1 iulie 2026.',qs:[
+  {q:'Un angajator îți spune „4.000 lei”. Ce întrebi?',o:['Brut sau net?','Când e pauza?','Am parcare?','Nimic'],a:0,x:'Diferența dintre brut și net e de peste 40%.'},
+  {q:'Salariu brut 4.000 lei. Cât e CAS (25%)?',o:['400 lei','1.000 lei','1.400 lei','250 lei'],a:1,x:'25% din 4.000 = 1.000 lei.'},
+  {q:'Impozitul de 10% se calculează din:',o:['Tot salariul brut','Brut minus CAS și CASS (și minus deducerea, dacă există)','Salariul net','Bonusuri'],a:1,x:'De aceea impozitul e mai mic decât 10% din brut.'},
+  {q:'De ce doi colegi cu același brut pot avea neturi puțin diferite?',o:['Deduceri personale sau facilități fiscale diferite','Au bănci diferite','Primesc salariul în zile diferite','Nu se poate'],a:0,x:'Deducerea personală (de exemplu pentru persoane în întreținere) scade impozitul.'}]}]},
+{id:'u4',title:'Credite și rate',emoji:'💳',c:'#8B5CF6',cd:'#6D3FD6',tag:'📊 37% nu înțeleg creditele · 55% la clasa a IX-a',lessons:[
+ {id:'u4l1',title:'Dobânda, pe înțeles',emoji:'🏦',tip:'Când împrumuți, dai înapoi <b>suma + dobânda</b>. <b>DAE</b> (dobânda anuală efectivă) include și comisioanele, de aceea e cifra după care compari ofertele.',qs:[
+  {q:'Împrumuți 1.000 lei și dai înapoi 1.150 lei. Cât te-a costat împrumutul?',o:['1.000 lei','150 lei','1.150 lei','15 lei'],a:1,x:'Costul e diferența: 150 lei.'},
+  {q:'Ca să compari două credite, te uiți în primul rând la:',o:['Rata lunară','DAE','Culoarea reclamei','Numele băncii'],a:1,x:'O rată mică pe o perioadă lungă poate costa mult mai mult în total.'},
+  {q:'Telefon: 3.000 lei cash sau 24 de rate × 150 lei. Cât plătești în plus cu ratele?',o:['0 lei','300 lei','600 lei','3.600 lei'],a:2,x:'24 × 150 = 3.600 lei. 3.600 − 3.000 = 600 lei în plus.'},
+  {q:'„Rate fără dobândă” înseamnă mereu că nu plătești nimic în plus?',o:['Da, mereu','Nu, pot exista comisioane, asigurări sau un preț de bază mai mare'],a:1,x:'Citește costul total, nu doar titlul ofertei.'}]},
+ {id:'u4l2',title:'Rate peste rate',emoji:'🧱',tip:'Ratele mici par ușoare, dar <b>mai multe rate deodată se adună</b>. Întârzierile aduc penalități și pot ajunge în Biroul de Credit, iar asta îți îngreunează creditele de mai târziu.',qs:[
+  {q:'Ai 3 rate: 90 + 120 + 60 lei. Câți bani pleacă lunar?',o:['170 lei','210 lei','270 lei','90 lei'],a:2,x:'90 + 120 + 60 = 270 lei în fiecare lună.'},
+  {q:'Ce se întâmplă dacă întârzii ratele?',o:['Nimic','Penalități și o înregistrare negativă care îți îngreunează creditele viitoare','Banca îți iartă datoria','Primești bonus'],a:1,x:'Istoricul de plată te urmărește ani de zile.'},
+  {q:'Care e diferența dintre cardul de debit și cel de credit?',o:['Sunt identice','Debit = banii tăi; credit = banii băncii, pe care îi dai înapoi (cu dobândă dacă întârzii)','Creditul e doar pentru firme','Debitul are dobândă'],a:1,x:'Cu cardul de credit cheltui bani împrumutați.'},
+  {q:'Un prieten îți cere 200 lei „până vineri”. Ce e cel mai înțelept?',o:['Îi dai tot ce ai','Împrumuți doar cât îți permiți să pierzi și stabiliți clar termenul','Iei tu un credit ca să-i dai','Refuzi mereu, din principiu'],a:1,x:'Împrumuturile între prieteni sunt riscante. Fii clar de la început.'}]}]},
+{id:'u5',title:'Inflația',emoji:'🎈',c:'#D94F70',cd:'#B03656',tag:'📊 23% nu înțeleg inflația',lessons:[
+ {id:'u5l1',title:'De ce se scumpește tot',emoji:'🛒',tip:'<b>Inflația</b> = creșterea generală a prețurilor. Cu aceeași sumă cumperi mai puțin în timp. Banii ținuți „la saltea” își pierd puterea de cumpărare.',qs:[
+  {q:'Inflația înseamnă:',o:['Prețurile scad','Prețurile cresc în general, iar banii cumpără mai puțin','Banca îți dă bani','Salariile cresc automat'],a:1,x:'Inflația îți „mănâncă” banii care stau pe loc.'},
+  {q:'Ai 1.000 lei în sertar și inflația e 5% pe an. După un an, banii tăi cumpără cam cât ar fi cumpărat azi:',o:['1.050 lei','1.000 lei','≈ 950 lei','500 lei'],a:2,x:'Suma e aceeași, dar prețurile au crescut, deci cumperi cam cât ai fi cumpărat azi cu ≈ 950 lei.'},
+  {q:'Ce te protejează, măcar parțial, de inflație?',o:['Banii în sertar','Un depozit sau o investiție cu randament apropiat de inflație sau mai mare','Să cheltui tot imediat','Să schimbi bancnotele'],a:1,x:'Banii trebuie să „lucreze” ca să țină pasul cu prețurile.'},
+  {q:'Salariul îți crește cu 5%, iar prețurile cu 8%. De fapt:',o:['Ești mai bogat','Poți cumpăra mai puțin decât înainte','Nu se schimbă nimic','Primești bonus'],a:1,x:'Contează creșterea reală: 5% − 8% ≈ −3%.'}]}]},
+{id:'u6',title:'Investiții și mituri',emoji:'📈',c:'#2E9C4A',cd:'#1F7A36',tag:'📊 23% nu înțeleg investițiile · 44% învață de pe social media',lessons:[
+ {id:'u6l1',title:'Risc și randament',emoji:'⚖️',tip:'Cu cât promisiunea de câștig e mai mare, cu atât <b>riscul e mai mare</b>. Nicio investiție reală nu garantează un profit mare și rapid.',qs:[
+  {q:'Cineva îți promite „20% pe lună, garantat”. Ce e cel mai probabil?',o:['O ocazie unică','O schemă sau o țeapă','Un depozit bancar','Un fond de investiții obișnuit'],a:1,x:'20% pe lună înseamnă peste 790% pe an. Promisiunile „garantate” de acest tip sunt semnal de alarmă.'},
+  {q:'Ce înseamnă diversificare?',o:['Pui toți banii într-o singură monedă','Împarți banii în mai multe investiții, ca să reduci riscul','Cumperi doar ce e la modă','Schimbi banca des'],a:1,x:'„Nu pune toate ouăle în același coș.”'},
+  {q:'Dobânda compusă înseamnă:',o:['Dobândă doar la suma inițială','Câștigi dobândă și la dobânda deja câștigată','O taxă bancară','Dobânda unui credit'],a:1,x:'De aceea timpul e cel mai bun prieten al investitorului.'},
+  {q:'Ce este, pe scurt, un ETF?',o:['Un singur „coș” cu acțiuni ale multor firme','Un credit','O criptomonedă','Un cont curent'],a:0,x:'Un ETF te ajută să diversifici ușor, cu o singură investiție.'}]},
+ {id:'u6l2',title:'Mituri de pe TikTok',emoji:'📱',tip:'Aproape 1 din 2 elevi din chestionar învață despre bani și de pe social media, iar ei au povestit mai des pățanii (37% față de 20%). Întreabă mereu: <b>cine câștigă din sfatul ăsta?</b>',qs:[
+  {q:'Un influencer arată mașini scumpe și vinde un curs „cum să devii bogat”. De unde câștigă cel mai probabil?',o:['Din investiții','Din vânzarea cursului','Din loterie','Din salariu'],a:1,x:'Adesea produsul real e cursul, nu metoda.'},
+  {q:'Ce înseamnă un post marcat „#ad” sau „colaborare plătită”?',o:['O părere independentă','Creatorul e plătit să promoveze','E fals','E un concurs'],a:1,x:'Nu e neapărat rău, dar nu e o părere neutră.'},
+  {q:'Pe termen lung, „secretul” cel mai sigur al investitorilor este:',o:['Să ghicești următoarea monedă','Timp + sume regulate + diversificare','Semnale de pe Telegram','Să te împrumuți ca să investești'],a:1,x:'Plictisitor, dar funcționează.'},
+  {q:'Când e momentul potrivit să începi să investești?',o:['După ce ai un fond de urgență și înțelegi riscul','Cu banii de chirie','Cu bani împrumutați','Niciodată'],a:0,x:'Investește doar bani de care nu ai nevoie pe termen scurt.'}]}]},
+{id:'u7',title:'Siguranța banilor online',emoji:'🛡️',c:'#334E68',cd:'#1F3448',tag:'📊 1 din 4 elevi a pățit deja ceva cu banii',lessons:[
+ {id:'u7l1',title:'Anti-țeapă',emoji:'🕵️',tip:'Semnale de alarmă: <b>grabă</b> („doar azi!”), plată <b>în afara platformei</b>, linkuri primite pe WhatsApp sau SMS, cereri de <b>cod, CVV sau PIN</b>.',qs:[
+  {q:'Pe OLX, un „cumpărător” îți trimite un link „ca să primești banii” și îți cere datele cardului. Ce faci?',o:['Introduci datele','Refuzi: ca să PRIMEȘTI bani nu ai nevoie de CVV sau de cod','Trimiți o poză cu cardul','Îi dai PIN-ul'],a:1,x:'Este una dintre cele mai frecvente țepe. Rămâi în chatul și plata platformei.'},
+  {q:'Ce nu dai niciodată nimănui?',o:['Numele','PIN-ul, CVV-ul și codurile primite prin SMS','Orașul','Prenumele'],a:1,x:'Nici banca, nici poliția nu îți cer vreodată PIN-ul sau codurile.'},
+  {q:'Un SMS „de la curier”: „Coletul e blocat, plătește 3 lei taxă” + link. Ce e?',o:['Normal','Phishing: nu intri pe link, verifici direct pe site-ul oficial al curierului'],a:1,x:'Suma mică e momeala. Scopul e să-ți fure datele cardului.'},
+  {q:'Ai introdus din greșeală datele cardului pe un site fals. Primul pas?',o:['Aștepți să vezi dacă se întâmplă ceva','Blochezi imediat cardul din aplicație sau suni la bancă','Schimbi parola de Instagram','Ștergi istoricul'],a:1,x:'Fiecare minut contează. Apoi poți raporta incidentul la DNSC (1911).'}]},
+ {id:'u7l2',title:'Cumpărături online inteligente',emoji:'📦',tip:'Înainte să cumperi: <b>recenzii cu poze reale</b>, <b>politica de retur</b>, <b>prețul total</b> cu transport. La Black Friday, compară cu prețul de acum o lună.',qs:[
+  {q:'Un produs are „−70% de Black Friday”. Ce verifici primul?',o:['Cât mai durează oferta','Dacă prețul de dinainte era real (istoricul prețului)','Culoarea','Câți l-au cumpărat'],a:1,x:'Unele „reduceri” pornesc de la un preț umflat cu puțin înainte.'},
+  {q:'În UE, la cumpărăturile online de la un magazin, de regulă te poți răzgândi în:',o:['24 de ore','14 zile','1 an','Nu te poți răzgândi'],a:1,x:'Dreptul de retragere e de 14 zile pentru cumpărăturile la distanță de la comercianți.'},
+  {q:'Produsul de pe o platformă online nu arată ca în poze. Ce faci?',o:['Nimic','Ceri retur sau rambursare în aplicație, cu poze, în termenul de retur','Lași doar o recenzie','Îl arunci'],a:1,x:'Fă poze imediat la deschiderea coletului și respectă termenul.'},
+  {q:'Toate recenziile de 5 stele sunt scrise în aceeași zi, fără poze. Ce înseamnă?',o:['Produsul e excelent','Pot fi recenzii false'],a:1,x:'Caută recenzii cu poze și detalii concrete.'}]}]}
+];
+const SITS=[
+{id:'abonament',e:'🔁',t:'Mi s-au luat bani pentru un abonament',tag:'Cea mai des întâlnită pățanie (6 elevi)',story:'Ai făcut o probă gratuită la o aplicație sau la sală. Ai uitat de ea, iar acum vezi o plată pe card. Uneori te taxează chiar și după ce ai anulat.',steps:['Verifică extrasul: ce firmă, ce sumă, de când.','Anulează abonamentul din contul firmei sau din App Store / Google Play. Ștergerea aplicației nu e suficientă.','Scrie firmei un e-mail scurt cu dovada anulării și cere rambursarea.','Dacă nu răspunde în câteva zile, sună la bancă și contestă tranzacția (chargeback).','Pe viitor: pune un memento la fiecare probă gratuită sau folosește un card virtual.'],tip:'Fă capturi de ecran la anulare. Fără dovadă, banii se recuperează greu.',quiz:{q:'Ce NU anulează un abonament?',o:['Anularea din cont','Ștergerea aplicației de pe telefon','Anularea din App Store / Google Play'],a:1}},
+{id:'poze',e:'📦',t:'Produsul nu arată ca în poze',tag:'Pățit de 3 elevi (Temu, târg, haine online)',story:'Ai comandat un hanorac care arăta perfect în poze. A venit subțire, cu altă culoare și altă mărime.',steps:['Fă poze și un video scurt imediat ce deschizi coletul.','Deschide o cerere de retur sau rambursare în aplicație, în termenul de retur.','Descrie clar problema: „culoare diferită”, „material diferit față de descriere”.','Dacă vânzătorul refuză, escaladează la platformă, apoi la bancă (contestație).'],tip:'Înainte să comanzi, caută recenzii cu poze reale de la cumpărători.',quiz:{q:'Ce te ajută cel mai mult să-ți recuperezi banii?',o:['Poze de la deschiderea coletului + cerere în termen','O recenzie de o stea','Să aștepți'],a:0}},
+{id:'olx',e:'🕵️',t:'Țeapă pe OLX / Marketplace',tag:'2 elevi au pățit o înșelătorie',story:'Vinzi ceva. Un „cumpărător” zice că plătește prin curier și îți trimite pe WhatsApp un link „ca să încasezi banii”. Linkul îți cere datele cardului.',steps:['Nu ieși din chatul platformei. Cine insistă să mutați discuția pe WhatsApp e suspect.','Ca să primești bani nu ai nevoie niciodată de CVV, PIN sau cod din SMS.','Dacă ai introdus datele: blochează imediat cardul din aplicația băncii.','Sună la bancă, raportează contul pe platformă și anunță incidentul la DNSC (1911).'],tip:'Graba („acum, altfel pierzi”) e cel mai folosit truc.',quiz:{q:'Ca să PRIMEȘTI bani pe card, ai nevoie să dai:',o:['CVV-ul','Codul din SMS','Nimic din acestea'],a:2}},
+{id:'imprumut',e:'🤝',t:'Am împrumutat un prieten și nu-mi dă banii',tag:'Poveste reală din chestionar',story:'I-ai dat unui coleg 150 lei „până săptămâna viitoare”. Au trecut două luni și schimbă subiectul.',steps:['Amintește-i calm, în scris, suma și ce ați stabilit.','Propune o variantă ușoară: plătește în tranșe, de exemplu 50 lei pe săptămână.','Hotărăște cât contează pentru tine: banii sau prietenia.','Pe viitor: împrumută doar cât îți permiți să pierzi și stabiliți data din start.'],tip:'Un mesaj scris („îți dau 150 lei, mi-i dai pe 15”) evită neînțelegerile.',quiz:{q:'Regula de aur la împrumuturile între prieteni:',o:['Dai cât îți cere','Dai doar cât îți permiți să pierzi','Iei credit ca să-l ajuți'],a:1}},
+{id:'salariu',e:'💼',t:'Primul meu job de vară',tag:'Pregătire pentru taxe (40% din chestionar)',story:'Ai găsit un job de vară. Ți se spune „2.500 lei”, dar în cont vin mai puțini.',steps:['Întreabă dacă suma e brută sau netă. Netul e cam 58–60% din brut.','Lucrează doar cu contract. Fără contract nu ai protecție și nu ai vechime.','Sub 18 ani: poți lucra cu acordul părinților, cel mult 6 ore pe zi și 30 pe săptămână.','Verifică fluturașul: brut, CAS 25%, CASS 10%, impozit 10%, net.'],tip:'Calculează-ți netul înainte să accepți. Așa știi exact cu ce bani rămâi.',quiz:{q:'„2.500 lei brut” înseamnă în mână aproximativ:',o:['2.500 lei','≈ 1.460 lei','≈ 2.200 lei'],a:1}},
+{id:'rate',e:'📱',t:'Vreau un telefon în rate',tag:'Credite și rate: 37% nu le înțeleg',story:'Telefonul costă 4.000 lei, dar „doar 199 lei pe lună”. Pare simplu.',steps:['Înmulțește: 199 × numărul de luni = costul total.','Compară costul total cu prețul cash. Diferența e prețul împrumutului.','Uită-te la DAE și la comisioane, nu doar la rată.','Întreabă-te: îmi permit rata și dacă apare o cheltuială neprevăzută?'],tip:'Dacă nu-ți permiți telefonul cash, poate îți permiți un model mai ieftin.',quiz:{q:'199 lei × 24 de luni pentru un telefon de 4.000 lei. Cât plătești în plus?',o:['0 lei','776 lei','199 lei'],a:1}},
+{id:'cadou',e:'🎁',t:'Am primit bani de ziua mea',tag:'Doar 1 din 6 elevi pune deoparte',story:'Ai primit 500 lei. Prima tentație: haine și ieșiri.',steps:['Pune deoparte o parte, întâi: de exemplu 20% (100 lei).','Alege un singur lucru important pe care îl vrei de mult.','Lasă o sumă mică pentru distracție, fără vinovăție.','Notează ce ai cumpărat și cât te-a bucurat după o săptămână.'],tip:'Banii primiți „din senin” se evaporă cel mai repede.',quiz:{q:'Ce faci primul când primești o sumă?',o:['Cumperi ce vrei de mult','Pui deoparte o parte','Împrumuți prietenii'],a:1}},
+{id:'blackfriday',e:'🏷️',t:'Black Friday: reducere sau capcană?',tag:'5 elevi au povestit cumpărături impulsive',story:'Totul e „−60%” și cronometrul arată că mai ai 10 minute. Coșul se umple singur.',steps:['Fă lista înainte de reduceri și cumpără doar de pe ea.','Verifică istoricul prețului (prețul de acum o lună).','Aplică regula de 24 de ore la tot ce nu e pe listă.','Calculează prețul total, cu transport și retur.'],tip:'Cronometrele și „ultimele 2 bucăți” sunt făcute ca să te grăbească.',quiz:{q:'Cel mai bun scut contra cumpărăturilor impulsive:',o:['O listă făcută dinainte','Cardul de credit','Notificările de la magazine'],a:0}},
+{id:'bolt',e:'🚕',t:'Iau Bolt aproape zilnic',tag:'Bolt la 1 din 7 elevi săptămâna trecută',story:'Întârzii puțin, e frig, e mai comod. 15–20 lei o cursă nu pare mult.',steps:['Adună cursele din ultima lună din istoricul aplicației.','Compară cu abonamentul de transport sau cu mersul pe jos.','Stabilește o regulă: Bolt doar seara târziu sau când plouă.','Mută suma economisită direct în pușculiță.'],tip:'Cheltuielile mici repetate nu par decizii, dar sunt.',quiz:{q:'20 lei × 4 curse pe săptămână × 4 săptămâni =',o:['80 lei','320 lei','160 lei'],a:1}},
+{id:'card',e:'🔒',t:'Mi-am pierdut cardul',tag:'Siguranța banilor',story:'Nu-ți găsești cardul după ce ai fost la mall.',steps:['Blochează-l imediat din aplicația băncii (de obicei se poate bloca temporar).','Verifică ultimele tranzacții.','Dacă vezi plăți necunoscute, sună la bancă și contestă-le.','Cere un card nou și activează notificările pentru fiecare plată.'],tip:'Blocarea temporară e gratuită și se poate anula dacă găsești cardul.',quiz:{q:'Primul lucru când pierzi cardul:',o:['Îl cauți o săptămână','Îl blochezi din aplicație','Postezi pe Instagram'],a:1}}
+];
+const CHALLENGES=[
+{id:'nobolt',e:'🚶',t:'7 zile fără Bolt sau taxi',d:'Mergi pe jos, cu bicicleta sau cu transportul în comun.',xp:20,fund:20},
+{id:'jurnal',e:'📝',t:'Notează toate cheltuielile 3 zile',d:'Chiar și o gumă. Vezi unde se duc banii.',xp:15,fund:15},
+{id:'abon',e:'✂️',t:'Verifică-ți abonamentele',d:'Uită-te în App Store / Google Play și anulează unul pe care nu-l folosești.',xp:20,fund:20},
+{id:'24h',e:'⏳',t:'Regula celor 24 de ore',d:'Amână o cumpărătură neplanificată cu o zi.',xp:10,fund:10},
+{id:'10la100',e:'🐷',t:'Pune deoparte 10%',d:'Din următorii bani primiți, pune 10% deoparte imediat.',xp:15,fund:15},
+{id:'explica',e:'🗣️',t:'Explică-i cuiva brut vs. net',d:'Unui părinte, frate sau prieten. Dacă poți explica, ai înțeles.',xp:10,fund:10}
+];
+const BADGES=[
+{id:'first',e:'🌱',n:'Primul pas',d:'Prima lecție terminată',t:u=>nDone(u)>=1},
+{id:'perfect',e:'💯',n:'Fără greșeală',d:'O lecție perfectă',t:u=>Object.values(u.done).some(d=>d.perfect)},
+{id:'streak3',e:'🔥',n:'3 zile la rând',d:'Serie de 3 zile',t:u=>u.maxStreak>=3},
+{id:'streak7',e:'⚡',n:'O săptămână',d:'Serie de 7 zile',t:u=>u.maxStreak>=7},
+{id:'net',e:'🧾',n:'Știu ce e netul',d:'Unitatea „Taxele din salariu”',t:u=>unitDone(u,'u3')},
+{id:'rate',e:'🧱',n:'Fără capcane la rate',d:'Unitatea „Credite și rate”',t:u=>unitDone(u,'u4')},
+{id:'antiteapa',e:'🛡️',n:'Anti-țeapă',d:'Unitatea „Siguranța online”',t:u=>unitDone(u,'u7')},
+{id:'detectiv',e:'🔎',n:'Detectiv',d:'5 situații rezolvate',t:u=>Object.keys(u.sit).length>=5},
+{id:'econom',e:'🐷',n:'Econom',d:'Obiectivul lunii atins',t:u=>goalAmt(u)>0&&saved(u)>=goalAmt(u)},
+{id:'provocare',e:'🎯',n:'Provocare acceptată',d:'Prima provocare făcută',t:u=>Object.keys(u.ch).length>=1},
+{id:'gasca',e:'👥',n:'Gașca',d:'3 prieteni adăugați',t:u=>u.friends.length>=3},
+{id:'pregatit',e:'🎓',n:'Sunt pregătit',d:'Testul final trecut',t:u=>!!(u.finalTest&&u.finalTest.passed)}
+];
+const AVATARS=[['🦊',1],['🐼',1],['🐸',1],['🐨',1],['🐧',2],['🦉',3],['🐯',4],['🐙',5],['🦄',6],['🦁',7],['🐲',8],['👑',10]];
+const ALL=UNITS.flatMap(u=>u.lessons.map((l,i)=>Object.assign({},l,{unit:u,idx:i})));
+const LES=Object.fromEntries(ALL.map(l=>[l.id,l]));
+const SIT=Object.fromEntries(SITS.map(s=>[s.id,s]));
+const TOTAL=ALL.length, UNLOCK_FINAL=9, PASS=8;
+const START_REFS=[['u1l2',0],['u2l1',0],['u3l1',3],['u4l1',2],['u5l1',1],['u6l1',0],['u7l1',0]];
+
+/* ================= UTILITARE ================= */
+const $=s=>document.querySelector(s);
+const esc=s=>String(s==null?'':s).replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const pad=n=>String(n).padStart(2,'0');
+const dayKey=(d=new Date())=>d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate());
+const addDays=n=>{const d=new Date();d.setDate(d.getDate()+n);return dayKey(d)};
+const monthKey=()=>dayKey().slice(0,7);
+const fmt=n=>Math.round(n).toLocaleString('ro-RO');
+const fmtDate=k=>{if(!k)return '—';const [y,m,d]=k.split('-');return d+'.'+m};
+function cyrb(str,seed){let h1=0xdeadbeef^seed,h2=0x41c6ce57^seed;for(let i=0,ch;i<str.length;i++){ch=str.charCodeAt(i);h1=Math.imul(h1^ch,2654435761);h2=Math.imul(h2^ch,1597334677)}h1=Math.imul(h1^(h1>>>16),2246822507);h1^=Math.imul(h2^(h2>>>13),3266489909);h2=Math.imul(h2^(h2>>>16),2246822507);h2^=Math.imul(h1^(h1>>>13),3266489909);return (4294967296*(2097151&h2)+(h1>>>0)).toString(16)}
+const hashPw=(u,p)=>{const s='c18|'+u.toLowerCase()+'|'+p;return cyrb(s,7)+cyrb(s,1337)};
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function shuffleQ(q){if(q.o.length<=2)return Object.assign({},q);const p=shuffle(q.o.map((_,i)=>i));return Object.assign({},q,{o:p.map(i=>q.o[i]),a:p.indexOf(q.a)})}
+
+/* ================= DATE: Supabase (online) + mod demo (local) ================= */
+// >>> CONFIGURARE: pune aici cheia "anon public" / "publishable" din Supabase (Project Settings → API Keys)
+const SUPABASE_URL='https://wawkhmqthbntzfczstzd.supabase.co';
+const SUPABASE_KEY='PUNE_AICI_CHEIA_ANON';
+const EMAIL_DOMAIN='@capital18.app'; // conturile folosesc numele de utilizator; e-mailul e doar intern
+const DB_KEY='capital18_db_v1',SES_KEY='capital18_session',MODE_KEY='capital18_mode';
+const memStore={};
+const store={get(k){try{return localStorage.getItem(k)}catch(e){return memStore[k]==null?null:memStore[k]}},set(k,v){try{localStorage.setItem(k,v)}catch(e){memStore[k]=v}},del(k){try{localStorage.removeItem(k)}catch(e){delete memStore[k]}}};
+const sb=(window.supabase&&!SUPABASE_KEY.startsWith('PUNE_'))?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
+const isDemo=()=>!sb||store.get(MODE_KEY)==='demo';
+let db={users:{},classes:{},v:1},cloudUser=null,authId=null,pushT=null,pushing=null,dirty=false;
+const emptyDb=()=>({users:{},classes:{},v:1});
+function save(){if(isDemo()){store.set(DB_KEY,JSON.stringify(db));return}dirty=true;clearTimeout(pushT);pushT=setTimeout(pushNow,400)}
+async function pushNow(){
+ clearTimeout(pushT);if(isDemo()||!cloudUser||!authId)return;
+ if(pushing)await pushing;if(!dirty)return;dirty=false;
+ const u=db.users[cloudUser];if(!u)return;
+ pushing=(async()=>{const now=new Date().toISOString();
+  const r1=await sb.from('profiles').upsert({id:authId,username:u.u,role:u.role,class_code:u.classCode||null,data:Object.assign({},u,{pass:null}),updated_at:now});
+  if(r1.error){dirty=true;toast('Nu s-a putut salva. Verifică internetul.')}
+  if(u.role==='profesor'){const mine=Object.values(db.classes).filter(c=>c.teacher===u.u);
+   if(mine.length){const r2=await sb.from('classes').upsert(mine.map(c=>({code:c.code,teacher:authId,data:c,updated_at:now})));if(r2.error){dirty=true;toast('Clasa nu s-a putut salva.')}}}
+ })();
+ try{await pushing}finally{pushing=null}
+}
+async function loadCloud(){
+ const [p,c]=await Promise.all([sb.from('profiles').select('username,data'),sb.from('classes').select('code,data')]);
+ if(p.error||c.error)throw (p.error||c.error);
+ const d=emptyDb();
+ p.data.forEach(r=>{if(r.data&&r.data.u)d.users[r.username]=r.data});
+ c.data.forEach(r=>{if(r.data&&r.data.code)d.classes[r.code]=r.data});
+ db=d;
+}
+async function refresh(){if(isDemo()||!cloudUser)return;await pushNow();await loadCloud()}
+async function ensureProfile(u){if(!db.users[u]){db.users[u]=Object.assign(newUser({u,name:u,pw:''}),{pass:null});dirty=true;await pushNow()}}
+function loadDb(){try{db=JSON.parse(store.get(DB_KEY))}catch(e){db=null}if(!db||!db.users){db=seed();store.set(DB_KEY,JSON.stringify(db))}}
+function me(){if(isDemo()){const k=store.get(SES_KEY);return k&&db.users[k]?db.users[k]:null}return cloudUser&&db.users[cloudUser]?db.users[cloudUser]:null}
+function newUser(o){return{u:o.u,name:o.name,role:o.role||'elev',grade:o.grade||'',pass:hashPw(o.u,o.pw),avatar:o.avatar||'🦊',classCode:o.classCode||null,xp:0,fund:0,xpLog:{},streak:0,maxStreak:0,lastDay:null,done:{},sit:{},ch:{},friends:[],budget:0,goalPct:20,savings:{},badges:{},startTest:null,finalTest:null,created:dayKey()}}
+const nDone=u=>Object.keys(u.done).length;
+const unitDone=(u,id)=>UNITS.find(x=>x.id===id).lessons.every(l=>u.done[l.id]);
+const level=u=>Math.floor(u.xp/100)+1;
+const weekXp=u=>{const from=addDays(-6);return Object.entries(u.xpLog).reduce((s,[k,v])=>k>=from?s+v:s,0)};
+const saved=u=>u.savings[monthKey()]||0;
+const goalAmt=u=>Math.round((u.budget||0)*(u.goalPct||0)/100);
+const goalPct=u=>goalAmt(u)?Math.round(saved(u)/goalAmt(u)*100):0;
+const streakNow=u=>(u.lastDay===dayKey()||u.lastDay===addDays(-1))?u.streak:0;
+const pct=t=>t?Math.round(t.score/t.total*100):null;
+function touchStreak(u){const t=dayKey();if(u.lastDay===t)return;u.streak=(u.lastDay===addDays(-1))?u.streak+1:1;u.lastDay=t;u.maxStreak=Math.max(u.maxStreak,u.streak)}
+function checkBadges(u){const nw=[];BADGES.forEach(b=>{if(!u.badges[b.id]&&b.t(u)){u.badges[b.id]=dayKey();nw.push(b)}});return nw}
+function award(u,xp,fund){touchStreak(u);u.xp+=xp;u.fund+=fund;const t=dayKey();u.xpLog[t]=(u.xpLog[t]||0)+xp;return checkBadges(u)}
+function classOf(u){return u.classCode&&db.classes[u.classCode]?db.classes[u.classCode]:null}
+function studentsOf(code){return Object.values(db.users).filter(s=>s.role==='elev'&&s.classCode===code)}
+
+function seed(){
+ const d={users:{},classes:{},v:1};
+ const add=o=>{const u=newUser(Object.assign({pw:'demo123'},o));d.users[u.u]=u;return u};
+ add({u:'prof.demo',name:'Prof. Ionescu',role:'profesor',avatar:'🦉'});
+ d.classes.BANI26={code:'BANI26',name:'a IX-a B',teacher:'prof.demo',created:dayKey(),hw:[{id:'h1',type:'lesson',ref:'u4l1',due:addDays(3)},{id:'h2',type:'sit',ref:'abonament',due:addDays(5)}]};
+ const order=ALL.map(l=>l.id);
+ const P=[
+  ['elev.demo','Andrei Pop','IX','🦊',4,300,20,45,4,null,3,-1,['abonament'],['jurnal']],
+  ['ana.m','Ana Marin','IX','🐼',9,400,25,110,3,9,12,0,['abonament','olx','poze','rate','cadou'],['nobolt','abon','10la100']],
+  ['mihai.p','Mihai Popescu','IX','🐸',6,250,10,10,2,null,5,0,['bolt'],['24h']],
+  ['ioana.r','Ioana Radu','IX','🦉',11,500,20,70,5,8,20,0,['olx','salariu','rate','card','blackfriday','bolt'],['jurnal','explica','abon']],
+  ['david.s','David Stan','IX','🐧',2,200,15,0,3,null,4,-9,[],[]],
+  ['sara.t','Sara Toma','IX','🐯',7,350,20,50,4,6,2,-1,['poze','cadou'],['10la100']]];
+ P.forEach(([u,name,grade,av,n,budget,gp,sv,st,fin,streak,last,sits,chs])=>{
+  const x=add({u,name,grade,avatar:av,classCode:'BANI26'});
+  order.slice(0,n).forEach((id,i)=>x.done[id]={date:addDays(-(n-i)),perfect:i%3===0});
+  sits.forEach(s=>x.sit[s]=true);chs.forEach(c=>x.ch[c]=addDays(-3));
+  x.budget=budget;x.goalPct=gp;x.savings[monthKey()]=sv;
+  x.startTest={score:st,total:7,date:addDays(-20)};
+  if(fin!=null)x.finalTest={score:fin,total:10,date:addDays(-1),passed:fin>=PASS};
+  x.streak=streak;x.maxStreak=streak;x.lastDay=addDays(last);
+  x.xp=n*13+sits.length*3+chs.length*15+(x.finalTest&&x.finalTest.passed?50:0)+5;
+  x.fund=n*12+sits.length*3+chs.length*15+(x.finalTest&&x.finalTest.passed?100:0)+5;
+  for(let i=0;i<7;i++){if(last<=-7)break;const v=Math.round([12,0,15,25,10,13,20][(i+n)%7]*(0.4+n/8));if(v)x.xpLog[addDays(-i)]=v}
+ });
+ const fr=(a,b)=>{d.users[a].friends.push(b);d.users[b].friends.push(a)};
+ fr('elev.demo','ana.m');fr('elev.demo','mihai.p');fr('elev.demo','ioana.r');fr('ana.m','ioana.r');fr('sara.t','ana.m');
+ Object.values(d.users).forEach(u=>{if(u.role==='elev')BADGES.forEach(b=>{if(b.t(u))u.badges[b.id]=addDays(-2)})});
+ return d;
+}
+
+/* ================= UI DE BAZĂ ================= */
+const state={run:null,sitAns:{},fSort:'save',fScope:'friends'};
+let toastT;
+function toast(msg){const t=$('#toast');t.textContent=msg;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2400)}
+function openSheet(html){$('#sheetpane').innerHTML=html;$('#sheet').classList.add('on')}
+function closeSheet(){$('#sheet').classList.remove('on')}
+function go(h){if(location.hash===h)render();else location.hash=h}
+const isStandalone=()=>window.matchMedia&&matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+let lastRoute='';
+
+function shell(u,inner,tab){
+ const T=u.role==='profesor'
+  ?[['class','🏫','Clase'],['learn','📚','Lecții'],['sit','💡','Situații'],['profile',u.avatar,'Profil']]
+  :[['learn','📚','Învață'],['sit','💡','Situații'],['capital','🪙','Capital 18'],['friends','👥','Prieteni'],['profile',u.avatar,'Profil']];
+ const top=u.role==='profesor'
+  ?`<div class="logo">Capital<b>18</b></div><span class="pill">Profesor</span>`
+  :`<div class="logo">Capital<b>18</b></div><div class="stats"><span class="stat fire" title="Serie de zile">🔥${streakNow(u)}</span><span class="stat xp" title="XP">⚡${fmt(u.xp)}</span><span class="stat coin" title="Fondul tău virtual">🪙${fmt(u.fund)}</span></div>`;
+ return `<header class="top">${top}</header><main>${inner}</main><nav class="nav">${T.map(([k,i,l])=>`<a href="#/${k}" class="${tab===k?'on':''}"><span class="i">${i}</span>${l}</a>`).join('')}</nav>`;
+}
+function render(){
+ const u=me();const parts=location.hash.replace(/^#\/?/,'').split('/');const r=parts[0]||'';
+ const app=$('#app');let html,tab=r,full=false;
+ if(!u){html=r==='register'?viewRegister():r==='login'?viewLogin():viewLanding();full=true}
+ else if(r==='run'&&state.run){html=viewRun();full=true}
+ else{
+  if(r==='run'||r===''||r==='login'||r==='register'){return go(u.role==='profesor'?'#/class':'#/learn')}
+  switch(r){
+   case 'learn':html=viewLearn(u);break;
+   case 'sit':html=parts[1]&&SIT[parts[1]]?viewSit(u,parts[1]):viewSits(u);break;
+   case 'capital':html=u.role==='elev'?viewCapital(u):viewLearn(u);break;
+   case 'friends':html=u.role==='elev'?viewFriends(u):viewLearn(u);break;
+   case 'profile':html=viewProfile(u);break;
+   case 'class':html=u.role==='profesor'?(parts[1]&&db.classes[parts[1]]?viewClass(u,parts[1]):viewClasses(u)):viewLearn(u);if(u.role!=='profesor')tab='learn';break;
+   default:return go('#/learn');
+  }
+ }
+ app.innerHTML=full?html:shell(u,html,tab);
+ if(location.hash!==lastRoute){window.scrollTo(0,0);lastRoute=location.hash}
+}
+
+/* ================= AUTENTIFICARE ================= */
+function viewLanding(){return `<div class="landing">
+ <div class="logo" style="font-size:1.5rem;justify-content:center">Capital<b>18</b></div>
+ <div class="mascot">🐷🪙</div>
+ <h1 class="center">Ce nu ne învață nimeni despre bani</h1>
+ <p class="center muted">Lecții de 3 minute, situații reale și un fond care crește odată cu tine până la 18 ani.</p>
+ <div class="feat"><i>📚</i><div><b>Lecții scurte, ca un joc</b><br><span class="muted small">Taxe, credite, abonamente, țepe online: exact ce colegii au spus că nu înțeleg.</span></div></div>
+ <div class="feat"><i>🪙</i><div><b>Capitalul tău de 18 ani</b><br><span class="muted small">Fiecare lecție și provocare adaugă lei virtuali în fondul tău.</span></div></div>
+ <div class="feat"><i>👥</i><div><b>Cu prietenii și cu clasa</b><br><span class="muted small">Vedeți cine își atinge mai bine obiectivul de economisire.</span></div></div>
+ <div style="flex:1"></div>
+ <a class="btn" href="#/register">Creează cont</a>
+ <a class="btn ghost" href="#/login">Am deja cont</a>
+</div>`}
+function viewRegister(){return `<div class="landing">
+ <button class="x" onclick="history.length>1?history.back():go('#/')" aria-label="Înapoi">←</button>
+ <h1>Creează cont</h1><p class="muted">Durează 30 de secunde.</p>
+ <form data-f="register" autocomplete="off">
+  <div class="seg" role="radiogroup"><label><input type="radio" name="role" value="elev" checked><span>🎒 Sunt elev</span></label><label><input type="radio" name="role" value="profesor"><span>🏫 Sunt profesor</span></label></div>
+  <label class="f">Nume afișat</label><input name="name" required maxlength="30" placeholder="ex: Andrei P.">
+  <label class="f">Nume de utilizator</label><input name="u" required maxlength="20" placeholder="ex: andrei.p" autocapitalize="none" autocorrect="off" spellcheck="false">
+  <div class="only-elev"><label class="f">Clasa</label><select name="grade"><option value="IX">a IX-a</option><option value="X">a X-a</option><option value="XI">a XI-a</option><option value="XII">a XII-a</option></select>
+  <label class="f">Cod clasă de la profesor (opțional)</label><input name="code" maxlength="6" placeholder="ex: BANI26" autocapitalize="characters"></div>
+  <label class="f">Parolă (minimum 6 caractere)</label><input name="pw" type="password" required minlength="6">
+  <label class="f">Repetă parola</label><input name="pw2" type="password" required minlength="6">
+  <div class="err" id="err"></div>
+  <button class="btn mt">Creează contul</button>
+ </form>
+ <p class="center small mt">Ai deja cont? <a href="#/login">Intră în cont</a></p>
+</div>`}
+function viewLogin(){return `<div class="landing">
+ <button class="x" onclick="history.length>1?history.back():go('#/')" aria-label="Înapoi">←</button>
+ <h1>Intră în cont</h1>
+ <form data-f="login">
+  <label class="f">Nume de utilizator</label><input name="u" required autocapitalize="none" autocorrect="off" spellcheck="false" autocomplete="username">
+  <label class="f">Parolă</label><input name="pw" type="password" required autocomplete="current-password">
+  <div class="err" id="err"></div>
+  <button class="btn mt">Intră</button>
+ </form>
+ <p class="center small mt">Nu ai cont? <a href="#/register">Creează unul</a></p>
+ <div class="card blue mt"><b>Conturi demo pentru prezentare</b><p class="small muted">Funcționează fără internet, cu date de test salvate doar pe acest telefon.</p>
+  <div class="demo"><button class="btn sm" data-a="demo" data-u="elev.demo">🎒 Elev demo</button><button class="btn sm gold" data-a="demo" data-u="prof.demo">🏫 Profesor demo</button></div></div>
+</div>`}
+function doLogin(u){store.set(SES_KEY,u.u);go(u.role==='profesor'?'#/class':'#/learn')}
+
+/* ================= ÎNVAȚĂ ================= */
+function lessonState(u,l){if(u.done[l.id])return 'done';if(l.idx===0||u.done[l.unit.lessons[l.idx-1].id])return 'open';return 'locked'}
+function hwIds(u){const c=classOf(u);return c?c.hw.map(h=>h.ref):[]}
+function viewLearn(u){
+ let h='';
+ if(u.role==='elev'){
+  if(!u.startTest)h+=`<div class="card gold"><div class="row"><div style="font-size:2.2rem">🧪</div><div class="grow"><h3>Testul de start (2 minute)</h3><p class="small">7 întrebări, ca să vezi cât știi acum. La final de lună compari cu testul final. <b>+5 lei</b> în fond.</p></div></div><button class="btn gold" data-a="starttest">Fă testul</button></div>`;
+  const c=classOf(u);
+  if(c&&c.hw.length){h+=`<div class="card"><h3>📌 Teme de la profesor · ${esc(c.name)}</h3>${c.hw.map(w=>{const done=w.type==='lesson'?!!u.done[w.ref]:!!u.sit[w.ref];const t=w.type==='lesson'?(LES[w.ref]||{}).title:(SIT[w.ref]||{}).t;return `<div class="li"><div class="av" style="width:38px;height:38px;font-size:1.2rem">${w.type==='lesson'?'📚':'💡'}</div><div class="grow"><b>${esc(t)}</b><div class="metrics"><span>până pe ${fmtDate(w.due)}</span></div></div>${done?'<span class="pill">✓ Gata</span>':`<button class="btn sm" data-a="${w.type==='lesson'?'lesson':'opensit'}" data-id="${w.ref}">Începe</button>`}</div>`}).join('')}</div>`}
+  if(!isStandalone()&&!u.hideInstall)h+=`<div class="card blue"><div class="row"><div style="font-size:1.8rem">📲</div><div class="grow"><b>Pune Capital18 pe ecranul telefonului</b><div class="small muted">Se deschide ca o aplicație, fără App Store.</div></div></div><div class="row mt"><button class="btn sm" data-a="install">Cum instalez</button><button class="link small" data-a="hideinstall">Mai târziu</button></div></div>`;
+ }
+ const hw=hwIds(u);const offs=[0,48,70,48,0,-48,-70,-48];let k=0;
+ UNITS.forEach((un,ui)=>{
+  const dn=un.lessons.filter(l=>u.done[l.id]).length;
+  h+=`<section class="unit" style="--c:${un.c};--cd:${un.cd}"><div class="unit-h"><small>Unitatea ${ui+1} · ${dn}/${un.lessons.length} lecții</small><h2>${un.emoji} ${un.title}</h2><span class="tag">${un.tag}</span></div><div class="path">`;
+  un.lessons.forEach(l0=>{const l=LES[l0.id];let st=lessonState(u,l);const isHw=hw.includes(l.id);if(st==='locked'&&isHw)st='open';
+   h+=`<div class="nwrap" style="transform:translateX(${offs[k++%offs.length]}px)"><button class="node ${st==='done'?'done':st==='locked'?'locked':'cur'}${isHw&&st!=='done'?' hw':''}" ${st==='locked'?'data-a="locked"':`data-a="lesson" data-id="${l.id}"`} aria-label="${esc(l.title)}">${st==='done'?'✓':st==='locked'?'🔒':l.emoji}</button><div class="nlbl">${esc(l.title)}</div></div>`});
+  h+=`</div></section>`;
+ });
+ if(u.role==='elev'){const ok=nDone(u)>=UNLOCK_FINAL;h+=`<div class="card ${ok?'gold':''} center"><div style="font-size:2.6rem">${u.finalTest&&u.finalTest.passed?'🎓':ok?'🏆':'🔒'}</div><h3>Testul final „Sunt pregătit”</h3><p class="small muted">${u.finalTest&&u.finalTest.passed?'L-ai trecut! Certificatul e în pagina Capital 18.':ok?'Deblocat! Trece-l ca să primești +100 lei în fond.':`Se deblochează după ${UNLOCK_FINAL} lecții (ai ${nDone(u)}).`}</p>${ok&&!(u.finalTest&&u.finalTest.passed)?'<button class="btn gold" data-a="finaltest">Începe testul final</button>':''}</div>`}
+ return h;
+}
+
+/* ================= RULARE LECȚIE / TEST ================= */
+function startLesson(id){const l=LES[id];if(!l)return;state.run={kind:'lesson',id,title:l.title,tip:l.tip,emoji:l.emoji,queue:l.qs.map(shuffleQ),total:l.qs.length,i:0,correct:0,mistakes:0,phase:'tip',sel:null,checked:false,back:location.hash||'#/learn'};go('#/run')}
+function startTest(kind){
+ let qs=START_REFS.map(([id,i])=>LES[id].qs[i]);
+ if(kind==='final'){const rest=ALL.flatMap(l=>l.qs.filter((q,i)=>!START_REFS.some(([a,b])=>a===l.id&&b===i)));qs=qs.concat(shuffle(rest).slice(0,3))}
+ state.run={kind,title:kind==='final'?'Testul final „Sunt pregătit”':'Testul de start',queue:shuffle(qs).map(shuffleQ),total:qs.length,i:0,score:0,phase:'tip',sel:null,checked:false,back:location.hash||'#/learn',
+  tip:kind==='final'?`${qs.length} întrebări din toate unitățile. Ai nevoie de minimum <b>${PASS} răspunsuri corecte</b>. Nu primești explicațiile decât la final, ca la un test adevărat.`:'7 întrebări rapide. Nu contează dacă greșești: testul arată de unde pornești. Profesorul vede doar scorul clasei, ca să compare cu testul final.',emoji:kind==='final'?'🎓':'🧪'};
+ go('#/run');
+}
+function viewRun(){
+ const r=state.run;const isL=r.kind==='lesson';
+ if(r.phase==='tip')return `<div class="run"><div class="run-top"><button class="x" data-a="quit" aria-label="Închide">✕</button><div class="bar"><i style="width:0%"></i></div></div><div class="run-body"><div class="big-emoji">${r.emoji}</div><h1 class="center">${esc(r.title)}</h1><div class="tipcard mt"><div class="q-k">${isL?'Pe scurt':'Cum funcționează'}</div>${r.tip}</div></div><div class="run-foot"><button class="btn" data-a="begin">Începe</button></div></div>`;
+ if(r.phase==='end')return viewEnd();
+ const q=r.queue[r.i];const prog=isL?r.correct/r.total*100:r.i/r.total*100;
+ const showAns=r.checked&&isL;
+ let foot;
+ if(!r.checked)foot=`<div class="run-foot"><button class="btn" data-a="check" ${r.sel==null?'disabled':''}>${isL?'Verifică':'Răspunde'}</button></div>`;
+ else if(isL)foot=`<div class="run-foot ${r.ok?'ok':'bad'}"><div class="fb-t">${r.ok?['Corect! 🎉','Excelent! ✨','Bravo! 💪','Exact! 👏'][r.i%4]:'Nu chiar…'}</div><div class="fb-x">${r.ok?'':`Răspuns corect: <b>${esc(q.o[q.a])}</b><br>`}${esc(q.x||'')}</div><button class="btn" data-a="next">Continuă</button></div>`;
+ else foot=`<div class="run-foot"><button class="btn" data-a="next">Următoarea</button></div>`;
+ return `<div class="run"><div class="run-top"><button class="x" data-a="quit" aria-label="Închide">✕</button><div class="bar ${isL?'':'gold'}"><i style="width:${prog}%"></i></div>${isL?'':`<b class="small">${r.i+1}/${r.total}</b>`}</div>
+ <div class="run-body"><div class="q-k">${q.retry?'🔁 Încă o dată':isL?'Alege răspunsul':'Întrebarea '+(r.i+1)}</div><div class="q">${esc(q.q)}</div>
+ ${q.o.map((o,i)=>{let c='';if(showAns){if(i===q.a)c='right';else if(i===r.sel)c='wrong'}else if(i===r.sel)c='sel';return `<button class="opt ${c}" data-a="pick" data-i="${i}" ${r.checked?'disabled':''}>${esc(o)}</button>`}).join('')}
+ </div>${foot}</div>`;
+}
+function finishRun(){
+ const r=state.run;const u=me();let xp=0,fund=0,head,sub,tiles;
+ if(r.kind==='lesson'){
+  const first=!u.done[r.id];const perfect=r.mistakes===0;
+  if(first){xp=10+(perfect?5:0);fund=10+(perfect?5:0);u.done[r.id]={date:dayKey(),perfect}}else{xp=5;if(perfect)u.done[r.id].perfect=true}
+  const acc=Math.round(r.total/(r.total+r.mistakes)*100);
+  head=perfect?'Lecție perfectă!':'Lecție terminată!';sub=first?'Ai adăugat bani în Capitalul tău de 18 ani.':'Recapitularea te ajută să ții minte.';
+  tiles=[['XP','⚡'+xp,'var(--blue)'],['Fond','🪙+'+fund,'var(--gold-d)'],['Precizie',acc+'%','var(--teal)']];
+ }else{
+  const res={score:r.score,total:r.total,date:dayKey()};
+  if(r.kind==='start'){const firstTime=!u.startTest;u.startTest=res;if(firstTime){xp=5;fund=5}head='Testul de start e gata!';sub='Acum știi de unde pornești. Hai la prima lecție.'}
+  else{const passed=r.score>=PASS;const was=u.finalTest&&u.finalTest.passed;res.passed=passed||!!was;u.finalTest=res;if(passed&&!was){xp=50;fund=100}else xp=5;head=passed?'Ești pregătit! 🎓':'Aproape!';sub=passed?'Ai trecut testul final. Certificatul tău e în Capital 18.':`Ai nevoie de ${PASS} răspunsuri corecte. Recapitulează și încearcă din nou.`}
+  tiles=[['Scor',r.score+'/'+r.total,'var(--teal)'],['XP','⚡'+xp,'var(--blue)'],['Fond','🪙+'+fund,'var(--gold-d)']];
+ }
+ const nb=award(u,xp,fund);save();
+ r.phase='end';r.res={head,sub,tiles,nb,emoji:r.kind==='final'&&r.score<PASS?'💪':r.kind==='lesson'&&r.mistakes===0?'🏆':'🎉',review:r.kind!=='lesson'?r.log:null};
+}
+function viewEnd(){const s=state.run.res;return `<div class="run"><div class="run-body center"><div class="big-emoji">${s.emoji}</div><h1>${s.head}</h1><p class="muted">${s.sub}</p>
+ <div class="tiles">${s.tiles.map(([a,b,c])=>`<div class="tile" style="--tc:${c}"><b>${a}</b><span>${b}</span></div>`).join('')}</div>
+ ${s.nb.length?`<div class="card gold"><b>Insignă nouă!</b><div class="badges mt">${s.nb.map(b=>`<div class="bdg"><i>${b.e}</i>${b.n}</div>`).join('')}</div></div>`:''}
+ ${s.review?`<div class="card" style="text-align:left"><h3>Răspunsurile tale</h3>${s.review.map(x=>`<div class="li"><div style="font-size:1.2rem">${x.ok?'✅':'❌'}</div><div class="grow small"><b>${esc(x.q)}</b><br>${x.ok?'':`<span class="muted">Corect: ${esc(x.right)}</span>`}</div></div>`).join('')}</div>`:''}
+ </div><div class="run-foot"><button class="btn" data-a="endrun">Continuă</button></div></div>`}
+
+/* ================= SITUAȚII ================= */
+function viewSits(u){return `<h1>💡 Situații reale</h1><p class="muted">Pățanii adevărate ale colegilor din chestionar, explicate pas cu pas: ce faci în momentul în care ți se întâmplă.</p>
+ <div class="sitgrid">${SITS.map(s=>`<button class="sit" data-a="opensit" data-id="${s.id}">${u.sit[s.id]?'<span class="ck">✅</span>':''}<div class="e">${s.e}</div><h3>${esc(s.t)}</h3><span class="pill gray">${esc(s.tag)}</span></button>`).join('')}</div>`}
+function viewSit(u,id){const s=SIT[id];const ans=state.sitAns[id];const answered=ans!=null;
+ return `<button class="link" data-a="back" data-to="#/sit">← Toate situațiile</button>
+ <div class="center"><div style="font-size:3.4rem">${s.e}</div><h1>${esc(s.t)}</h1><span class="pill gold">${esc(s.tag)}</span></div>
+ <div class="card mt"><div class="q-k">Situația</div><p>${esc(s.story)}</p></div>
+ <div class="card"><div class="q-k">Ce faci, pas cu pas</div><ol class="steps">${s.steps.map(x=>`<li>${esc(x)}</li>`).join('')}</ol></div>
+ <div class="card teal"><b>💡 Pe viitor:</b> ${esc(s.tip)}</div>
+ <div class="card"><div class="q-k">Verifică-te ${u.sit[id]?'· ✅ rezolvată':'· +3 lei în fond'}</div><div class="q" style="font-size:1.1rem">${esc(s.quiz.q)}</div>
+ ${s.quiz.o.map((o,i)=>{let c='';if(answered){if(i===s.quiz.a&&ans===i)c='right';else if(i===ans)c='wrong'}return `<button class="opt ${c}" data-a="sitpick" data-id="${id}" data-i="${i}">${esc(o)}</button>`}).join('')}
+ ${answered?(ans===s.quiz.a?'<p class="center" style="color:var(--teal-d);font-weight:800">Corect! 🎉</p>':'<p class="center" style="color:var(--red-d);font-weight:800">Mai citește o dată pașii și încearcă din nou.</p>'):''}</div>`}
+
+/* ================= CAPITAL 18 ================= */
+function viewCapital(u){
+ const ok=nDone(u)>=UNLOCK_FINAL;const passed=u.finalTest&&u.finalTest.passed;
+ const gA=goalAmt(u),gp=goalPct(u);
+ let h=`<div class="hero"><div class="coin">🪙</div><div class="small" style="opacity:.85;font-weight:800;text-transform:uppercase;letter-spacing:.05em">Capitalul tău de 18 ani</div><div class="amt">${fmt(u.fund)} lei</div><div class="small" style="opacity:.85">virtuali · strânși din lecții, teste și provocări</div>
+ <div class="mt small" style="font-weight:800">${passed?'🎓 Test final trecut: capitalul tău e „deblocat”':`Lecții: ${nDone(u)}/${TOTAL} · testul final se deblochează la ${UNLOCK_FINAL}`}</div><div class="bar sm mt"><i style="width:${Math.min(100,nDone(u)/TOTAL*100)}%"></i></div></div>`;
+ if(passed)h+=`<div class="card gold center"><div style="font-size:2.6rem">🎓</div><h2>Certificat „Sunt pregătit”</h2><p><b>${esc(u.name)}</b> a trecut testul final Capital18 cu ${u.finalTest.score}/${u.finalTest.total}, pe ${fmtDate(u.finalTest.date)}.</p></div>`;
+ else if(ok)h+=`<div class="card gold"><h3>🏆 Testul final e deblocat</h3><p class="small">10 întrebări, minimum ${PASS} corecte. Dacă îl treci: <b>+100 lei</b> în fond și certificatul „Sunt pregătit”.</p><button class="btn gold" data-a="finaltest">Începe testul</button></div>`;
+ h+=`<div class="card"><h3>🐷 Pușculița lunii</h3>`;
+ if(!u.budget)h+=`<p class="small muted">Spune-ne câți bani primești sau câștigi pe lună și ce procent vrei să pui deoparte. Prietenii văd doar procentul atins, nu sumele.</p>${budgetForm(u)}`;
+ else h+=`<div class="row"><div class="grow"><b style="font-size:1.4rem">${fmt(saved(u))} / ${fmt(gA)} lei</b><div class="small muted">obiectiv: ${u.goalPct}% din bugetul de ${fmt(u.budget)} lei</div></div><span class="pill ${gp>=100?'gold':''}">${gp}%</span></div><div class="bar mt ${gp>=100?'gold':''}"><i style="width:${Math.min(100,gp)}%"></i></div>
+  <form data-f="save" class="row mt"><input name="amt" type="number" inputmode="decimal" min="1" max="100000" step="1" placeholder="Am pus deoparte… lei" required><button class="btn sm">Adaugă</button></form>
+  <button class="link small mt" data-a="editbudget">Schimbă bugetul sau obiectivul</button>`;
+ h+=`</div>`;
+ h+=`<h2 class="mt">🎯 Provocări</h2><p class="small muted">Le faci în viața reală, apoi spui în 1 propoziție cum a fost. Se pot repeta după 7 zile.</p><div class="card">${CHALLENGES.map(c=>{const d=u.ch[c.id];const can=!d||d<=addDays(-7);return `<div class="li"><div class="av">${c.e}</div><div class="grow"><b>${c.t}</b><div class="small muted">${c.d}</div><div class="metrics"><span>⚡${c.xp}</span><span>🪙+${c.fund} lei</span>${d?`<span>✓ ${fmtDate(d)}</span>`:''}</div></div>${can?`<button class="btn sm" data-a="challenge" data-id="${c.id}">Gata</button>`:'<span class="pill">✓</span>'}</div>`}).join('')}</div>`;
+ h+=`<h2 class="mt">🏅 Insigne</h2><div class="card"><div class="badges">${BADGES.map(b=>`<div class="bdg ${u.badges[b.id]?'':'off'}" title="${esc(b.d)}"><i>${b.e}</i>${b.n}</div>`).join('')}</div></div>`;
+ h+=`<div class="card"><h3>🪙 Cum crește fondul</h3><div class="li"><div class="grow">Lecție nouă</div><b>+10 lei</b></div><div class="li"><div class="grow">Lecție fără greșeală</div><b>+5 lei bonus</b></div><div class="li"><div class="grow">Situație rezolvată</div><b>+3 lei</b></div><div class="li"><div class="grow">Provocare din viața reală</div><b>+10–20 lei</b></div><div class="li"><div class="grow">Test final trecut</div><b>+100 lei</b></div></div>`;
+ h+=`<div class="card blue"><h3>🔮 Cum va funcționa în realitate</h3><p class="small">În prototip, fondul e <b>virtual</b>. În planul nostru, un <b>sponsor</b> (o bancă, o companie sau o fundație) finanțează o sumă mică, de exemplu o primă economie sau un cont de investiții educațional. Elevul o primește <b>la 18 ani, doar după ce trece testul final „Sunt pregătit”</b>.</p>
+ <div class="li"><div style="font-size:1.3rem">✅</div><div class="grow small">Nu depinde de o monedă inventată sau de crypto.</div></div><div class="li"><div style="font-size:1.3rem">🤝</div><div class="grow small">Are parteneri reali posibili: băncile investesc deja în educație financiară.</div></div><div class="li"><div style="font-size:1.3rem">🧠</div><div class="grow small">Recompensa vine din învățare, nu din speculație.</div></div></div>`;
+ return h;
+}
+function budgetForm(u){return `<form data-f="budget"><label class="f">Bani primiți sau câștigați pe lună (lei)</label><input name="budget" type="number" inputmode="numeric" min="10" max="100000" value="${u.budget||''}" required placeholder="ex: 300">
+ <label class="f">Cât vrei să pui deoparte?</label><select name="goal">${[5,10,15,20,25,30,40,50].map(p=>`<option value="${p}" ${p===(u.goalPct||20)?'selected':''}>${p}% din buget</option>`).join('')}</select><button class="btn mt">Salvează</button></form>`}
+
+/* ================= PRIETENI ================= */
+function viewFriends(u){
+ const c=classOf(u);const scope=state.fScope==='class'&&c?'class':'friends';
+ let people=scope==='class'?studentsOf(u.classCode):u.friends.map(f=>db.users[f]).filter(Boolean).concat([u]);
+ const key={save:x=>goalPct(x),lessons:x=>nDone(x),xp:x=>weekXp(x)}[state.fSort];
+ people=people.slice().sort((a,b)=>key(b)-key(a)||b.xp-a.xp);
+ const label={save:'Obiectiv economisire',lessons:'Lecții făcute',xp:'XP săptămâna asta'}[state.fSort];
+ let h=`<h1>👥 Prieteni</h1>
+ <form data-f="addfriend" class="row"><input name="u" placeholder="Adaugă după nume de utilizator" autocapitalize="none" autocorrect="off" spellcheck="false" required><button class="btn sm">Adaugă</button></form>
+ <div class="mt"></div>
+ ${c?`<div class="seg"><button class="${scope==='friends'?'on':''}" data-a="fscope" data-v="friends">Prieteni</button><button class="${scope==='class'?'on':''}" data-a="fscope" data-v="class">Clasa ${esc(c.name)}</button></div><div style="height:8px"></div>`:''}
+ <div class="seg"><button class="${state.fSort==='save'?'on':''}" data-a="fsort" data-v="save">🐷 Economisire</button><button class="${state.fSort==='lessons'?'on':''}" data-a="fsort" data-v="lessons">📚 Lecții</button><button class="${state.fSort==='xp'?'on':''}" data-a="fsort" data-v="xp">⚡ XP</button></div>
+ <p class="small muted mt">Clasament după: <b>${label}</b>. La economisire contează procentul din obiectivul tău, nu suma, ca să fie corect pentru toată lumea.</p>
+ <div class="card">`;
+ if(people.length<=1&&scope==='friends')h+=`<p class="center muted">Încă nu ai prieteni adăugați. Cere-le numele de utilizator${c?' sau adaugă colegi din clasă mai jos':''}.</p>`;
+ people.forEach((p,i)=>{const val=state.fSort==='save'?(p.budget?goalPct(p)+'%':'—'):state.fSort==='lessons'?nDone(p)+'/'+TOTAL:fmt(weekXp(p))+' XP';
+  h+=`<div class="li ${p.u===u.u?'me':''}"><div class="rank">${i<3?['🥇','🥈','🥉'][i]:i+1}</div><div class="av">${p.avatar}</div><div class="grow"><b>${esc(p.name)}${p.u===u.u?' (tu)':''}</b><div class="metrics"><span>🐷 ${p.budget?goalPct(p)+'%':'—'}</span><span>📚 ${nDone(p)}</span><span>🔥 ${streakNow(p)}</span></div></div><b>${val}</b>${p.u!==u.u&&scope==='friends'?`<button class="x small" style="font-size:1rem" data-a="unfriend" data-u="${p.u}" aria-label="Șterge">✕</button>`:''}</div>`});
+ h+=`</div>`;
+ if(c){const sug=studentsOf(u.classCode).filter(s=>s.u!==u.u&&!u.friends.includes(s.u));if(sug.length)h+=`<h3>Colegi din clasa ta</h3><div class="card">${sug.map(s=>`<div class="li"><div class="av">${s.avatar}</div><div class="grow"><b>${esc(s.name)}</b><div class="small muted">@${esc(s.u)}</div></div><button class="btn sm" data-a="addf" data-u="${s.u}">+ Adaugă</button></div>`).join('')}</div>`}
+ h+=`<div class="card blue small">Numele tău de utilizator: <b>@${esc(u.u)}</b>. Dă-l prietenilor ca să te adauge.</div>`;
+ return h;
+}
+
+/* ================= PROFIL ================= */
+function viewProfile(u){
+ const lv=level(u),c=classOf(u);
+ let h=`<div class="center"><div class="av lg">${u.avatar}</div><h1>${esc(u.name)}</h1><p class="muted">@${esc(u.u)}${u.role==='elev'?' · clasa a '+esc(u.grade)+'-a':' · profesor'}</p></div>`;
+ if(u.role==='elev'){
+  h+=`<div class="kpis"><div class="kpi"><b>Nivel ${lv}</b><span>${u.xp%100}/100 XP până la nivelul ${lv+1}</span><div class="bar sm mt"><i style="width:${u.xp%100}%"></i></div></div><div class="kpi"><b>🔥 ${streakNow(u)}</b><span>zile la rând (record ${u.maxStreak})</span></div><div class="kpi"><b>📚 ${nDone(u)}/${TOTAL}</b><span>lecții</span></div><div class="kpi"><b>🧪 ${u.startTest?pct(u.startTest)+'%':'—'} → ${u.finalTest?pct(u.finalTest)+'%':'—'}</b><span>test start → test final</span></div></div>`;
+  h+=`<div class="card"><h3>Avatar</h3><p class="small muted">Avatarurile noi se deblochează când urci de nivel.</p><div class="avpick">${AVATARS.map(([e,l])=>`<button class="${u.avatar===e?'on':''} ${lv<l?'lock':''}" data-a="avatar" data-e="${e}">${lv<l?'🔒':e}<small>${lv<l?'Nv.'+l:''}</small></button>`).join('')}</div></div>`;
+  h+=`<div class="card"><h3>🏫 Clasa mea</h3>${c?`<p>Ești în clasa <b>${esc(c.name)}</b> (profesor: ${esc((db.users[c.teacher]||{}).name||'')}).</p><button class="link small" data-a="leaveclass">Ieși din clasă</button>`:`<p class="small muted">Introdu codul primit de la profesor.</p><form data-f="join" class="row"><input name="code" maxlength="6" placeholder="ex: BANI26" autocapitalize="characters" required><button class="btn sm">Intră</button></form>`}</div>`;
+  h+=`<div class="card"><h3>🐷 Buget și obiectiv</h3>${budgetForm(u)}</div>`;
+ }
+ h+=`<div class="card"><h3>📲 Aplicația pe telefon</h3>${isStandalone()?'<p class="small">✅ Folosești Capital18 ca aplicație.</p>':'<p class="small muted">Adaug-o pe ecranul principal și se va deschide ca o aplicație.</p><button class="btn ghost" data-a="install">Instalează aplicația</button>'}<button class="btn ghost" data-a="sharesite">Trimite aplicația unui prieten</button></div>`;
+ h+=`<button class="btn ghost" data-a="logout">Ieși din cont</button>${isDemo()?'<button class="btn red" data-a="reset">Resetează datele demo</button><p class="center small muted mt">Mod demo: datele se salvează doar pe acest dispozitiv.</p>':'<p class="center small muted mt">☁️ Contul tău e salvat online. Intri de pe orice telefon cu același nume de utilizator și parolă.</p>'}`;
+ return h;
+}
+
+/* ================= PROFESOR ================= */
+function viewClasses(u){
+ const mine=Object.values(db.classes).filter(c=>c.teacher===u.u);
+ return `<h1>🏫 Clasele mele</h1><p class="muted">Creează o clasă, dă elevilor codul și urmărește cum progresează.</p>
+ ${mine.map(c=>{const n=studentsOf(c.code).length;return `<a class="card" style="display:block;text-decoration:none;color:inherit" href="#/class/${c.code}"><div class="row"><div class="av">🏫</div><div class="grow"><b>${esc(c.name)}</b><div class="small muted">${n} elevi · cod <b>${c.code}</b></div></div><span style="font-size:1.4rem">›</span></div></a>`}).join('')||'<div class="card center muted">Nu ai încă nicio clasă.</div>'}
+ <div class="card"><h3>➕ Clasă nouă</h3><form data-f="newclass" class="row"><input name="name" maxlength="24" placeholder="ex: a X-a A" required><button class="btn sm">Creează</button></form></div>`;
+}
+function viewClass(u,code){
+ const c=db.classes[code];if(c.teacher!==u.u)return '<p>Nu ai acces la această clasă.</p>';
+ const S=studentsOf(code);const n=S.length||1;
+ const avg=a=>a.length?Math.round(a.reduce((s,x)=>s+x,0)/a.length):null;
+ const st=avg(S.filter(s=>s.startTest).map(s=>pct(s.startTest)));const fi=avg(S.filter(s=>s.finalTest).map(s=>pct(s.finalTest)));
+ const active=S.filter(s=>s.lastDay&&s.lastDay>=addDays(-6)).length;
+ const savers=S.filter(s=>saved(s)>0).length;
+ const avgL=avg(S.map(nDone));
+ let h=`<button class="link" data-a="back" data-to="#/class">← Clasele mele</button><h1>${esc(c.name)}</h1>
+ <div class="card teal center"><div class="small muted">Codul clasei: elevii îl introduc în Profil</div><div class="code mt">${c.code}</div><div class="mt"><button class="btn sm" data-a="sharecode" data-code="${c.code}">📤 Trimite codul</button></div></div>
+ <h2>📊 Indicatori</h2><p class="small muted">Cei 3 indicatori din proiect, calculați automat.</p>
+ <div class="kpis"><div class="kpi"><b>${st==null?'—':st+'%'} → ${fi==null?'—':fi+'%'}</b><span>1. Scor mediu: test de start → test final</span></div>
+ <div class="kpi"><b>${savers}/${S.length}</b><span>2. Elevi care au economisit luna asta</span></div>
+ <div class="kpi"><b>${active}/${S.length}</b><span>3. Elevi activi în ultimele 7 zile</span></div>
+ <div class="kpi"><b>${avgL==null?0:avgL}/${TOTAL}</b><span>Lecții făcute, în medie</span></div></div>
+ <h2>📌 Teme</h2><div class="card">${c.hw.map(w=>{const t=w.type==='lesson'?(LES[w.ref]||{}).title:(SIT[w.ref]||{}).t;const dn=S.filter(s=>w.type==='lesson'?s.done[w.ref]:s.sit[w.ref]).length;return `<div class="li"><div class="av" style="width:38px;height:38px;font-size:1.2rem">${w.type==='lesson'?'📚':'💡'}</div><div class="grow"><b>${esc(t)}</b><div class="metrics"><span>până pe ${fmtDate(w.due)}</span><span>${dn}/${S.length} au terminat</span></div><div class="bar sm mt"><i style="width:${S.length?dn/S.length*100:0}%"></i></div></div><button class="x" style="font-size:1rem" data-a="delhw" data-code="${code}" data-id="${w.id}" aria-label="Șterge tema">✕</button></div>`}).join('')||'<p class="muted small">Nicio temă încă.</p>'}
+ <form data-f="hw" class="mt"><input type="hidden" name="code" value="${code}"><label class="f">Temă nouă</label><select name="ref"><optgroup label="Lecții">${ALL.map(l=>`<option value="lesson:${l.id}">${esc(l.unit.title)} · ${esc(l.title)}</option>`).join('')}</optgroup><optgroup label="Situații">${SITS.map(s=>`<option value="sit:${s.id}">${esc(s.t)}</option>`).join('')}</optgroup></select>
+ <label class="f">Termen</label><input type="date" name="due" value="${addDays(7)}" required><button class="btn mt">Adaugă tema</button></form></div>
+ <h2>👩‍🎓 Elevi (${S.length})</h2><div class="card">${S.length?S.sort((a,b)=>b.xp-a.xp).map(s=>`<div class="li"><div class="av">${s.avatar}</div><div class="grow"><b>${esc(s.name)}</b> <span class="small muted">@${esc(s.u)}</span><div class="metrics"><span>📚 ${nDone(s)}/${TOTAL}</span><span>⚡ ${fmt(weekXp(s))}/săpt.</span><span>🐷 ${s.budget?goalPct(s)+'%':'—'}</span><span>🧪 ${s.startTest?pct(s.startTest)+'%':'—'}→${s.finalTest?pct(s.finalTest)+'%':'—'}</span><span>👀 ${fmtDate(s.lastDay)}</span></div></div><button class="x" style="font-size:1rem" data-a="kick" data-u="${s.u}" aria-label="Scoate din clasă">✕</button></div>`).join(''):'<p class="muted small">Niciun elev încă. Trimite-le codul clasei.</p>'}</div>
+ <p class="small muted">Profesorul vede progresul și procentele, nu sumele de bani ale elevilor.</p>`;
+ return h;
+}
+
+/* ================= ACȚIUNI ================= */
+const A={
+ demo(el){store.set(MODE_KEY,'demo');loadDb();const u=db.users[el.dataset.u];if(u)doLogin(u)},
+ locked(){toast('🔒 Termină lecția de dinainte ca s-o deblochezi')},
+ lesson(el){startLesson(el.dataset.id)},
+ starttest(){startTest('start')},
+ finaltest(){const u=me();if(nDone(u)<UNLOCK_FINAL)return toast(`Mai ai ${UNLOCK_FINAL-nDone(u)} lecții până la testul final`);startTest('final')},
+ begin(){state.run.phase='q';render()},
+ pick(el){const r=state.run;if(r.checked)return;r.sel=+el.dataset.i;render()},
+ check(){const r=state.run;if(r.sel==null)return;const q=r.queue[r.i];r.ok=r.sel===q.a;r.checked=true;
+  if(r.kind==='lesson'){if(r.ok)r.correct++;else{r.mistakes++;r.queue.push(Object.assign(shuffleQ(LES[r.id].qs.find(x=>x.q===q.q)),{retry:true}))}}
+  else{if(r.ok)r.score++;(r.log=r.log||[]).push({q:q.q,ok:r.ok,right:q.o[q.a]});r.i++;r.sel=null;r.checked=false;if(r.i>=r.queue.length)finishRun();render();return}
+  if(navigator.vibrate)try{navigator.vibrate(r.ok?15:[30,40,30])}catch(e){}
+  render()},
+ next(){const r=state.run;r.i++;r.sel=null;r.checked=false;if(r.i>=r.queue.length)finishRun();render()},
+ quit(){if(state.run.phase==='q'&&!confirm('Sigur ieși? Progresul lecției se pierde.'))return;const b=state.run.back;state.run=null;go(b)},
+ endrun(){const b=state.run.back;state.run=null;go(b)},
+ opensit(el){go('#/sit/'+el.dataset.id)},
+ back(el){go(el.dataset.to)},
+ sitpick(el){const id=el.dataset.id,i=+el.dataset.i,u=me();state.sitAns[id]=i;
+  if(i===SIT[id].quiz.a&&!u.sit[id]){u.sit[id]=true;const nb=award(u,3,3);save();toast(nb.length?`🏅 Insignă nouă: ${nb[0].n}`:'+3 lei în Capitalul tău 🪙')}render()},
+ challenge(el){const c=CHALLENGES.find(x=>x.id===el.dataset.id);openSheet(`<div class="center"><div style="font-size:3rem">${c.e}</div><h2>${c.t}</h2><p class="muted small">${c.d}</p></div><form data-f="challenge"><input type="hidden" name="id" value="${c.id}"><label class="f">Cum ai făcut-o? (o propoziție)</label><textarea name="proof" required minlength="8" maxlength="300" placeholder="ex: Am mers pe jos la școală toată săptămâna și am economisit 60 lei."></textarea><button class="btn mt">Confirm · +${c.fund} lei</button></form><button class="btn ghost" data-a="closesheet">Renunță</button>`)},
+ closesheet(){closeSheet()},
+ editbudget(){openSheet(`<h2>🐷 Buget și obiectiv</h2>${budgetForm(me())}`)},
+ fsort(el){state.fSort=el.dataset.v;render()},
+ fscope(el){state.fScope=el.dataset.v;render()},
+ addf(el){addFriend(me(),el.dataset.u)},
+ unfriend(el){const u=me(),f=db.users[el.dataset.u];if(!f||!confirm(`Ștergi pe ${f.name} din prieteni?`))return;u.friends=u.friends.filter(x=>x!==f.u);if(isDemo())f.friends=f.friends.filter(x=>x!==u.u);save();render()},
+ avatar(el){const u=me(),a=AVATARS.find(x=>x[0]===el.dataset.e);if(level(u)<a[1])return toast(`🔒 Se deblochează la nivelul ${a[1]}`);u.avatar=a[0];save();render()},
+ leaveclass(){const u=me();if(!confirm('Ieși din clasă?'))return;u.classCode=null;save();render()},
+ install(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.finally(()=>{deferredPrompt=null});return}
+  const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
+  openSheet(`<h2>📲 Instalează Capital18</h2>${ios?'<ol class="steps"><li>Deschide pagina în <b>Safari</b>.</li><li>Apasă butonul <b>Partajează</b> (pătratul cu săgeată în sus).</li><li>Alege <b>„Adaugă pe ecranul principal”</b>.</li><li>Apasă <b>Adaugă</b>. Iconița Capital18 apare lângă celelalte aplicații.</li></ol>':'<ol class="steps"><li>Deschide pagina în <b>Chrome</b>.</li><li>Apasă meniul <b>⋮</b> din dreapta sus.</li><li>Alege <b>„Instalează aplicația”</b> sau <b>„Adaugă pe ecranul de pornire”</b>.</li><li>Confirmă. Capital18 apare printre aplicații.</li></ol>'}<button class="btn mt" data-a="closesheet">Am înțeles</button>`)},
+ hideinstall(){const u=me();u.hideInstall=true;save();render()},
+ sharesite(){const url=location.href.split('#')[0];const text='Hai pe Capital18: lecții scurte despre bani și Capitalul tău de 18 ani!';if(navigator.share)navigator.share({title:'Capital18',text,url}).catch(()=>{});else copy(url,'Linkul a fost copiat')},
+ sharecode(el){const c=db.classes[el.dataset.code];const url=location.href.split('#')[0];const text=`Intră în clasa „${c.name}” pe Capital18. Fă-ți cont și scrie codul ${c.code} la „Clasa mea”.`;if(navigator.share)navigator.share({title:'Capital18',text,url}).catch(()=>{});else copy(text+' '+url,'Mesajul a fost copiat')},
+ delhw(el){const c=db.classes[el.dataset.code];c.hw=c.hw.filter(w=>w.id!==el.dataset.id);save();render()},
+ kick(el){const s=db.users[el.dataset.u];if(!s||!confirm(`Scoți pe ${s.name} din clasă?`))return;s.classCode=null;if(isDemo()){save();render();return}sb.rpc('scoate_din_clasa',{p_username:s.u}).then(({error})=>{if(error)toast('Eroare: '+error.message);render()})},
+ logout(){state.run=null;if(isDemo()){store.del(SES_KEY);if(sb){store.del(MODE_KEY);db=emptyDb()}go('#/');return}
+  pushNow().catch(()=>{}).finally(()=>sb.auth.signOut().finally(()=>{cloudUser=null;authId=null;db=emptyDb();go('#/')}))},
+ reset(){if(!confirm('Ștergi TOATE conturile și datele de pe acest dispozitiv și refaci conturile demo?'))return;store.del(DB_KEY);store.del(SES_KEY);loadDb();go('#/')}
+};
+function copy(t,msg){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast(msg)).catch(()=>prompt('Copiază:',t))}
+function addFriend(u,name,retried){const f=db.users[name];if(!f){if(!isDemo()&&!retried)return refresh().then(()=>addFriend(me(),name,true)).catch(()=>toast('Verifică internetul'));return toast('Nu există utilizatorul @'+name)}if(f.u===u.u)return toast('Nu te poți adăuga pe tine 🙂');if(f.role!=='elev')return toast('Poți adăuga doar elevi');if(u.friends.includes(f.u))return toast('Sunteți deja prieteni');u.friends.push(f.u);if(isDemo()&&!f.friends.includes(u.u))f.friends.push(u.u);const nb=checkBadges(u);save();toast(nb.length?`🏅 Insignă nouă: ${nb[0].n}`:`${f.name} e acum prietenul tău`);render()}
+
+/* ================= CONTURI ONLINE ================= */
+function busy(form,on,label){const b=document.querySelector(`form[data-f=${form}] button`);if(b){b.disabled=on;if(label)b.textContent=label}}
+async function cloudRegister(d,u,role){
+ const err=m=>{const e=$('#err');if(e)e.textContent=m};busy('register',true,'Se creează contul…');
+ try{
+  const {data,error}=await sb.auth.signUp({email:u+EMAIL_DOMAIN,password:d.pw});
+  if(error)throw error;
+  if(!data.session)throw new Error('CONFIRM');
+  authId=data.user.id;cloudUser=u;await loadCloud();
+  const x=Object.assign(newUser({u,name:d.name.trim().slice(0,30),role,grade:role==='elev'?d.grade:'',pw:'',avatar:role==='profesor'?'🦉':'🦊'}),{pass:null});
+  let msg='Cont creat! Bine ai venit 👋';
+  const code=(d.code||'').trim().toUpperCase();
+  if(role==='elev'&&code){if(db.classes[code])x.classCode=code;else msg='Cont creat, dar codul de clasă nu există. Îl poți pune din Profil.'}
+  db.users[u]=x;dirty=true;await pushNow();
+  go(role==='profesor'?'#/class':'#/learn');toast(msg);
+ }catch(e){
+  cloudUser=null;authId=null;const m=String(e&&e.message||e);
+  err(m==='CONFIRM'?'Contul există, dar Supabase cere confirmare pe e-mail. Dezactivează „Confirm email” în Supabase.':/already|registered|exists/i.test(m)?'Numele de utilizator e deja luat.':/fetch|network/i.test(m)?'Nu ne putem conecta. Verifică internetul.':'Eroare: '+m);
+  busy('register',false,'Creează contul');
+ }
+}
+async function cloudLogin(u,pw){
+ const err=m=>{const e=$('#err');if(e)e.textContent=m};busy('login',true,'Se intră…');
+ try{
+  const {data,error}=await sb.auth.signInWithPassword({email:u+EMAIL_DOMAIN,password:pw});
+  if(error)throw error;
+  authId=data.user.id;cloudUser=u;await loadCloud();await ensureProfile(u);
+  go(db.users[u].role==='profesor'?'#/class':'#/learn');
+ }catch(e){
+  cloudUser=null;authId=null;const m=String(e&&e.message||e);
+  err(/invalid|credentials/i.test(m)?'Nume de utilizator sau parolă greșită.':/fetch|network/i.test(m)?'Nu ne putem conecta. Verifică internetul.':'Eroare: '+m);
+  busy('login',false,'Intră');
+ }
+}
+const F={
+ register(f){const d=Object.fromEntries(new FormData(f));const err=m=>{$('#err').textContent=m};
+  const u=(d.u||'').trim().toLowerCase().replace(/^@/,'');
+  if(!/^[a-z0-9._]{3,20}$/.test(u))return err('Numele de utilizator: 3–20 caractere, doar litere mici, cifre, punct sau _.');
+  if(isDemo()&&db.users[u])return err('Numele de utilizator e deja luat.');
+  if((d.pw||'').length<6)return err('Parola trebuie să aibă minimum 6 caractere.');
+  if(d.pw!==d.pw2)return err('Parolele nu coincid.');
+  const role=d.role==='profesor'?'profesor':'elev';
+  if(!isDemo())return cloudRegister(d,u,role);
+  const x=newUser({u,name:d.name.trim().slice(0,30),role,grade:role==='elev'?d.grade:'',pw:d.pw,avatar:role==='profesor'?'🦉':'🦊'});
+  let msg='Cont creat! Bine ai venit 👋';
+  const code=(d.code||'').trim().toUpperCase();
+  if(role==='elev'&&code){if(db.classes[code])x.classCode=code;else msg='Cont creat, dar codul de clasă nu există. Îl poți pune din Profil.'}
+  db.users[u]=x;save();doLogin(x);toast(msg)},
+ login(f){const d=Object.fromEntries(new FormData(f));const u=(d.u||'').trim().toLowerCase().replace(/^@/,'');if(!isDemo())return cloudLogin(u,d.pw||'');const x=db.users[u];
+  if(!x||x.pass!==hashPw(u,d.pw||'')){$('#err').textContent='Nume de utilizator sau parolă greșită.';return}doLogin(x)},
+ save(f){const u=me();const v=Math.round(+new FormData(f).get('amt'));if(!(v>0))return;const before=goalPct(u);u.savings[monthKey()]=saved(u)+v;const nb=award(u,3,0);save();
+  toast(nb.length?`🏅 Insignă nouă: ${nb[0].n}`:goalPct(u)>=100&&before<100?'🎉 Obiectivul lunii e atins!':`+${v} lei în pușculiță 🐷`);render()},
+ budget(f){const u=me();const d=new FormData(f);const b=Math.round(+d.get('budget'));if(!(b>0))return;u.budget=b;u.goalPct=+d.get('goal')||20;checkBadges(u);save();closeSheet();toast('Obiectiv salvat');render()},
+ challenge(f){const u=me();const d=new FormData(f);const c=CHALLENGES.find(x=>x.id===d.get('id'));if(!c)return;u.ch[c.id]=dayKey();(u.chLog=u.chLog||[]).push({id:c.id,date:dayKey(),text:String(d.get('proof')).slice(0,300)});const nb=award(u,c.xp,c.fund);save();closeSheet();toast(nb.length?`🏅 Insignă nouă: ${nb[0].n}`:`+${c.fund} lei în Capitalul tău 🪙`);render()},
+ addfriend(f){addFriend(me(),String(new FormData(f).get('u')).trim().toLowerCase().replace(/^@/,''))},
+ join(f,retried){const u=me();const code=String(new FormData(f).get('code')).trim().toUpperCase();if(!db.classes[code]&&!isDemo()&&!retried){refresh().then(()=>F.join(f,true)).catch(()=>toast('Verifică internetul'));return}if(!db.classes[code])return toast('Codul nu există. Verifică-l cu profesorul.');u.classCode=code;save();toast('Ai intrat în clasa '+db.classes[code].name);render()},
+ newclass(f){const u=me();const name=String(new FormData(f).get('name')).trim();if(!name)return;const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let code;do{code=Array.from({length:6},()=>A[Math.floor(Math.random()*A.length)]).join('')}while(db.classes[code]);db.classes[code]={code,name,teacher:u.u,created:dayKey(),hw:[]};save();go('#/class/'+code)},
+ hw(f){const d=new FormData(f);const c=db.classes[d.get('code')];const [type,ref]=String(d.get('ref')).split(':');c.hw.push({id:'h'+Date.now(),type,ref,due:d.get('due')});save();toast('Tema a fost adăugată');render()}
+};
+document.addEventListener('click',e=>{const el=e.target.closest('[data-a]');if(!el)return;const fn=A[el.dataset.a];if(fn){e.preventDefault();fn(el,e)}});
+document.addEventListener('submit',e=>{const f=e.target;if(!f.dataset.f)return;e.preventDefault();F[f.dataset.f]&&F[f.dataset.f](f)});
+document.addEventListener('change',e=>{if(e.target.name==='role'){const o=document.querySelector('.only-elev');if(o)o.style.display=e.target.value==='profesor'?'none':''}});
+let deferredPrompt=null;
+window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferredPrompt=e});
+window.addEventListener('hashchange',render);
+window.addEventListener('storage',e=>{if(isDemo()&&e.key===DB_KEY){loadDb();if(!state.run)render()}});
+const typing=()=>{const a=document.activeElement;return a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName)};
+function softRefresh(){if(isDemo()||!cloudUser||state.run||typing()||$('#sheet').classList.contains('on'))return;refresh().then(()=>{if(!state.run&&!typing())render()}).catch(()=>{})}
+document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')pushNow().catch(()=>{});else softRefresh()});
+setInterval(()=>{if(document.visibilityState==='visible')softRefresh()},60000);
+async function boot(){
+ if(isDemo()){loadDb();render();return}
+ $('#app').innerHTML='<div class="landing"><div class="logo" style="font-size:1.5rem;justify-content:center">Capital<b>18</b></div><p class="center muted">Se încarcă…</p></div>';
+ try{
+  const {data:{session}}=await sb.auth.getSession();
+  if(session){authId=session.user.id;cloudUser=(session.user.email||'').split('@')[0];await loadCloud();await ensureProfile(cloudUser)}
+ }catch(e){cloudUser=null;authId=null;db=emptyDb();setTimeout(()=>toast('Nu ne putem conecta la server. Verifică internetul.'),100)}
+ render();
+}
+boot();
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+</script>
+</body>
+</html>
