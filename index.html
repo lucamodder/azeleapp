@@ -15,7 +15,7 @@
 <link rel="icon" type="image/png" href="icon-192.png">
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--bg:#F6F4EE;--card:#fff;--ink:#17302B;--muted:#64756F;--line:#E5E0D4;--teal:#0F8A6F;--teal-d:#0B6A55;--teal-l:#E2F4EE;--gold:#F4B400;--gold-d:#C48F00;--gold-l:#FFF4D2;--red:#E0504F;--red-d:#B53A39;--red-l:#FDEBEA;--blue:#2F6FD6;--blue-l:#E6EFFC;--r:18px}
+:root{--bg:#F6F4EE;--card:#fff;--ink:#17302B;--muted:#64756F;--line:#E5E0D4;--teal:#0F8A6F;--teal-d:#0B6A55;--teal-l:#E2F4EE;--gold:#F4B400;--gold-d:#C48F00;--gold-l:#FFF4D2;--red:#E0504F;--red-d:#B53A39;--red-l:#FDEBEA;--blue:#2F6FD6;--blue-l:#E6EFFC;--teal-t:#0B6A55;--red-t:#B53A39;--r:18px}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-rounded,"SF Pro Rounded","Nunito","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;font-size:16px;line-height:1.45}
 body{min-height:100vh;min-height:100dvh}
 #app{max-width:520px;margin:0 auto;min-height:100vh;min-height:100dvh;position:relative}
@@ -35,8 +35,8 @@ p{margin:.3em 0 .8em}a{color:var(--teal)}
 .card.gold{background:var(--gold-l);border-color:#F2DC94}
 .card.teal{background:var(--teal-l);border-color:#BFE6D8}
 .card.blue{background:var(--blue-l);border-color:#C7DAF7}
-.pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;background:var(--teal-l);color:var(--teal-d)}
-.pill.gold{background:var(--gold-l);color:#7a5a00}.pill.red{background:var(--red-l);color:var(--red-d)}.pill.gray{background:#EEEBE3;color:var(--muted)}
+.pill{display:inline-block;padding:3px 10px;border-radius:99px;font-size:.75rem;font-weight:800;background:var(--teal-l);color:var(--teal-t)}
+.pill.gold{background:var(--gold-l);color:#7a5a00}.pill.red{background:var(--red-l);color:var(--red-t)}.pill.gray{background:#EEEBE3;color:var(--muted)}
 label.f{display:block;font-weight:700;font-size:.88rem;margin:12px 0 6px}
 input,select,textarea{width:100%;font:inherit;font-size:1rem;padding:13px 14px;border:2px solid var(--line);border-radius:14px;background:#fff;color:var(--ink);outline:none}
 input:focus,select:focus,textarea:focus{border-color:var(--teal)}
@@ -46,10 +46,10 @@ textarea{min-height:90px;resize:vertical}
 .seg input{display:none}
 .seg input:checked+span,.seg .on{color:var(--ink)}
 .seg label:has(input:checked),.seg button.on{background:#fff;box-shadow:0 2px 0 var(--line);color:var(--ink)}
-.err{color:var(--red-d);font-weight:700;font-size:.9rem;margin-top:10px;min-height:1em}
+.err{color:var(--red-t);font-weight:700;font-size:.9rem;margin-top:10px;min-height:1em}
 /* top & nav */
 .top{position:sticky;top:0;z-index:5;background:rgba(246,244,238,.95);-webkit-backdrop-filter:blur(8px);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:space-between;gap:8px;padding:calc(10px + env(safe-area-inset-top)) 16px 10px;border-bottom:2px solid var(--line)}
-.logo{font-weight:900;font-size:1.15rem;color:var(--teal-d);display:flex;align-items:center;gap:6px}
+.logo{font-weight:900;font-size:1.15rem;color:var(--teal-t);display:flex;align-items:center;gap:6px}
 .logo b{background:var(--gold);color:#3b2a00;border-radius:8px;padding:0 6px}
 .stats{display:flex;gap:12px}
 .stat{display:flex;align-items:center;gap:3px;font-weight:900;font-size:.95rem}
@@ -58,7 +58,7 @@ main{padding:16px 16px calc(100px + env(safe-area-inset-bottom))}
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:#fff;border-top:2px solid var(--line);display:flex;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:6}
 .nav a{flex:1;text-align:center;text-decoration:none;color:var(--muted);font-size:.68rem;font-weight:800;padding:6px 0 5px;border-radius:12px;margin:0 2px}
 .nav a .i{display:block;font-size:1.45rem;line-height:1.25;filter:grayscale(1);opacity:.65}
-.nav a.on{color:var(--teal-d);background:var(--teal-l)}.nav a.on .i{filter:none;opacity:1}
+.nav a.on{color:var(--teal-t);background:var(--teal-l)}.nav a.on .i{filter:none;opacity:1}
 /* path */
 .unit{margin:4px 0 30px}
 .unit-h{border-radius:var(--r);padding:16px;color:#fff;box-shadow:0 5px 0 rgba(0,0,0,.18);margin-bottom:22px;background:var(--c)}
@@ -88,14 +88,14 @@ main{padding:16px 16px calc(100px + env(safe-area-inset-bottom))}
 .q{font-size:1.28rem;font-weight:800;margin-bottom:20px}
 .opt{display:block;width:100%;text-align:left;font:inherit;font-size:1rem;font-weight:700;background:#fff;border:2px solid var(--line);border-bottom-width:4px;border-radius:16px;padding:14px 16px;margin-bottom:11px;cursor:pointer;color:var(--ink)}
 .opt.sel{border-color:var(--blue);background:var(--blue-l);color:#1d4fa0}
-.opt.right{border-color:var(--teal);background:var(--teal-l);color:var(--teal-d)}
-.opt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red-d)}
+.opt.right{border-color:var(--teal);background:var(--teal-l);color:var(--teal-t)}
+.opt.wrong{border-color:var(--red);background:var(--red-l);color:var(--red-t)}
 .opt[disabled]{cursor:default}
 .run-foot{position:sticky;bottom:0;margin:0 -16px;padding:16px 16px calc(16px + env(safe-area-inset-bottom));border-top:2px solid var(--line);background:var(--bg)}
 .run-foot.ok{background:var(--teal-l);border-color:#BFE6D8}
 .run-foot.bad{background:var(--red-l);border-color:#F5C9C7}
 .fb-t{font-weight:900;font-size:1.2rem;margin-bottom:4px}
-.ok .fb-t{color:var(--teal-d)}.bad .fb-t{color:var(--red-d)}
+.ok .fb-t{color:var(--teal-t)}.bad .fb-t{color:var(--red-t)}
 .fb-x{font-size:.95rem;margin-bottom:14px}
 .ok .btn{background:var(--teal)}.bad .btn{background:var(--red);box-shadow:0 4px 0 var(--red-d)}
 .tipcard{background:#fff;border:2px solid var(--line);border-radius:var(--r);padding:18px;font-size:1.05rem}
@@ -160,7 +160,36 @@ a.li{text-decoration:none;color:inherit}
 .feat i{font-style:normal;font-size:1.6rem;flex:none}
 .demo{display:flex;gap:8px;flex-wrap:wrap}
 .hr{height:2px;background:var(--line);margin:16px 0}
+
+/* ===== temă întunecată ===== */
+:root[data-theme=dark]{--bg:#0E1513;--card:#17211E;--ink:#E7EFEC;--muted:#93A6A0;--line:#2A3833;--teal:#17A583;--teal-d:#0C7259;--teal-l:#12362E;--teal-t:#4FD9B3;--gold-l:#3A3115;--red-l:#3D1E1E;--red-t:#F28C8B;--blue:#6A9CF0;--blue-l:#17263F;color-scheme:dark}
+[data-theme=dark] .btn.ghost,[data-theme=dark] input,[data-theme=dark] select,[data-theme=dark] textarea,[data-theme=dark] .seg label:has(input:checked),[data-theme=dark] .seg button.on,[data-theme=dark] .nav,[data-theme=dark] .node.cur::after,[data-theme=dark] .opt,[data-theme=dark] .tipcard,[data-theme=dark] .tile,[data-theme=dark] .bub,[data-theme=dark] .sit,[data-theme=dark] .avpick button,[data-theme=dark] .kpi,[data-theme=dark] .code{background:var(--card)}
+[data-theme=dark] .bub.me{background:var(--teal)}
+[data-theme=dark] .seg{background:#0A100E}
+[data-theme=dark] .top{background:rgba(14,21,19,.92)}
+[data-theme=dark] .btn[disabled]{background:#24302C;color:#5E6E69;box-shadow:0 4px 0 #1A2421}
+[data-theme=dark] .card.gold{border-color:#5A4A1C}[data-theme=dark] .card.teal{border-color:#1E5547}[data-theme=dark] .card.blue{border-color:#27406A}
+[data-theme=dark] .pill.gold{color:#F4CF6A}[data-theme=dark] .pill.gray{background:#24302C}
+[data-theme=dark] .node.locked{background:#2A3532;box-shadow:0 7px 0 #1C2523}
+[data-theme=dark] .bar{background:#24302C}
+[data-theme=dark] .opt.sel{color:#BCD4FA}
+[data-theme=dark] .run-foot.ok{border-color:#1E5547}[data-theme=dark] .run-foot.bad{border-color:#5A2B2B}
+[data-theme=dark] .bdg.off i{background:#222;border-color:#333}
+[data-theme=dark] .av.lg{border-color:var(--card)}
+[data-theme=dark] #toast{background:#E7EFEC;color:#0E1513}
+[data-theme=dark] .hero{box-shadow:0 6px 0 #052A21}
+[data-theme=dark] #sheet .bg{background:rgba(0,0,0,.6)}
+/* ===== bara de jos: „Învață” în mijloc ===== */
+.nav a.main{flex:1.2;color:var(--teal-t)}
+.nav a.main .i{width:62px;height:62px;margin:-30px auto 2px;border-radius:50%;background:linear-gradient(145deg,#1FC39B,var(--teal) 70%);display:flex;align-items:center;justify-content:center;font-size:1.8rem;filter:none;opacity:1;border:4px solid var(--card);box-shadow:0 5px 0 var(--teal-d),0 10px 22px rgba(15,138,111,.35);transition:transform .15s}
+.nav a.main.on{background:none}
+.nav a.main.on .i{transform:translateY(-2px);box-shadow:0 5px 0 var(--teal-d),0 0 0 4px var(--gold),0 12px 26px rgba(15,138,111,.45)}
+.nav a.main:active .i{transform:translateY(3px);box-shadow:0 2px 0 var(--teal-d)}
+.stats{align-items:center}
+.topav{width:36px;height:36px;border-radius:50%;background:var(--teal-l);display:flex;align-items:center;justify-content:center;font-size:1.25rem;text-decoration:none;border:2px solid var(--line);flex:none}
+.topav.on{border-color:var(--teal)}
 </style>
+<script>try{var t=localStorage.getItem('c18_theme')||'auto';if(t==='dark'||(t==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.dataset.theme='dark'}catch(e){}</script>
 </head>
 <body>
 <div id="app"></div>
@@ -307,6 +336,11 @@ const userOf=user=>(user&&user.user_metadata&&user.user_metadata.username)||((us
 const DB_KEY='capital18_db_v1',SES_KEY='capital18_session',MODE_KEY='capital18_mode';
 const memStore={};
 const store={get(k){try{return localStorage.getItem(k)}catch(e){return memStore[k]==null?null:memStore[k]}},set(k,v){try{localStorage.setItem(k,v)}catch(e){memStore[k]=v}},del(k){try{localStorage.removeItem(k)}catch(e){delete memStore[k]}}};
+const THEME_KEY='c18_theme';
+const themePref=()=>store.get(THEME_KEY)||'auto';
+const darkMQ=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
+function applyTheme(){const p=themePref();const dark=p==='dark'||(p==='auto'&&!!darkMQ&&darkMQ.matches);document.documentElement.dataset.theme=dark?'dark':'light';const m=document.querySelector('meta[name=theme-color]');if(m)m.content=dark?'#0E1513':'#0F8A6F'}
+applyTheme();if(darkMQ&&darkMQ.addEventListener)darkMQ.addEventListener('change',applyTheme);
 const sb=(window.supabase&&!SUPABASE_KEY.startsWith('PUNE_'))?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
 const isDemo=()=>!sb||store.get(MODE_KEY)==='demo';
 let db={users:{},classes:{},v:1},cloudUser=null,authId=null,pushT=null,pushing=null,dirty=false;
@@ -519,12 +553,12 @@ let lastRoute='';
 function shell(u,inner,tab){
  const T=u.role==='profesor'
   ?[['class','🏫','Clase'],['learn','📚','Lecții'],['sit','💡','Situații'],['profile',u.avatar,'Profil']]
-  :[['learn','📚','Învață'],['sit','💡','Situații'],['capital','🪙','Capital 18'],['friends','👥','Prieteni'],['community','💬','Chat'],['profile',u.avatar,'Profil']];
+  :[['sit','💡','Situații'],['capital','🪙','Capital 18'],['learn','📚','Învață',1],['friends','👥','Prieteni'],['community','💬','Chat']];
  const BD=u.role==='elev'?{friends:incoming(u.u).length,community:unreadDm(u.u)}:{};
  const top=u.role==='profesor'
   ?`<div class="logo">Capital<b>18</b></div><span class="pill">Profesor</span>`
-  :`<div class="logo">Capital<b>18</b></div><div class="stats"><span class="stat fire" title="Serie de zile">🔥${streakNow(u)}</span><span class="stat xp" title="XP">⚡${fmt(u.xp)}</span><span class="stat coin" title="Fondul tău virtual">🪙${fmt(u.fund)}</span></div>`;
- return `<header class="top">${top}</header><main>${inner}</main><nav class="nav">${T.map(([k,i,l])=>`<a href="#/${k}" class="${tab===k?'on':''}"><span class="i">${i}</span>${BD[k]?`<span class="bd">${BD[k]>9?'9+':BD[k]}</span>`:''}${l}</a>`).join('')}</nav>`;
+  :`<div class="logo">Capital<b>18</b></div><div class="stats"><span class="stat fire" title="Serie de zile">🔥${streakNow(u)}</span><span class="stat xp" title="XP">⚡${fmt(u.xp)}</span><span class="stat coin" title="Fondul tău virtual">🪙${fmt(u.fund)}</span><a href="#/profile" class="topav${tab==='profile'?' on':''}" aria-label="Profil">${u.avatar}</a></div>`;
+ return `<header class="top">${top}</header><main>${inner}</main><nav class="nav">${T.map(([k,i,l,m])=>`<a href="#/${k}" class="${tab===k?'on':''}${m?' main':''}"><span class="i">${i}</span>${BD[k]?`<span class="bd">${BD[k]>9?'9+':BD[k]}</span>`:''}${l}</a>`).join('')}</nav>`;
 }
 function render(){
  const u=me();if(u&&u.role==='elev')syncFriends();const parts=location.hash.replace(/^#\/?/,'').split('/');const r=parts[0]||'';
@@ -676,7 +710,7 @@ function viewSit(u,id){const s=SIT[id];const ans=state.sitAns[id];const answered
  <div class="card teal"><b>💡 Pe viitor:</b> ${esc(s.tip)}</div>
  <div class="card"><div class="q-k">Verifică-te ${u.sit[id]?'· ✅ rezolvată':'· +3 lei în fond'}</div><div class="q" style="font-size:1.1rem">${esc(s.quiz.q)}</div>
  ${s.quiz.o.map((o,i)=>{let c='';if(answered){if(i===s.quiz.a&&ans===i)c='right';else if(i===ans)c='wrong'}return `<button class="opt ${c}" data-a="sitpick" data-id="${id}" data-i="${i}">${esc(o)}</button>`}).join('')}
- ${answered?(ans===s.quiz.a?'<p class="center" style="color:var(--teal-d);font-weight:800">Corect! 🎉</p>':'<p class="center" style="color:var(--red-d);font-weight:800">Mai citește o dată pașii și încearcă din nou.</p>'):''}</div>`}
+ ${answered?(ans===s.quiz.a?'<p class="center" style="color:var(--teal-t);font-weight:800">Corect! 🎉</p>':'<p class="center" style="color:var(--red-t);font-weight:800">Mai citește o dată pașii și încearcă din nou.</p>'):''}</div>`}
 
 /* ================= CAPITAL 18 ================= */
 function viewCapital(u){
@@ -780,6 +814,7 @@ function viewProfile(u){
   h+=`<div class="card"><h3>🏫 Clasa mea</h3>${c?`<p>Ești în clasa <b>${esc(c.name)}</b> (profesor: ${esc((db.users[c.teacher]||{}).name||'')}).</p><button class="link small" data-a="leaveclass">Ieși din clasă</button>`:`<p class="small muted">Introdu codul primit de la profesor.</p><form data-f="join" class="row"><input name="code" maxlength="6" placeholder="ex: BANI26" autocapitalize="characters" required><button class="btn sm">Intră</button></form>`}</div>`;
   h+=`<div class="card"><h3>🐷 Buget și obiectiv</h3>${budgetForm(u)}</div>`;
  }
+ h+=`<div class="card"><h3>🌙 Temă</h3><div class="seg">${[['light','☀️ Luminoasă'],['dark','🌙 Întunecată'],['auto','📱 Automat']].map(([v,l])=>`<button class="${themePref()===v?'on':''}" data-a="theme" data-v="${v}">${l}</button>`).join('')}</div><p class="small muted mt">„Automat” urmează setarea telefonului.</p></div>`;
  h+=`<div class="card"><h3>📲 Aplicația pe telefon</h3>${isStandalone()?'<p class="small">✅ Folosești Capital18 ca aplicație.</p>':'<p class="small muted">Adaug-o pe ecranul principal și se va deschide ca o aplicație.</p><button class="btn ghost" data-a="install">Instalează aplicația</button>'}<button class="btn ghost" data-a="sharesite">Trimite aplicația unui prieten</button></div>`;
  h+=`<button class="btn ghost" data-a="logout">Ieși din cont</button>${isDemo()?'<button class="btn red" data-a="reset">Resetează datele demo</button><p class="center small muted mt">Mod demo: datele se salvează doar pe acest dispozitiv.</p>':'<p class="center small muted mt">☁️ Contul tău e salvat online. Intri de pe orice telefon cu același nume de utilizator și parolă.</p>'}`;
  return h;
@@ -838,6 +873,7 @@ const A={
   if(i===SIT[id].quiz.a&&!u.sit[id]){u.sit[id]=true;const nb=award(u,3,3);save();toast(nb.length?`🏅 Insignă nouă: ${nb[0].n}`:'+3 lei în Capitalul tău 🪙')}render()},
  challenge(el){const c=CHALLENGES.find(x=>x.id===el.dataset.id);openSheet(`<div class="center"><div style="font-size:3rem">${c.e}</div><h2>${c.t}</h2><p class="muted small">${c.d}</p></div><form data-f="challenge"><input type="hidden" name="id" value="${c.id}"><label class="f">Cum ai făcut-o? (o propoziție)</label><textarea name="proof" required minlength="8" maxlength="300" placeholder="ex: Am mers pe jos la școală toată săptămâna și am economisit 60 lei."></textarea><button class="btn mt">Confirm · +${c.fund} lei</button></form><button class="btn ghost" data-a="closesheet">Renunță</button>`)},
  closesheet(){closeSheet()},
+ theme(el){store.set(THEME_KEY,el.dataset.v);applyTheme();render()},
  editbudget(){openSheet(`<h2>🐷 Buget și obiectiv</h2>${budgetForm(me())}`)},
  fsort(el){state.fSort=el.dataset.v;render()},
  fscope(el){state.fScope=el.dataset.v;render()},
