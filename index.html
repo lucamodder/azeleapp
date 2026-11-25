@@ -3,19 +3,19 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Capital18 – educație financiară pentru liceeni</title>
+<title>Finzel – educație financiară pentru liceeni</title>
 <meta name="description" content="Lecții scurte despre bani, situații reale și Capitalul tău de 18 ani.">
-<meta name="theme-color" content="#0F8A6F">
+<meta name="theme-color" content="#0A0D1C">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="default">
-<meta name="apple-mobile-web-app-title" content="Capital18">
+<meta name="apple-mobile-web-app-title" content="Finzel">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="icon" type="image/png" href="icon-192.png">
 <style>
 *{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
-:root{--bg:#F6F4EE;--card:#fff;--ink:#17302B;--muted:#64756F;--line:#E5E0D4;--teal:#0F8A6F;--teal-d:#0B6A55;--teal-l:#E2F4EE;--gold:#F4B400;--gold-d:#C48F00;--gold-l:#FFF4D2;--red:#E0504F;--red-d:#B53A39;--red-l:#FDEBEA;--blue:#2F6FD6;--blue-l:#E6EFFC;--teal-t:#0B6A55;--red-t:#B53A39;--r:18px}
+:root{--bg:#F5F7FB;--card:#fff;--ink:#12172E;--muted:#646B85;--line:#E3E7F0;--teal:#1CC8C3;--teal-d:#0E9893;--teal-l:#DDF7F6;--gold:#FF4F9A;--gold-d:#CC2F74;--gold-l:#FFE4F0;--red:#E5484D;--red-d:#B4343A;--red-l:#FDEBEC;--blue:#3D8BFF;--blue-l:#E4EFFF;--teal-t:#0A8984;--red-t:#B4343A;--on-teal:#0A0D1C;--coin:#F5B301;--r:18px}
 html,body{margin:0;background:var(--bg);color:var(--ink);font-family:ui-rounded,"SF Pro Rounded","Nunito","Segoe UI",system-ui,-apple-system,Roboto,sans-serif;font-size:16px;line-height:1.45}
 body{min-height:100vh;min-height:100dvh}
 #app{max-width:520px;margin:0 auto;min-height:100vh;min-height:100dvh;position:relative}
@@ -162,7 +162,7 @@ a.li{text-decoration:none;color:inherit}
 .hr{height:2px;background:var(--line);margin:16px 0}
 
 /* ===== temă întunecată ===== */
-:root[data-theme=dark]{--bg:#0E1513;--card:#17211E;--ink:#E7EFEC;--muted:#93A6A0;--line:#2A3833;--teal:#17A583;--teal-d:#0C7259;--teal-l:#12362E;--teal-t:#4FD9B3;--gold-l:#3A3115;--red-l:#3D1E1E;--red-t:#F28C8B;--blue:#6A9CF0;--blue-l:#17263F;color-scheme:dark}
+:root[data-theme=dark]{--bg:#0A0D1C;--card:#141933;--ink:#EEF1FA;--muted:#98A0C0;--line:#262D4D;--teal:#1CC8C3;--teal-d:#0E8F8B;--teal-l:#10303A;--teal-t:#4FE3DD;--gold:#FF4F9A;--gold-d:#C92F72;--gold-l:#36172C;--red:#FF5C6C;--red-d:#C43A49;--red-l:#3A1820;--red-t:#FF8A95;--blue:#8EC5FF;--blue-l:#16244A;color-scheme:dark}
 [data-theme=dark] .btn.ghost,[data-theme=dark] input,[data-theme=dark] select,[data-theme=dark] textarea,[data-theme=dark] .seg label:has(input:checked),[data-theme=dark] .seg button.on,[data-theme=dark] .nav,[data-theme=dark] .node.cur::after,[data-theme=dark] .opt,[data-theme=dark] .tipcard,[data-theme=dark] .tile,[data-theme=dark] .bub,[data-theme=dark] .sit,[data-theme=dark] .avpick button,[data-theme=dark] .kpi,[data-theme=dark] .code{background:var(--card)}
 [data-theme=dark] .bub.me{background:var(--teal)}
 [data-theme=dark] .seg{background:#0A100E}
@@ -193,6 +193,40 @@ a.li{text-decoration:none;color:inherit}
 .nt{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:2px solid var(--line);text-decoration:none;color:inherit}
 .nt:last-child{border-bottom:0}.nt .ic{width:42px;height:42px;border-radius:50%;background:var(--teal-l);display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex:none}
 .nt.nou .ic{box-shadow:0 0 0 3px var(--gold)}.nt .dot{width:10px;height:10px;border-radius:50%;background:var(--red);flex:none}
+
+/* ===== Finzel: culori din logo (turcoaz, roz, albastru deschis) ===== */
+.btn,.bub.me,.mine .bub,.steps li::before{color:var(--on-teal)}
+.btn.gold,.btn.red{color:#fff}
+.logo{color:var(--ink);letter-spacing:-.01em}.logo::before{content:'';width:28px;height:28px;border-radius:8px;background:url(icon-192.png) center/cover;flex:none}.logo b{background:linear-gradient(110deg,var(--teal),var(--blue) 50%,var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent;padding:0;border-radius:0}
+.stat.coin{color:var(--coin)}.stat.xp{color:var(--blue)}
+.card.gold{border-color:#FFC2DC}.card.teal{border-color:#B2ECE9}.card.blue{border-color:#C9DEFF}
+.pill.gold{color:#B0215F}.pill.gray{background:#EDF0F6}
+.seg{background:#E6EAF3}
+.top{background:rgba(245,247,251,.95)}
+.btn[disabled]{background:#E6E9F1;color:#A0A6BA;box-shadow:0 4px 0 #CDD2E0}
+.node.locked{background:#E3E6EF;box-shadow:0 7px 0 #C8CDDC}
+.bar{background:#E3E7F0}
+.opt.sel{color:#1F5FC2}
+.run-foot.ok{border-color:#B2ECE9}.run-foot.bad{border-color:#F6C3C6}
+.tile b{color:var(--on-teal)}
+.hero{background:radial-gradient(120% 90% at 100% 0%,rgba(255,79,154,.35),transparent 55%),radial-gradient(120% 90% at 0% 100%,rgba(28,200,195,.35),transparent 55%),linear-gradient(150deg,#1A2147,#0A0D1C);box-shadow:0 6px 0 #05070F}
+.hero .bar>i{background:linear-gradient(90deg,var(--teal),var(--blue),var(--gold))}
+.bdg i{border-color:var(--gold)}
+.nav a.main .i{background:linear-gradient(145deg,#4FE3DD,var(--teal) 70%);box-shadow:0 5px 0 var(--teal-d),0 10px 22px rgba(28,200,195,.35)}
+.nav a.main.on .i{box-shadow:0 5px 0 var(--teal-d),0 0 0 4px var(--gold),0 12px 26px rgba(28,200,195,.45)}
+#sheet .bg{background:rgba(8,10,25,.5)}
+[data-theme=dark] .seg{background:#070A16}
+[data-theme=dark] .top{background:rgba(10,13,28,.92)}
+[data-theme=dark] .btn[disabled]{background:#1E2440;color:#5D6588;box-shadow:0 4px 0 #141933}
+[data-theme=dark] .card.gold{border-color:#6A2450}[data-theme=dark] .card.teal{border-color:#145A5C}[data-theme=dark] .card.blue{border-color:#2A4580}
+[data-theme=dark] .pill.gold{color:#FF8DBE}[data-theme=dark] .pill.gray{background:#1E2440}
+[data-theme=dark] .node.locked{background:#232A4A;box-shadow:0 7px 0 #161B35}
+[data-theme=dark] .bar{background:#1E2440}
+[data-theme=dark] .opt.sel{color:#BFDCFF}
+[data-theme=dark] .run-foot.ok{border-color:#145A5C}[data-theme=dark] .run-foot.bad{border-color:#6A2433}
+[data-theme=dark] .bdg.off i{background:#1A1F3A;border-color:#2A3157}
+[data-theme=dark] #toast{background:#EEF1FA;color:#0A0D1C}
+[data-theme=dark] .hero{box-shadow:0 6px 0 #04050C}
 </style>
 <script>try{var t=localStorage.getItem('c18_theme')||'auto';if(t==='dark'||(t==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.dataset.theme='dark'}catch(e){}</script>
 </head>
@@ -205,7 +239,7 @@ a.li{text-decoration:none;color:inherit}
 'use strict';
 /* ================= CONȚINUT ================= */
 const UNITS=[
-{id:'u1',title:'Nevoi vs. dorințe',emoji:'🧭',c:'#3A8FD9',cd:'#2A6FAD',tag:'📊 Bugetul de bază: de aici pornește tot',lessons:[
+{id:'u1',title:'Nevoi vs. dorințe',emoji:'🧭',c:'#3D8BFF',cd:'#2A66C4',tag:'📊 Bugetul de bază: de aici pornește tot',lessons:[
  {id:'u1l1',title:'Ce chiar îți trebuie',emoji:'🧭',tip:'<b>Nevoia</b> = fără ea ai o problemă reală (mâncare, transport la școală, telefon de bază).<br><b>Dorința</b> = îți face viața mai plăcută, dar poate aștepta. Nu e greșit să ai dorințe, important e să le alegi tu, nu impulsul.',qs:[
   {q:'Care dintre acestea este o NEVOIE pentru un elev?',o:['Abonamentul de transport la școală','Al treilea hanorac de anul ăsta','Un skin nou în joc','Bubble tea în fiecare zi'],a:0,x:'Fără transport nu ajungi la școală. Restul sunt dorințe, adică lucruri care pot fi amânate.'},
   {q:'Vrei adidași de 600 lei. Ce întrebare te ajută cel mai mult să decizi?',o:['Îi au și prietenii mei?','Câte săptămâni de bani de buzunar mă costă?','Sunt la reducere?','Arată bine în poze?'],a:1,x:'Transformă prețul în timp. Dacă primești 100 lei pe săptămână, adidașii costă 6 săptămâni.'},
@@ -216,7 +250,7 @@ const UNITS=[
   {q:'Ce înseamnă „plătește-te pe tine primul”?',o:['Pui economiile deoparte imediat ce primești banii','Îți cumperi ceva ție înainte de alții','Plătești datoriile la final','Ceri bani în avans'],a:0,x:'Dacă aștepți să „rămână ceva” la final de lună, de obicei nu rămâne nimic.'},
   {q:'Care este cel mai bun obiectiv de economisire?',o:['Vreau să am bani','Strâng 600 lei pentru căști până în martie, adică 150 lei pe lună','Economisesc când îmi rămâne ceva','Nu mai cheltui nimic'],a:1,x:'Un obiectiv bun are o sumă, un termen și un pas lunar clar.'},
   {q:'Unde e cel mai bine să ții banii puși deoparte?',o:['În portofel, cu banii de cheltuială','Într-un cont sau o pușculiță separată, greu de folosit zilnic','La un prieten','În contul din joc'],a:1,x:'Banii pe care îi vezi zilnic se cheltuie mai ușor. Separă-i.'}]}]},
-{id:'u2',title:'Cheltuieli mici și abonamente',emoji:'☕',c:'#E07A2E',cd:'#B45E1E',tag:'📊 23% nu înțeleg cheltuielile mici · 1 din 7 a dat bani pe Bolt săptămâna trecută',lessons:[
+{id:'u2',title:'Cheltuieli mici și abonamente',emoji:'☕',c:'#14B8B3',cd:'#0C8784',tag:'📊 23% nu înțeleg cheltuielile mici · 1 din 7 a dat bani pe Bolt săptămâna trecută',lessons:[
  {id:'u2l1',title:'Banii care pleacă pe nesimțite',emoji:'🚕',tip:'O cheltuială mică repetată nu pare o decizie, dar se adună. <b>15 lei pe zi înseamnă 450 lei pe lună.</b> În chestionarul nostru, Bolt apare de 3 ori mai des la „ultimele 7 zile” decât la „primele cheltuieli”, pentru că nu îl percepem ca pe o decizie.',qs:[
   {q:'Iei un Bolt de 18 lei de 3 ori pe săptămână. Cât te costă într-o lună (4 săptămâni)?',o:['54 lei','120 lei','216 lei','300 lei'],a:2,x:'18 × 3 × 4 = 216 lei. Cam cât o pereche de căști bune.'},
   {q:'O cafea de 12 lei în fiecare zi de școală (20 de zile pe lună). Cât te costă într-un an școlar (9 luni)?',o:['240 lei','1.080 lei','2.160 lei','4.320 lei'],a:2,x:'12 × 20 × 9 = 2.160 lei.'},
@@ -227,7 +261,7 @@ const UNITS=[
   {q:'Dacă ștergi aplicația de pe telefon, se anulează abonamentul?',o:['Da','Nu, trebuie anulat din cont, App Store sau Google Play'],a:1,x:'Abonamentul e legat de cont, nu de aplicația instalată.'},
   {q:'Ai 4 abonamente de câte 25 lei pe lună, dar folosești doar 2. Cât pierzi pe an?',o:['50 lei','300 lei','600 lei','1.200 lei'],a:2,x:'2 × 25 × 12 = 600 lei pe lucruri pe care nu le folosești.'},
   {q:'Ți s-au luat bani pentru un abonament pe care l-ai anulat. Care e primul pas bun?',o:['Postezi pe TikTok','Scrii firmei, cu dovada anulării, iar dacă nu rezolvă, contești plata la bancă','Îți închizi contul bancar','Aștepți să se rezolve singur'],a:1,x:'Păstrează dovezile (capturi, e-mailuri). Banca poate contesta tranzacția (chargeback).'}]}]},
-{id:'u3',title:'Taxele din salariu',emoji:'💼',c:'#0F8A6F',cd:'#0B6A55',tag:'📊 Subiectul nr. 1: 40% dintre elevi nu îl înțeleg',lessons:[
+{id:'u3',title:'Taxele din salariu',emoji:'💼',c:'#FF4F9A',cd:'#C92F72',tag:'📊 Subiectul nr. 1: 40% dintre elevi nu îl înțeleg',lessons:[
  {id:'u3l1',title:'Brut vs. net',emoji:'🧾',tip:'<b>Brut</b> = suma din contract. <b>Net</b> = ce primești efectiv în cont.<br>Din brut se rețin: <b>25% pensie (CAS)</b>, <b>10% sănătate (CASS)</b> și <b>10% impozit pe venit</b>, calculat după ce scazi CAS și CASS.',qs:[
   {q:'Ce sumă ajunge efectiv în contul tău?',o:['Salariul brut','Salariul net','Costul angajatorului','Bonusul'],a:1,x:'Netul e suma care ajunge efectiv la tine.'},
   {q:'Pentru ce plătești CAS (25%)?',o:['Pensia ta de mai târziu','Asigurarea mașinii','Taxa pe telefon','Concediul'],a:0,x:'CAS merge la sistemul public de pensii.'},
@@ -238,7 +272,7 @@ const UNITS=[
   {q:'Salariu brut 4.000 lei. Cât e CAS (25%)?',o:['400 lei','1.000 lei','1.400 lei','250 lei'],a:1,x:'25% din 4.000 = 1.000 lei.'},
   {q:'Impozitul de 10% se calculează din:',o:['Tot salariul brut','Brut minus CAS și CASS (și minus deducerea, dacă există)','Salariul net','Bonusuri'],a:1,x:'De aceea impozitul e mai mic decât 10% din brut.'},
   {q:'De ce doi colegi cu același brut pot avea neturi puțin diferite?',o:['Deduceri personale sau facilități fiscale diferite','Au bănci diferite','Primesc salariul în zile diferite','Nu se poate'],a:0,x:'Deducerea personală (de exemplu pentru persoane în întreținere) scade impozitul.'}]}]},
-{id:'u4',title:'Credite și rate',emoji:'💳',c:'#8B5CF6',cd:'#6D3FD6',tag:'📊 37% nu înțeleg creditele · 55% la clasa a IX-a',lessons:[
+{id:'u4',title:'Credite și rate',emoji:'💳',c:'#7C5CFF',cd:'#5A3FD6',tag:'📊 37% nu înțeleg creditele · 55% la clasa a IX-a',lessons:[
  {id:'u4l1',title:'Dobânda, pe înțeles',emoji:'🏦',tip:'Când împrumuți, dai înapoi <b>suma + dobânda</b>. <b>DAE</b> (dobânda anuală efectivă) include și comisioanele, de aceea e cifra după care compari ofertele.',qs:[
   {q:'Împrumuți 1.000 lei și dai înapoi 1.150 lei. Cât te-a costat împrumutul?',o:['1.000 lei','150 lei','1.150 lei','15 lei'],a:1,x:'Costul e diferența: 150 lei.'},
   {q:'Ca să compari două credite, te uiți în primul rând la:',o:['Rata lunară','DAE','Culoarea reclamei','Numele băncii'],a:1,x:'O rată mică pe o perioadă lungă poate costa mult mai mult în total.'},
@@ -249,13 +283,13 @@ const UNITS=[
   {q:'Ce se întâmplă dacă întârzii ratele?',o:['Nimic','Penalități și o înregistrare negativă care îți îngreunează creditele viitoare','Banca îți iartă datoria','Primești bonus'],a:1,x:'Istoricul de plată te urmărește ani de zile.'},
   {q:'Care e diferența dintre cardul de debit și cel de credit?',o:['Sunt identice','Debit = banii tăi; credit = banii băncii, pe care îi dai înapoi (cu dobândă dacă întârzii)','Creditul e doar pentru firme','Debitul are dobândă'],a:1,x:'Cu cardul de credit cheltui bani împrumutați.'},
   {q:'Un prieten îți cere 200 lei „până vineri”. Ce e cel mai înțelept?',o:['Îi dai tot ce ai','Împrumuți doar cât îți permiți să pierzi și stabiliți clar termenul','Iei tu un credit ca să-i dai','Refuzi mereu, din principiu'],a:1,x:'Împrumuturile între prieteni sunt riscante. Fii clar de la început.'}]}]},
-{id:'u5',title:'Inflația',emoji:'🎈',c:'#D94F70',cd:'#B03656',tag:'📊 23% nu înțeleg inflația',lessons:[
+{id:'u5',title:'Inflația',emoji:'🎈',c:'#2FB2E8',cd:'#1F86B5',tag:'📊 23% nu înțeleg inflația',lessons:[
  {id:'u5l1',title:'De ce se scumpește tot',emoji:'🛒',tip:'<b>Inflația</b> = creșterea generală a prețurilor. Cu aceeași sumă cumperi mai puțin în timp. Banii ținuți „la saltea” își pierd puterea de cumpărare.',qs:[
   {q:'Inflația înseamnă:',o:['Prețurile scad','Prețurile cresc în general, iar banii cumpără mai puțin','Banca îți dă bani','Salariile cresc automat'],a:1,x:'Inflația îți „mănâncă” banii care stau pe loc.'},
   {q:'Ai 1.000 lei în sertar și inflația e 5% pe an. După un an, banii tăi cumpără cam cât ar fi cumpărat azi:',o:['1.050 lei','1.000 lei','≈ 950 lei','500 lei'],a:2,x:'Suma e aceeași, dar prețurile au crescut, deci cumperi cam cât ai fi cumpărat azi cu ≈ 950 lei.'},
   {q:'Ce te protejează, măcar parțial, de inflație?',o:['Banii în sertar','Un depozit sau o investiție cu randament apropiat de inflație sau mai mare','Să cheltui tot imediat','Să schimbi bancnotele'],a:1,x:'Banii trebuie să „lucreze” ca să țină pasul cu prețurile.'},
   {q:'Salariul îți crește cu 5%, iar prețurile cu 8%. De fapt:',o:['Ești mai bogat','Poți cumpăra mai puțin decât înainte','Nu se schimbă nimic','Primești bonus'],a:1,x:'Contează creșterea reală: 5% − 8% ≈ −3%.'}]}]},
-{id:'u6',title:'Investiții și mituri',emoji:'📈',c:'#2E9C4A',cd:'#1F7A36',tag:'📊 23% nu înțeleg investițiile · 44% învață de pe social media',lessons:[
+{id:'u6',title:'Investiții și mituri',emoji:'📈',c:'#E0479E',cd:'#A92F76',tag:'📊 23% nu înțeleg investițiile · 44% învață de pe social media',lessons:[
  {id:'u6l1',title:'Risc și randament',emoji:'⚖️',tip:'Cu cât promisiunea de câștig e mai mare, cu atât <b>riscul e mai mare</b>. Nicio investiție reală nu garantează un profit mare și rapid.',qs:[
   {q:'Cineva îți promite „20% pe lună, garantat”. Ce e cel mai probabil?',o:['O ocazie unică','O schemă sau o țeapă','Un depozit bancar','Un fond de investiții obișnuit'],a:1,x:'20% pe lună înseamnă peste 790% pe an. Promisiunile „garantate” de acest tip sunt semnal de alarmă.'},
   {q:'Ce înseamnă diversificare?',o:['Pui toți banii într-o singură monedă','Împarți banii în mai multe investiții, ca să reduci riscul','Cumperi doar ce e la modă','Schimbi banca des'],a:1,x:'„Nu pune toate ouăle în același coș.”'},
@@ -266,7 +300,7 @@ const UNITS=[
   {q:'Ce înseamnă un post marcat „#ad” sau „colaborare plătită”?',o:['O părere independentă','Creatorul e plătit să promoveze','E fals','E un concurs'],a:1,x:'Nu e neapărat rău, dar nu e o părere neutră.'},
   {q:'Pe termen lung, „secretul” cel mai sigur al investitorilor este:',o:['Să ghicești următoarea monedă','Timp + sume regulate + diversificare','Semnale de pe Telegram','Să te împrumuți ca să investești'],a:1,x:'Plictisitor, dar funcționează.'},
   {q:'Când e momentul potrivit să începi să investești?',o:['După ce ai un fond de urgență și înțelegi riscul','Cu banii de chirie','Cu bani împrumutați','Niciodată'],a:0,x:'Investește doar bani de care nu ai nevoie pe termen scurt.'}]}]},
-{id:'u7',title:'Siguranța banilor online',emoji:'🛡️',c:'#334E68',cd:'#1F3448',tag:'📊 1 din 4 elevi a pățit deja ceva cu banii',lessons:[
+{id:'u7',title:'Siguranța banilor online',emoji:'🛡️',c:'#2A3463',cd:'#181F40',tag:'📊 1 din 4 elevi a pățit deja ceva cu banii',lessons:[
  {id:'u7l1',title:'Anti-țeapă',emoji:'🕵️',tip:'Semnale de alarmă: <b>grabă</b> („doar azi!”), plată <b>în afara platformei</b>, linkuri primite pe WhatsApp sau SMS, cereri de <b>cod, CVV sau PIN</b>.',qs:[
   {q:'Pe OLX, un „cumpărător” îți trimite un link „ca să primești banii” și îți cere datele cardului. Ce faci?',o:['Introduci datele','Refuzi: ca să PRIMEȘTI bani nu ai nevoie de CVV sau de cod','Trimiți o poză cu cardul','Îi dai PIN-ul'],a:1,x:'Este una dintre cele mai frecvente țepe. Rămâi în chatul și plata platformei.'},
   {q:'Ce nu dai niciodată nimănui?',o:['Numele','PIN-ul, CVV-ul și codurile primite prin SMS','Orașul','Prenumele'],a:1,x:'Nici banca, nici poliția nu îți cer vreodată PIN-ul sau codurile.'},
@@ -344,7 +378,7 @@ const store={get(k){try{return localStorage.getItem(k)}catch(e){return memStore[
 const THEME_KEY='c18_theme';
 const themePref=()=>store.get(THEME_KEY)||'auto';
 const darkMQ=window.matchMedia?matchMedia('(prefers-color-scheme: dark)'):null;
-function applyTheme(){const p=themePref();const dark=p==='dark'||(p==='auto'&&!!darkMQ&&darkMQ.matches);document.documentElement.dataset.theme=dark?'dark':'light';const m=document.querySelector('meta[name=theme-color]');if(m)m.content=dark?'#0E1513':'#0F8A6F'}
+function applyTheme(){const p=themePref();const dark=p==='dark'||(p==='auto'&&!!darkMQ&&darkMQ.matches);document.documentElement.dataset.theme=dark?'dark':'light';const m=document.querySelector('meta[name=theme-color]');if(m)m.content=dark?'#0A0D1C':'#F5F7FB'}
 applyTheme();if(darkMQ&&darkMQ.addEventListener)darkMQ.addEventListener('change',applyTheme);
 const sb=(window.supabase&&!SUPABASE_KEY.startsWith('PUNE_'))?window.supabase.createClient(SUPABASE_URL,SUPABASE_KEY):null;
 const isDemo=()=>!sb||store.get(MODE_KEY)==='demo';
@@ -572,7 +606,7 @@ async function refreshPushState(){let st='unsupported';try{if(pushSupported()){i
  if(state.pushSt!==st){state.pushSt=st;if(/^#\/(notif|profile)/.test(location.hash)&&!state.run)render()}}
 async function enablePush(){
  if(isDemo())return toast('Notificările pe telefon merg doar cu un cont online');
- if(!pushSupported()||(isIOS()&&!isStandalone()))return openSheet(`<h2>🔔 Notificări pe telefon</h2>${isIOS()?'<p>Pe iPhone, notificările merg doar după ce instalezi aplicația:</p><ol class="steps"><li>Deschide Capital18 în <b>Safari</b>.</li><li>Apasă <b>Partajează</b> → <b>„Adaugă pe ecranul principal”</b>.</li><li>Deschide Capital18 de pe ecranul principal.</li><li>Intră în 🔔 și apasă din nou <b>Pornește notificările</b>.</li></ol>':'<p>Browserul ăsta nu suportă notificări. Încearcă în Chrome.</p>'}<button class="btn mt" data-a="closesheet">Am înțeles</button>`);
+ if(!pushSupported()||(isIOS()&&!isStandalone()))return openSheet(`<h2>🔔 Notificări pe telefon</h2>${isIOS()?'<p>Pe iPhone, notificările merg doar după ce instalezi aplicația:</p><ol class="steps"><li>Deschide Finzel în <b>Safari</b>.</li><li>Apasă <b>Partajează</b> → <b>„Adaugă pe ecranul principal”</b>.</li><li>Deschide Finzel de pe ecranul principal.</li><li>Intră în 🔔 și apasă din nou <b>Pornește notificările</b>.</li></ol>':'<p>Browserul ăsta nu suportă notificări. Încearcă în Chrome.</p>'}<button class="btn mt" data-a="closesheet">Am înțeles</button>`);
  try{
   const perm=await Notification.requestPermission();
   if(perm!=='granted'){state.pushSt=perm==='denied'?'denied':'off';render();return toast('Notificările nu au fost permise')}
@@ -630,8 +664,8 @@ function shell(u,inner,tab){
   :[['sit','💡','Situații'],['capital','🪙','Capital 18'],['learn','📚','Învață',1],['friends','👥','Prieteni'],['community','💬','Chat']];
  const BD=u.role==='elev'?{friends:incoming(u.u).length,community:unreadDm(u.u)}:{};const NC=u.role==='elev'?notifCount(u):0;
  const top=u.role==='profesor'
-  ?`<div class="logo">Capital<b>18</b></div><span class="pill">Profesor</span>`
-  :`<div class="logo">Capital<b>18</b></div><div class="stats"><span class="stat fire" title="Serie de zile">🔥${streakNow(u)}</span><span class="stat xp" title="XP">⚡${fmt(u.xp)}</span><span class="stat coin" title="Fondul tău virtual">🪙${fmt(u.fund)}</span><a href="#/notif" class="topav${tab==='notif'?' on':''}" aria-label="Notificări">🔔${NC?`<span class="bd">${NC>9?'9+':NC}</span>`:''}</a><a href="#/profile" class="topav${tab==='profile'?' on':''}" aria-label="Profil">${u.avatar}</a></div>`;
+  ?`<div class="logo">Fin<b>zel</b></div><span class="pill">Profesor</span>`
+  :`<div class="logo">Fin<b>zel</b></div><div class="stats"><span class="stat fire" title="Serie de zile">🔥${streakNow(u)}</span><span class="stat xp" title="XP">⚡${fmt(u.xp)}</span><span class="stat coin" title="Fondul tău virtual">🪙${fmt(u.fund)}</span><a href="#/notif" class="topav${tab==='notif'?' on':''}" aria-label="Notificări">🔔${NC?`<span class="bd">${NC>9?'9+':NC}</span>`:''}</a><a href="#/profile" class="topav${tab==='profile'?' on':''}" aria-label="Profil">${u.avatar}</a></div>`;
  return `<header class="top">${top}</header><main>${inner}</main><nav class="nav">${T.map(([k,i,l,m])=>`<a href="#/${k}" class="${tab===k?'on':''}${m?' main':''}"><span class="i">${i}</span>${BD[k]?`<span class="bd">${BD[k]>9?'9+':BD[k]}</span>`:''}${l}</a>`).join('')}</nav>`;
 }
 function render(){
@@ -663,8 +697,8 @@ function render(){
 
 /* ================= AUTENTIFICARE ================= */
 function viewLanding(){return `<div class="landing">
- <div class="logo" style="font-size:1.5rem;justify-content:center">Capital<b>18</b></div>
- <div class="mascot"><img src="icon-512.png" alt="Capital18" width="140" height="140" style="display:block;margin:0 auto;border-radius:28px"></div>
+ <div class="logo" style="font-size:1.5rem;justify-content:center">Fin<b>zel</b></div>
+ <div class="mascot"><img src="icon-512.png" alt="Finzel" width="140" height="140" style="display:block;margin:0 auto;border-radius:28px"></div>
  <h1 class="center">Ce nu ne învață nimeni despre bani</h1>
  <p class="center muted">Lecții de 3 minute, situații reale și un fond care crește odată cu tine până la 18 ani.</p>
  <div class="feat"><i>📚</i><div><b>Lecții scurte, ca un joc</b><br><span class="muted small">Taxe, credite, abonamente, țepe online: exact ce colegii au spus că nu înțeleg.</span></div></div>
@@ -715,7 +749,7 @@ function viewLearn(u){
   if(!u.startTest)h+=`<div class="card gold"><div class="row"><div style="font-size:2.2rem">🧪</div><div class="grow"><h3>Testul de start (2 minute)</h3><p class="small">7 întrebări, ca să vezi cât știi acum. La final de lună compari cu testul final. <b>+5 lei</b> în fond.</p></div></div><button class="btn gold" data-a="starttest">Fă testul</button></div>`;
   const c=classOf(u);
   if(c&&c.hw.length){h+=`<div class="card"><h3>📌 Teme de la profesor · ${esc(c.name)}</h3>${c.hw.map(w=>{const done=w.type==='lesson'?!!u.done[w.ref]:!!u.sit[w.ref];const t=w.type==='lesson'?(LES[w.ref]||{}).title:(SIT[w.ref]||{}).t;return `<div class="li"><div class="av" style="width:38px;height:38px;font-size:1.2rem">${w.type==='lesson'?'📚':'💡'}</div><div class="grow"><b>${esc(t)}</b><div class="metrics"><span>până pe ${fmtDate(w.due)}</span></div></div>${done?'<span class="pill">✓ Gata</span>':`<button class="btn sm" data-a="${w.type==='lesson'?'lesson':'opensit'}" data-id="${w.ref}">Începe</button>`}</div>`}).join('')}</div>`}
-  if(!isStandalone()&&!u.hideInstall)h+=`<div class="card blue"><div class="row"><div style="font-size:1.8rem">📲</div><div class="grow"><b>Pune Capital18 pe ecranul telefonului</b><div class="small muted">Se deschide ca o aplicație, fără App Store.</div></div></div><div class="row mt"><button class="btn sm" data-a="install">Cum instalez</button><button class="link small" data-a="hideinstall">Mai târziu</button></div></div>`;
+  if(!isStandalone()&&!u.hideInstall)h+=`<div class="card blue"><div class="row"><div style="font-size:1.8rem">📲</div><div class="grow"><b>Pune Finzel pe ecranul telefonului</b><div class="small muted">Se deschide ca o aplicație, fără App Store.</div></div></div><div class="row mt"><button class="btn sm" data-a="install">Cum instalez</button><button class="link small" data-a="hideinstall">Mai târziu</button></div></div>`;
  }
  const hw=hwIds(u);const offs=[0,48,70,48,0,-48,-70,-48];let k=0;
  UNITS.forEach((un,ui)=>{
@@ -795,7 +829,7 @@ function viewCapital(u){
  const gA=goalAmt(u),gp=goalPct(u);
  let h=`<div class="hero"><div class="coin">🪙</div><div class="small" style="opacity:.85;font-weight:800;text-transform:uppercase;letter-spacing:.05em">Capitalul tău de 18 ani</div><div class="amt">${fmt(u.fund)} lei</div><div class="small" style="opacity:.85">virtuali · strânși din lecții, teste și provocări</div>
  <div class="mt small" style="font-weight:800">${passed?'🎓 Test final trecut: capitalul tău e „deblocat”':`Lecții: ${nDone(u)}/${TOTAL} · testul final se deblochează la ${UNLOCK_FINAL}`}</div><div class="bar sm mt"><i style="width:${Math.min(100,nDone(u)/TOTAL*100)}%"></i></div></div>`;
- if(passed)h+=`<div class="card gold center"><div style="font-size:2.6rem">🎓</div><h2>Certificat „Sunt pregătit”</h2><p><b>${esc(u.name)}</b> a trecut testul final Capital18 cu ${u.finalTest.score}/${u.finalTest.total}, pe ${fmtDate(u.finalTest.date)}.</p></div>`;
+ if(passed)h+=`<div class="card gold center"><div style="font-size:2.6rem">🎓</div><h2>Certificat „Sunt pregătit”</h2><p><b>${esc(u.name)}</b> a trecut testul final Finzel cu ${u.finalTest.score}/${u.finalTest.total}, pe ${fmtDate(u.finalTest.date)}.</p></div>`;
  else if(ok)h+=`<div class="card gold"><h3>🏆 Testul final e deblocat</h3><p class="small">10 întrebări, minimum ${PASS} corecte. Dacă îl treci: <b>+100 lei</b> în fond și certificatul „Sunt pregătit”.</p><button class="btn gold" data-a="finaltest">Începe testul</button></div>`;
  h+=`<div class="card"><h3>🐷 Pușculița lunii</h3>`;
  if(!u.budget)h+=`<p class="small muted">Spune-ne câți bani primești sau câștigi pe lună și ce procent vrei să pui deoparte. Prietenii văd doar procentul atins, nu sumele.</p>${budgetForm(u)}`;
@@ -853,7 +887,7 @@ function viewCommunity(u){
    h+=`<div class="card">${rows.map(({f,last,n})=>`<a class="li" href="#/chat/dm/${encodeURIComponent(f.u)}"><div class="av">${f.avatar}</div><div class="grow"><b>${esc(f.name)}</b><div class="small muted">${last?(last.from_u===u.u?'Tu: ':'')+esc(cut(last.body,48)):'Scrie primul mesaj'}</div></div>${n?`<span class="unread">${n}</span>`:''}</a>`).join('')}</div>`}
  }else if(t==='groups'){
   const rd=getRead();
-  h+=`<p class="small muted">Grupuri deschise tuturor elevilor din Capital18. Intră, întreabă, ajută-i pe alții.</p><div class="card">${GROUPS.map(g=>{const ms=threadMsgs(u.u,'g',g.id);const last=ms[ms.length-1];const n=rd['g:'+g.id]?unreadIn(u.u,'g',g.id):0;const w=last&&db.users[last.from_u];
+  h+=`<p class="small muted">Grupuri deschise tuturor elevilor din Finzel. Intră, întreabă, ajută-i pe alții.</p><div class="card">${GROUPS.map(g=>{const ms=threadMsgs(u.u,'g',g.id);const last=ms[ms.length-1];const n=rd['g:'+g.id]?unreadIn(u.u,'g',g.id):0;const w=last&&db.users[last.from_u];
    return `<a class="li" href="#/chat/g/${g.id}"><div class="av">${g.e}</div><div class="grow"><b>${g.n}</b><div class="small muted">${last?esc((w?w.name.split(' ')[0]:last.from_u)+': '+cut(last.body,44)):esc(g.d)}</div></div>${n?`<span class="unread">${n}</span>`:''}</a>`}).join('')}</div>`;
  }else{
   const q=(state.pq||'').toLowerCase(),c=classOf(u);
@@ -861,7 +895,7 @@ function viewCommunity(u){
   if(q)ps=ps.filter(p=>String(p.name).toLowerCase().includes(q)||p.u.includes(q));
   const sc=p=>(relation(u.u,p.u)==='in'?1e6:0)+(c&&p.classCode===u.classCode?1e5:0)+(p.grade&&p.grade===u.grade?1e4:0)+(p.xp||0);
   ps=ps.sort((a,b)=>sc(b)-sc(a)).slice(0,40);
-  h+=`<form data-f="psearch" class="row"><input name="q" value="${esc(state.pq||'')}" placeholder="Caută după nume" autocapitalize="none" autocorrect="off" spellcheck="false"><button class="btn sm">Caută</button></form><p class="small muted mt">Elevi care învață și ei cu Capital18. Trimite o cerere; după ce o acceptă, puteți vorbi.</p>`;
+  h+=`<form data-f="psearch" class="row"><input name="q" value="${esc(state.pq||'')}" placeholder="Caută după nume" autocapitalize="none" autocorrect="off" spellcheck="false"><button class="btn sm">Caută</button></form><p class="small muted mt">Elevi care învață și ei cu Finzel. Trimite o cerere; după ce o acceptă, puteți vorbi.</p>`;
   h+=ps.length?`<div class="card">${ps.map(p=>`<div class="li"><div class="av">${p.avatar}</div><div class="grow"><b>${esc(p.name)}</b><div class="small muted">@${esc(p.u)}${p.grade?' · a '+esc(p.grade)+'-a':''} · Nivel ${level(p)}${c&&p.classCode===u.classCode?' · 🏫 din clasa ta':''}</div></div>${relBtn(u,p)}</div>`).join('')}</div>`:`<p class="center muted">${q?'N-am găsit pe nimeni cu numele ăsta.':'Încă nu sunt alți elevi. Invită-ți colegii!'}</p>`;
  }
  return h;
@@ -893,7 +927,7 @@ function viewProfile(u){
  }
  if(u.role==='elev')h+=`<div class="card"><h3>🔔 Notificări pe telefon</h3><p class="small muted">Mesaje noi, cereri de prietenie și teme de la profesor.</p>${state.pushSt==='on'?'<p class="small">✅ Pornite pe acest telefon.</p><button class="btn ghost sm" data-a="pushoff">Oprește</button>':state.pushSt==='denied'?'<p class="small">⛔ Blocate din browser. Le poți permite din setările site-ului.</p>':'<button class="btn sm" data-a="pushon">Pornește notificările</button>'}</div>`;
  h+=`<div class="card"><h3>🌙 Temă</h3><div class="seg">${[['light','☀️ Luminoasă'],['dark','🌙 Întunecată'],['auto','📱 Automat']].map(([v,l])=>`<button class="${themePref()===v?'on':''}" data-a="theme" data-v="${v}">${l}</button>`).join('')}</div><p class="small muted mt">„Automat” urmează setarea telefonului.</p></div>`;
- h+=`<div class="card"><h3>📲 Aplicația pe telefon</h3>${isStandalone()?'<p class="small">✅ Folosești Capital18 ca aplicație.</p>':'<p class="small muted">Adaug-o pe ecranul principal și se va deschide ca o aplicație.</p><button class="btn ghost" data-a="install">Instalează aplicația</button>'}<button class="btn ghost" data-a="sharesite">Trimite aplicația unui prieten</button></div>`;
+ h+=`<div class="card"><h3>📲 Aplicația pe telefon</h3>${isStandalone()?'<p class="small">✅ Folosești Finzel ca aplicație.</p>':'<p class="small muted">Adaug-o pe ecranul principal și se va deschide ca o aplicație.</p><button class="btn ghost" data-a="install">Instalează aplicația</button>'}<button class="btn ghost" data-a="sharesite">Trimite aplicația unui prieten</button></div>`;
  h+=`<button class="btn ghost" data-a="logout">Ieși din cont</button>${isDemo()?'<button class="btn red" data-a="reset">Resetează datele demo</button><p class="center small muted mt">Mod demo: datele se salvează doar pe acest dispozitiv.</p>':'<p class="center small muted mt">☁️ Contul tău e salvat online. Intri de pe orice telefon cu același nume de utilizator și parolă.</p>'}`;
  return h;
 }
@@ -967,10 +1001,10 @@ const A={
  leaveclass(){const u=me();if(!confirm('Ieși din clasă?'))return;u.classCode=null;save();render()},
  install(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.finally(()=>{deferredPrompt=null});return}
   const ios=/iphone|ipad|ipod/i.test(navigator.userAgent);
-  openSheet(`<h2>📲 Instalează Capital18</h2>${ios?'<ol class="steps"><li>Deschide pagina în <b>Safari</b>.</li><li>Apasă butonul <b>Partajează</b> (pătratul cu săgeată în sus).</li><li>Alege <b>„Adaugă pe ecranul principal”</b>.</li><li>Apasă <b>Adaugă</b>. Iconița Capital18 apare lângă celelalte aplicații.</li></ol>':'<ol class="steps"><li>Deschide pagina în <b>Chrome</b>.</li><li>Apasă meniul <b>⋮</b> din dreapta sus.</li><li>Alege <b>„Instalează aplicația”</b> sau <b>„Adaugă pe ecranul de pornire”</b>.</li><li>Confirmă. Capital18 apare printre aplicații.</li></ol>'}<button class="btn mt" data-a="closesheet">Am înțeles</button>`)},
+  openSheet(`<h2>📲 Instalează Finzel</h2>${ios?'<ol class="steps"><li>Deschide pagina în <b>Safari</b>.</li><li>Apasă butonul <b>Partajează</b> (pătratul cu săgeată în sus).</li><li>Alege <b>„Adaugă pe ecranul principal”</b>.</li><li>Apasă <b>Adaugă</b>. Iconița Finzel apare lângă celelalte aplicații.</li></ol>':'<ol class="steps"><li>Deschide pagina în <b>Chrome</b>.</li><li>Apasă meniul <b>⋮</b> din dreapta sus.</li><li>Alege <b>„Instalează aplicația”</b> sau <b>„Adaugă pe ecranul de pornire”</b>.</li><li>Confirmă. Finzel apare printre aplicații.</li></ol>'}<button class="btn mt" data-a="closesheet">Am înțeles</button>`)},
  hideinstall(){const u=me();u.hideInstall=true;save();render()},
- sharesite(){const url=location.href.split('#')[0];const text='Hai pe Capital18: lecții scurte despre bani și Capitalul tău de 18 ani!';if(navigator.share)navigator.share({title:'Capital18',text,url}).catch(()=>{});else copy(url,'Linkul a fost copiat')},
- sharecode(el){const c=db.classes[el.dataset.code];const url=location.href.split('#')[0];const text=`Intră în clasa „${c.name}” pe Capital18. Fă-ți cont și scrie codul ${c.code} la „Clasa mea”.`;if(navigator.share)navigator.share({title:'Capital18',text,url}).catch(()=>{});else copy(text+' '+url,'Mesajul a fost copiat')},
+ sharesite(){const url=location.href.split('#')[0];const text='Hai pe Finzel: lecții scurte despre bani și Capitalul tău de 18 ani!';if(navigator.share)navigator.share({title:'Finzel',text,url}).catch(()=>{});else copy(url,'Linkul a fost copiat')},
+ sharecode(el){const c=db.classes[el.dataset.code];const url=location.href.split('#')[0];const text=`Intră în clasa „${c.name}” pe Finzel. Fă-ți cont și scrie codul ${c.code} la „Clasa mea”.`;if(navigator.share)navigator.share({title:'Finzel',text,url}).catch(()=>{});else copy(text+' '+url,'Mesajul a fost copiat')},
  delhw(el){const c=db.classes[el.dataset.code];c.hw=c.hw.filter(w=>w.id!==el.dataset.id);save();render()},
  kick(el){const s=db.users[el.dataset.u];if(!s||!confirm(`Scoți pe ${s.name} din clasă?`))return;s.classCode=null;if(isDemo()){save();render();return}sb.rpc('scoate_din_clasa',{p_username:s.u}).then(({error})=>{if(error)toast('Eroare: '+error.message);render()})},
  logout(){state.run=null;state.cTab='msgs';state.pq='';stopRealtime();social={reqs:[],msgs:[],ok:false};if(isDemo()){store.del(SES_KEY);if(sb){store.del(MODE_KEY);db=emptyDb()}go('#/');return}
@@ -1062,7 +1096,7 @@ setInterval(()=>{if(document.visibilityState==='visible')softRefresh()},60000);
 setInterval(()=>{if(document.visibilityState==='visible'&&/^#\/(chat|community|friends)/.test(location.hash))pollSocial().catch(()=>{})},5000);
 async function boot(){
  if(isDemo()){loadDb();render();return}
- $('#app').innerHTML='<div class="landing"><div class="logo" style="font-size:1.5rem;justify-content:center">Capital<b>18</b></div><p class="center muted">Se încarcă…</p></div>';
+ $('#app').innerHTML='<div class="landing"><div class="logo" style="font-size:1.5rem;justify-content:center">Fin<b>zel</b></div><p class="center muted">Se încarcă…</p></div>';
  try{
   const {data:{session}}=await sb.auth.getSession();
   if(session){authId=session.user.id;cloudUser=userOf(session.user);await loadCloud();await ensureProfile(cloudUser)}
