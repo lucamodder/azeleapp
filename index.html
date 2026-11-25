@@ -54,7 +54,7 @@ textarea{min-height:90px;resize:vertical}
 .stats{display:flex;gap:12px}
 .stat{display:flex;align-items:center;gap:3px;font-weight:900;font-size:.95rem}
 .stat.fire{color:#E8590C}.stat.xp{color:var(--blue)}.stat.coin{color:var(--gold-d)}
-main{padding:16px 16px calc(100px + env(safe-area-inset-bottom))}
+main{padding:16px 16px calc(125px + env(safe-area-inset-bottom))}
 .nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:520px;background:#fff;border-top:2px solid var(--line);display:flex;padding:6px 4px calc(6px + env(safe-area-inset-bottom));z-index:6}
 .nav a{flex:1;text-align:center;text-decoration:none;color:var(--muted);font-size:.68rem;font-weight:800;padding:6px 0 5px;border-radius:12px;margin:0 2px}
 .nav a .i{display:block;font-size:1.45rem;line-height:1.25;filter:grayscale(1);opacity:.65}
@@ -188,6 +188,11 @@ a.li{text-decoration:none;color:inherit}
 .stats{align-items:center}
 .topav{width:36px;height:36px;border-radius:50%;background:var(--teal-l);display:flex;align-items:center;justify-content:center;font-size:1.25rem;text-decoration:none;border:2px solid var(--line);flex:none}
 .topav.on{border-color:var(--teal)}
+.topav{position:relative}.topav .bd{position:absolute;top:-5px;right:-6px;background:var(--red);color:#fff;border-radius:999px;font-size:.62rem;font-weight:800;padding:0 5px;line-height:1.55;border:2px solid var(--bg)}
+.stats{gap:9px}
+.nt{display:flex;gap:12px;align-items:center;padding:12px 0;border-bottom:2px solid var(--line);text-decoration:none;color:inherit}
+.nt:last-child{border-bottom:0}.nt .ic{width:42px;height:42px;border-radius:50%;background:var(--teal-l);display:flex;align-items:center;justify-content:center;font-size:1.35rem;flex:none}
+.nt.nou .ic{box-shadow:0 0 0 3px var(--gold)}.nt .dot{width:10px;height:10px;border-radius:50%;background:var(--red);flex:none}
 </style>
 <script>try{var t=localStorage.getItem('c18_theme')||'auto';if(t==='dark'||(t==='auto'&&matchMedia('(prefers-color-scheme: dark)').matches))document.documentElement.dataset.theme='dark'}catch(e){}</script>
 </head>
@@ -476,16 +481,16 @@ function startRealtime(){
  if(isDemo()||rtChan||!sb||!cloudUser||!social.ok)return;
  rtChan=sb.channel('c18-social')
   .on('postgres_changes',{event:'*',schema:'public',table:'friend_requests'},()=>{reloadReqs().catch(()=>{})})
-  .on('postgres_changes',{event:'INSERT',schema:'public',table:'messages'},p=>{const m=p.new;if(m&&!social.msgs.some(x=>x.id===m.id)){social.msgs.push(m);onSocialChange()}})
+  .on('postgres_changes',{event:'INSERT',schema:'public',table:'messages'},p=>{const m=p.new;if(m&&!social.msgs.some(x=>x.id===m.id)){social.msgs.push(m);onIncomingMsg(m);onSocialChange()}})
   .subscribe();
 }
 function stopRealtime(){if(rtChan&&sb){sb.removeChannel(rtChan)}rtChan=null}
-async function reloadReqs(){const r=await sb.from('friend_requests').select('from_u,to_u,status,created_at');if(r.error)return;const ch=JSON.stringify(r.data)!==JSON.stringify(social.reqs);social.reqs=r.data;if(ch){syncFriends();onSocialChange()}}
+async function reloadReqs(){const r=await sb.from('friend_requests').select('from_u,to_u,status,created_at');if(r.error)return;const ch=JSON.stringify(r.data)!==JSON.stringify(social.reqs);const before=me()?incoming(me().u):[];social.reqs=r.data;if(ch){syncFriends();onNewRequests(before);onSocialChange()}}
 async function pollSocial(){
  if(isDemo()||!cloudUser||!social.ok)return;
  const last=social.msgs.reduce((a,m)=>Math.max(a,m.id),0);
  const m=await sb.from('messages').select('id,from_u,to_u,grp,body,created_at').gt('id',last).order('id').limit(200);
- let ch=false;if(!m.error)m.data.forEach(x=>{if(!social.msgs.some(y=>y.id===x.id)){social.msgs.push(x);ch=true}});
+ let ch=false;if(!m.error)m.data.forEach(x=>{if(!social.msgs.some(y=>y.id===x.id)){social.msgs.push(x);onIncomingMsg(x);ch=true}});
  if(ch)onSocialChange();
  await reloadReqs();
 }
@@ -540,6 +545,75 @@ function relBtn(u,p){const r=relation(u.u,p.u);
   :r==='in'?`<button class="btn sm gold" data-a="acceptreq" data-u="${p.u}">Acceptă</button>`
   :`<button class="btn sm" data-a="addf" data-u="${p.u}">+ Cerere</button>`}
 
+/* ================= NOTIFICĂRI ================= */
+const VAPID_PUBLIC='BKCn9Y1U4JAqkZVg7uBdkkjySKtn-SsDMdve1-Im2SNRQmN9OyVSa-V78hN_LAfbaJrx9ZGnnIglKzUMQIPQBCY';
+const seenKey=()=>'c18_seen_'+(me()||{}).u;
+function getSeen(){const k=seenKey();let v=null;try{v=JSON.parse(store.get(k)||'null')}catch(e){}
+ if(!v){v={};const u=me();if(u)social.reqs.filter(r=>r.status==='accepted'&&r.from_u===u.u).forEach(r=>v['acc:'+r.to_u]=1);store.set(k,JSON.stringify(v))}return v}
+function markSeen(keys){const v=getSeen();keys.forEach(k=>v[k]=1);store.set(seenKey(),JSON.stringify(v))}
+const fmtDay=d=>{const x=String(d||'').split('-');return x.length===3?x[2]+'.'+x[1]:''};
+function notifs(u){
+ if(!u||u.role!=='elev')return[];
+ const seen=getSeen(),L=[];
+ incoming(u.u).forEach(f=>{const p=db.users[f];if(p)L.push({k:'req:'+f,ic:p.avatar,t:`<b>${esc(p.name)}</b> ți-a trimis o cerere de prietenie`,href:'#/friends',act:1})});
+ friendsList(u.u).forEach(f=>{const n=unreadIn(u.u,'dm',f);if(!n)return;const p=db.users[f],ms=threadMsgs(u.u,'dm',f),last=ms[ms.length-1];
+  L.push({k:'dm:'+f,ic:'💬',t:`<b>${esc(p?p.name:f)}</b>: ${esc(cut(last.body,60))}${n>1?` <span class="muted small">(+${n-1})</span>`:''}`,href:'#/chat/dm/'+encodeURIComponent(f),act:1})});
+ social.reqs.filter(r=>r.status==='accepted'&&r.from_u===u.u&&!seen['acc:'+r.to_u]).forEach(r=>{const p=db.users[r.to_u];if(p)L.push({k:'acc:'+r.to_u,ic:p.avatar,t:`<b>${esc(p.name)}</b> ți-a acceptat cererea. Acum puteți vorbi!`,href:'#/chat/dm/'+encodeURIComponent(r.to_u)})});
+ const c=classOf(u);if(c)c.hw.forEach(w=>{const done=w.type==='lesson'?!!u.done[w.ref]:!!u.sit[w.ref];if(done)return;const t=w.type==='lesson'?(LES[w.ref]||{}).title:(SIT[w.ref]||{}).t;if(!t)return;
+  L.push({k:'hw:'+w.id,ic:'📌',t:`Temă de la profesor: <b>${esc(t)}</b>${w.due?` · până pe ${fmtDay(w.due)}`:''}`,href:w.type==='lesson'?'#/learn':'#/sit/'+w.ref})});
+ return L.map(x=>Object.assign(x,{nou:!!x.act||!seen[x.k]}));
+}
+const notifCount=u=>notifs(u).filter(x=>x.nou).length;
+function updateAppBadge(u){try{if(!navigator.setAppBadge)return;const n=u?notifCount(u):0;n?navigator.setAppBadge(n):navigator.clearAppBadge()}catch(e){}}
+const pushSupported=()=>'serviceWorker' in navigator&&'PushManager' in window&&'Notification' in window;
+const isIOS=()=>/iphone|ipad|ipod/i.test(navigator.userAgent);
+function b64u(s){const p='='.repeat((4-s.length%4)%4);const b=atob((s+p).replace(/-/g,'+').replace(/_/g,'/'));return Uint8Array.from(b,c=>c.charCodeAt(0))}
+async function refreshPushState(){let st='unsupported';try{if(pushSupported()){if(Notification.permission==='denied')st='denied';else{const reg=await navigator.serviceWorker.getRegistration();const sub=reg&&await reg.pushManager.getSubscription();st=sub?'on':'off'}}}catch(e){}
+ if(state.pushSt!==st){state.pushSt=st;if(/^#\/(notif|profile)/.test(location.hash)&&!state.run)render()}}
+async function enablePush(){
+ if(isDemo())return toast('Notificările pe telefon merg doar cu un cont online');
+ if(!pushSupported()||(isIOS()&&!isStandalone()))return openSheet(`<h2>🔔 Notificări pe telefon</h2>${isIOS()?'<p>Pe iPhone, notificările merg doar după ce instalezi aplicația:</p><ol class="steps"><li>Deschide Capital18 în <b>Safari</b>.</li><li>Apasă <b>Partajează</b> → <b>„Adaugă pe ecranul principal”</b>.</li><li>Deschide Capital18 de pe ecranul principal.</li><li>Intră în 🔔 și apasă din nou <b>Pornește notificările</b>.</li></ol>':'<p>Browserul ăsta nu suportă notificări. Încearcă în Chrome.</p>'}<button class="btn mt" data-a="closesheet">Am înțeles</button>`);
+ try{
+  const perm=await Notification.requestPermission();
+  if(perm!=='granted'){state.pushSt=perm==='denied'?'denied':'off';render();return toast('Notificările nu au fost permise')}
+  const reg=await navigator.serviceWorker.ready;
+  let sub=await reg.pushManager.getSubscription();
+  if(!sub)sub=await reg.pushManager.subscribe({userVisibleOnly:true,applicationServerKey:b64u(VAPID_PUBLIC)});
+  const j=sub.toJSON();
+  const {error}=await sb.from('push_subscriptions').upsert({endpoint:j.endpoint,username:me().u,p256dh:j.keys.p256dh,auth:j.keys.auth});
+  if(error)throw error;
+  state.pushSt='on';toast('🔔 Notificările sunt pornite');render();
+ }catch(e){toast('Nu s-au putut porni notificările: '+(e&&e.message||e))}
+}
+async function disablePush(quiet){
+ try{const reg=await navigator.serviceWorker.getRegistration();const sub=reg&&await reg.pushManager.getSubscription();
+  if(sub){if(sb&&cloudUser)await sb.from('push_subscriptions').delete().eq('endpoint',sub.endpoint);await sub.unsubscribe()}}catch(e){}
+ state.pushSt='off';if(!quiet){toast('Notificările sunt oprite');render()}
+}
+async function localNotify(title,body,url,tag){
+ try{if(state.pushSt==='on'||!('Notification' in window)||Notification.permission!=='granted'||!document.hidden)return;
+  const reg=await navigator.serviceWorker.getRegistration();if(reg)reg.showNotification(title,{body,icon:'icon-192.png',badge:'icon-192.png',tag,data:{url}})}catch(e){}
+}
+function onIncomingMsg(m){
+ const u=me();if(!u||m.from_u===u.u||m.to_u!==u.u)return;
+ const p=db.users[m.from_u],name=p?p.name:m.from_u;
+ if(location.hash!=='#/chat/dm/'+encodeURIComponent(m.from_u)&&!document.hidden)toast(`💬 ${name}: ${cut(m.body,40)}`);
+ localNotify('💬 '+name,cut(m.body,120),'./index.html#/chat/dm/'+encodeURIComponent(m.from_u),'dm:'+m.from_u);
+}
+function onNewRequests(before){
+ const u=me();if(!u)return;
+ incoming(u.u).filter(f=>!before.includes(f)).forEach(f=>{const p=db.users[f],name=p?p.name:f;if(!document.hidden)toast(`📨 ${name} ți-a trimis o cerere de prietenie`);localNotify('📨 Cerere de prietenie',`${name} vrea să fiți prieteni`,'./index.html#/friends','req:'+f)});
+}
+function viewNotif(u){
+ const L=notifs(u);
+ let h=`<h1>🔔 Notificări</h1>`;
+ const st=state.pushSt;
+ if(st!=='on')h+=`<div class="card blue"><div class="row"><div style="font-size:1.8rem">📲</div><div class="grow"><b>Primește notificări pe telefon</b><div class="small muted">${st==='denied'?'Ai blocat notificările. Le poți porni din setările browserului pentru acest site.':'Mesaje noi, cereri de prietenie și teme de la profesor, chiar și cu aplicația închisă.'}</div></div></div>${st==='denied'?'':`<button class="btn sm mt" data-a="pushon">Pornește notificările</button>`}</div>`;
+ h+=L.length?`<div class="card">${L.map(x=>`<a class="nt ${x.nou?'nou':''}" href="${x.href}"><div class="ic">${x.ic}</div><div class="grow">${x.t}</div>${x.nou?'<span class="dot"></span>':''}</a>`).join('')}</div>`
+  :`<div class="card center"><div style="font-size:2.6rem">🎉</div><p class="muted">Nicio notificare nouă. Ești la zi!</p></div>`;
+ return h;
+}
+
 /* ================= UI DE BAZĂ ================= */
 const state={run:null,sitAns:{},fSort:'save',fScope:'friends'};
 let toastT;
@@ -554,10 +628,10 @@ function shell(u,inner,tab){
  const T=u.role==='profesor'
   ?[['class','🏫','Clase'],['learn','📚','Lecții'],['sit','💡','Situații'],['profile',u.avatar,'Profil']]
   :[['sit','💡','Situații'],['capital','🪙','Capital 18'],['learn','📚','Învață',1],['friends','👥','Prieteni'],['community','💬','Chat']];
- const BD=u.role==='elev'?{friends:incoming(u.u).length,community:unreadDm(u.u)}:{};
+ const BD=u.role==='elev'?{friends:incoming(u.u).length,community:unreadDm(u.u)}:{};const NC=u.role==='elev'?notifCount(u):0;
  const top=u.role==='profesor'
   ?`<div class="logo">Capital<b>18</b></div><span class="pill">Profesor</span>`
-  :`<div class="logo">Capital<b>18</b></div><div class="stats"><span class="stat fire" title="Serie de zile">🔥${streakNow(u)}</span><span class="stat xp" title="XP">⚡${fmt(u.xp)}</span><span class="stat coin" title="Fondul tău virtual">🪙${fmt(u.fund)}</span><a href="#/profile" class="topav${tab==='profile'?' on':''}" aria-label="Profil">${u.avatar}</a></div>`;
+  :`<div class="logo">Capital<b>18</b></div><div class="stats"><span class="stat fire" title="Serie de zile">🔥${streakNow(u)}</span><span class="stat xp" title="XP">⚡${fmt(u.xp)}</span><span class="stat coin" title="Fondul tău virtual">🪙${fmt(u.fund)}</span><a href="#/notif" class="topav${tab==='notif'?' on':''}" aria-label="Notificări">🔔${NC?`<span class="bd">${NC>9?'9+':NC}</span>`:''}</a><a href="#/profile" class="topav${tab==='profile'?' on':''}" aria-label="Profil">${u.avatar}</a></div>`;
  return `<header class="top">${top}</header><main>${inner}</main><nav class="nav">${T.map(([k,i,l,m])=>`<a href="#/${k}" class="${tab===k?'on':''}${m?' main':''}"><span class="i">${i}</span>${BD[k]?`<span class="bd">${BD[k]>9?'9+':BD[k]}</span>`:''}${l}</a>`).join('')}</nav>`;
 }
 function render(){
@@ -573,6 +647,7 @@ function render(){
    case 'capital':html=u.role==='elev'?viewCapital(u):viewLearn(u);break;
    case 'friends':html=u.role==='elev'?viewFriends(u):viewLearn(u);break;
    case 'community':html=u.role==='elev'?viewCommunity(u):viewLearn(u);break;
+   case 'notif':html=u.role==='elev'?viewNotif(u):viewLearn(u);break;
    case 'chat':html=u.role==='elev'?viewChat(u,parts[1],decodeURIComponent(parts[2]||'')):viewLearn(u);tab='community';break;
    case 'profile':html=viewProfile(u);break;
    case 'class':html=u.role==='profesor'?(parts[1]&&db.classes[parts[1]]?viewClass(u,parts[1]):viewClasses(u)):viewLearn(u);if(u.role!=='profesor')tab='learn';break;
@@ -582,6 +657,8 @@ function render(){
  app.innerHTML=full?html:shell(u,html,tab);
  if(location.hash!==lastRoute){window.scrollTo(0,0);lastRoute=location.hash}
  if(r==='chat'&&u)window.scrollTo(0,document.body.scrollHeight);
+ if(r==='notif'&&u&&u.role==='elev'){const L=notifs(u).filter(x=>!x.act);if(L.some(x=>x.nou))markSeen(L.map(x=>x.k))}
+ updateAppBadge(u);
 }
 
 /* ================= AUTENTIFICARE ================= */
@@ -814,6 +891,7 @@ function viewProfile(u){
   h+=`<div class="card"><h3>🏫 Clasa mea</h3>${c?`<p>Ești în clasa <b>${esc(c.name)}</b> (profesor: ${esc((db.users[c.teacher]||{}).name||'')}).</p><button class="link small" data-a="leaveclass">Ieși din clasă</button>`:`<p class="small muted">Introdu codul primit de la profesor.</p><form data-f="join" class="row"><input name="code" maxlength="6" placeholder="ex: BANI26" autocapitalize="characters" required><button class="btn sm">Intră</button></form>`}</div>`;
   h+=`<div class="card"><h3>🐷 Buget și obiectiv</h3>${budgetForm(u)}</div>`;
  }
+ if(u.role==='elev')h+=`<div class="card"><h3>🔔 Notificări pe telefon</h3><p class="small muted">Mesaje noi, cereri de prietenie și teme de la profesor.</p>${state.pushSt==='on'?'<p class="small">✅ Pornite pe acest telefon.</p><button class="btn ghost sm" data-a="pushoff">Oprește</button>':state.pushSt==='denied'?'<p class="small">⛔ Blocate din browser. Le poți permite din setările site-ului.</p>':'<button class="btn sm" data-a="pushon">Pornește notificările</button>'}</div>`;
  h+=`<div class="card"><h3>🌙 Temă</h3><div class="seg">${[['light','☀️ Luminoasă'],['dark','🌙 Întunecată'],['auto','📱 Automat']].map(([v,l])=>`<button class="${themePref()===v?'on':''}" data-a="theme" data-v="${v}">${l}</button>`).join('')}</div><p class="small muted mt">„Automat” urmează setarea telefonului.</p></div>`;
  h+=`<div class="card"><h3>📲 Aplicația pe telefon</h3>${isStandalone()?'<p class="small">✅ Folosești Capital18 ca aplicație.</p>':'<p class="small muted">Adaug-o pe ecranul principal și se va deschide ca o aplicație.</p><button class="btn ghost" data-a="install">Instalează aplicația</button>'}<button class="btn ghost" data-a="sharesite">Trimite aplicația unui prieten</button></div>`;
  h+=`<button class="btn ghost" data-a="logout">Ieși din cont</button>${isDemo()?'<button class="btn red" data-a="reset">Resetează datele demo</button><p class="center small muted mt">Mod demo: datele se salvează doar pe acest dispozitiv.</p>':'<p class="center small muted mt">☁️ Contul tău e salvat online. Intri de pe orice telefon cu același nume de utilizator și parolă.</p>'}`;
@@ -873,6 +951,8 @@ const A={
   if(i===SIT[id].quiz.a&&!u.sit[id]){u.sit[id]=true;const nb=award(u,3,3);save();toast(nb.length?`🏅 Insignă nouă: ${nb[0].n}`:'+3 lei în Capitalul tău 🪙')}render()},
  challenge(el){const c=CHALLENGES.find(x=>x.id===el.dataset.id);openSheet(`<div class="center"><div style="font-size:3rem">${c.e}</div><h2>${c.t}</h2><p class="muted small">${c.d}</p></div><form data-f="challenge"><input type="hidden" name="id" value="${c.id}"><label class="f">Cum ai făcut-o? (o propoziție)</label><textarea name="proof" required minlength="8" maxlength="300" placeholder="ex: Am mers pe jos la școală toată săptămâna și am economisit 60 lei."></textarea><button class="btn mt">Confirm · +${c.fund} lei</button></form><button class="btn ghost" data-a="closesheet">Renunță</button>`)},
  closesheet(){closeSheet()},
+ pushon(){enablePush()},
+ pushoff(){disablePush()},
  theme(el){store.set(THEME_KEY,el.dataset.v);applyTheme();render()},
  editbudget(){openSheet(`<h2>🐷 Buget și obiectiv</h2>${budgetForm(me())}`)},
  fsort(el){state.fSort=el.dataset.v;render()},
@@ -894,7 +974,7 @@ const A={
  delhw(el){const c=db.classes[el.dataset.code];c.hw=c.hw.filter(w=>w.id!==el.dataset.id);save();render()},
  kick(el){const s=db.users[el.dataset.u];if(!s||!confirm(`Scoți pe ${s.name} din clasă?`))return;s.classCode=null;if(isDemo()){save();render();return}sb.rpc('scoate_din_clasa',{p_username:s.u}).then(({error})=>{if(error)toast('Eroare: '+error.message);render()})},
  logout(){state.run=null;state.cTab='msgs';state.pq='';stopRealtime();social={reqs:[],msgs:[],ok:false};if(isDemo()){store.del(SES_KEY);if(sb){store.del(MODE_KEY);db=emptyDb()}go('#/');return}
-  pushNow().catch(()=>{}).finally(()=>sb.auth.signOut().finally(()=>{cloudUser=null;authId=null;db=emptyDb();go('#/')}))},
+  pushNow().catch(()=>{}).then(()=>disablePush(true)).finally(()=>sb.auth.signOut().finally(()=>{cloudUser=null;authId=null;db=emptyDb();go('#/')}))},
  reset(){if(!confirm('Ștergi TOATE conturile și datele de pe acest dispozitiv și refaci conturile demo?'))return;store.del(DB_KEY);store.del(SES_KEY);loadDb();go('#/')}
 };
 function copy(t,msg){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast(msg)).catch(()=>prompt('Copiază:',t))}
@@ -943,6 +1023,7 @@ async function cloudLogin(u,pw){
 const F={
  register(f){const d=Object.fromEntries(new FormData(f));const err=m=>{$('#err').textContent=m};
   const u=(d.u||'').trim().toLowerCase().replace(/^@/,'');
+  if(!String(d.name||'').trim())return err('Scrie numele afișat.');
   if(!/^[a-z0-9._]{3,20}$/.test(u))return err('Numele de utilizator: 3–20 caractere, doar litere mici, cifre, punct sau _.');
   if(isDemo()&&db.users[u])return err('Numele de utilizator e deja luat.');
   if((d.pw||'').length<6)return err('Parola trebuie să aibă minimum 6 caractere.');
@@ -989,7 +1070,10 @@ async function boot(){
  render();
 }
 boot();
-if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))navigator.serviceWorker.register('sw.js').catch(()=>{});
+if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost'))navigator.serviceWorker.register('sw.js').then(()=>refreshPushState()).catch(()=>{});
+else refreshPushState();
+window.addEventListener('hashchange',()=>{if($('#sheet').classList.contains('on'))closeSheet()});
+if('serviceWorker' in navigator)navigator.serviceWorker.addEventListener('message',e=>{if(e.data&&e.data.go){location.hash=e.data.go}});
 </script>
 </body>
 </html>
