@@ -107,6 +107,15 @@ main{padding:16px 16px calc(100px + env(safe-area-inset-bottom))}
 /* lists */
 .li{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:2px solid var(--line)}
 .li:last-child{border-bottom:0}
+.msgs{display:flex;flex-direction:column;gap:6px;margin:12px 0}
+.bub{max-width:80%;align-self:flex-start;background:#fff;border:2px solid var(--line);border-radius:18px 18px 18px 6px;padding:8px 12px;overflow-wrap:anywhere;white-space:pre-wrap}
+.bub.me{align-self:flex-end;background:var(--teal);border-color:var(--teal);color:#fff;border-radius:18px 18px 6px 18px}
+.bub .who{font-size:.72rem;font-weight:800;color:var(--muted);margin-bottom:2px;white-space:normal}
+.bub .tm{font-size:.65rem;opacity:.7;text-align:right;margin-top:2px}
+.chatbar{position:sticky;bottom:calc(78px + env(safe-area-inset-bottom));background:var(--bg);padding:8px 0}
+.unread{background:var(--red);color:#fff;border-radius:999px;font-size:.72rem;font-weight:800;padding:2px 8px;flex:none}
+.nav a{position:relative}.nav .bd{position:absolute;top:1px;left:56%;background:var(--red);color:#fff;border-radius:999px;font-size:.62rem;padding:0 5px;line-height:1.5}
+a.li{text-decoration:none;color:inherit}
 .av{width:46px;height:46px;border-radius:50%;background:var(--teal-l);display:flex;align-items:center;justify-content:center;font-size:1.6rem;flex:none}
 .av.lg{width:92px;height:92px;font-size:3.2rem;margin:0 auto 8px;border:4px solid #fff;box-shadow:0 0 0 2px var(--line)}
 .rank{width:26px;font-weight:900;color:var(--muted);text-align:center;flex:none}
@@ -322,10 +331,11 @@ async function loadCloud(){
  p.data.forEach(r=>{if(r.data&&r.data.u)d.users[r.username]=r.data});
  c.data.forEach(r=>{if(r.data&&r.data.code)d.classes[r.code]=r.data});
  db=d;
+ await loadSocial();
 }
 async function refresh(){if(isDemo()||!cloudUser)return;await pushNow();await loadCloud()}
 async function ensureProfile(u){if(!db.users[u]){db.users[u]=Object.assign(newUser({u,name:u,pw:''}),{pass:null});dirty=true;await pushNow()}}
-function loadDb(){try{db=JSON.parse(store.get(DB_KEY))}catch(e){db=null}if(!db||!db.users){db=seed();store.set(DB_KEY,JSON.stringify(db))}}
+function loadDb(){try{db=JSON.parse(store.get(DB_KEY))}catch(e){db=null}if(!db||!db.users){db=seed();store.set(DB_KEY,JSON.stringify(db))}demoSocial()}
 function me(){if(isDemo()){const k=store.get(SES_KEY);return k&&db.users[k]?db.users[k]:null}return cloudUser&&db.users[cloudUser]?db.users[cloudUser]:null}
 function newUser(o){return{u:o.u,name:o.name,role:o.role||'elev',grade:o.grade||'',pass:hashPw(o.u,o.pw),avatar:o.avatar||'🦊',classCode:o.classCode||null,xp:0,fund:0,xpLog:{},streak:0,maxStreak:0,lastDay:null,done:{},sit:{},ch:{},friends:[],budget:0,goalPct:20,savings:{},badges:{},startTest:null,finalTest:null,created:dayKey()}}
 const nDone=u=>Object.keys(u.done).length;
@@ -374,6 +384,128 @@ function seed(){
  return d;
 }
 
+/* ================= SOCIAL: cereri de prietenie, mesaje, grupuri ================= */
+const GROUPS=[
+ {id:'general',e:'☕',n:'Cafenea',d:'Discuții libere despre bani și viața de liceean'},
+ {id:'investitii',e:'📈',n:'Investiții',d:'ETF-uri, acțiuni, dobândă compusă și riscuri'},
+ {id:'economisire',e:'🐷',n:'Economisire',d:'Trucuri ca să pui bani deoparte'},
+ {id:'job',e:'💼',n:'Primul job & taxe',d:'Joburi de vară, salariu brut vs. net'},
+ {id:'tepe',e:'🕵️',n:'Țepe & siguranță online',d:'Ai văzut o înșelătorie? Avertizează-i pe ceilalți'},
+ {id:'cumparaturi',e:'🛍️',n:'Cumpărături deștepte',d:'Reduceri reale vs. capcane de marketing'}];
+const GROUP=Object.fromEntries(GROUPS.map(g=>[g.id,g]));
+let social={reqs:[],msgs:[],ok:false},rtChan=null;
+const cut=(t,n)=>{t=String(t||'');return t.length>n?t.slice(0,n-1)+'…':t};
+const hm=iso=>{const d=new Date(iso),n=new Date(),p=x=>String(x).padStart(2,'0');const t=p(d.getHours())+':'+p(d.getMinutes());return d.toDateString()===n.toDateString()?t:p(d.getDate())+'.'+p(d.getMonth()+1)+' '+t};
+function relation(a,b){const r=social.reqs.find(x=>(x.from_u===a&&x.to_u===b)||(x.from_u===b&&x.to_u===a));if(!r)return'none';if(r.status==='accepted')return'friends';return r.from_u===a?'out':'in'}
+function friendsList(a){return social.reqs.filter(r=>r.status==='accepted'&&(r.from_u===a||r.to_u===a)).map(r=>r.from_u===a?r.to_u:r.from_u)}
+function incoming(a){return social.reqs.filter(r=>r.status==='pending'&&r.to_u===a).map(r=>r.from_u)}
+function outgoing(a){return social.reqs.filter(r=>r.status==='pending'&&r.from_u===a).map(r=>r.to_u)}
+function threadMsgs(a,kind,id){return kind==='g'?social.msgs.filter(m=>m.grp===id):social.msgs.filter(m=>!m.grp&&((m.from_u===a&&m.to_u===id)||(m.from_u===id&&m.to_u===a)))}
+const readKey=()=>'c18_read_'+(me()||{}).u;
+function getRead(){try{return JSON.parse(store.get(readKey())||'{}')}catch(e){return{}}}
+function markRead(th,id){const r=getRead();if(!(r[th]>=id)){r[th]=id;store.set(readKey(),JSON.stringify(r))}}
+function unreadIn(a,kind,id){const r=getRead();const th=(kind==='g'?'g:':'dm:')+id;return threadMsgs(a,kind,id).filter(m=>m.from_u!==a&&m.id>(r[th]||0)).length}
+function unreadDm(a){const r=getRead();return social.msgs.filter(m=>!m.grp&&m.to_u===a&&m.id>(r['dm:'+m.from_u]||0)).length}
+function syncFriends(){
+ const u=me();if(!u||u.role!=='elev'||!social.ok)return;
+ if(!isDemo()&&!u.socialV2){u.socialV2=true;(u.friends||[]).filter(f=>db.users[f]&&relation(u.u,f)==='none').forEach(f=>{social.reqs.push({from_u:u.u,to_u:f,status:'pending'});sb.from('friend_requests').insert({from_u:u.u,to_u:f}).then(()=>{})});save()}
+ const f=friendsList(u.u).filter(x=>db.users[x]).sort();
+ if(JSON.stringify(f)!==JSON.stringify((u.friends||[]).slice().sort())){u.friends=f;checkBadges(u);save()}
+}
+function demoSocial(){
+ if(!db.social){
+  const reqs=[],seen={},iso=m=>new Date(Date.now()-m*60000).toISOString();
+  Object.values(db.users).forEach(u=>(u.friends||[]).forEach(f=>{const k=[u.u,f].sort().join('|');if(!seen[k]&&db.users[f]){seen[k]=1;reqs.push({from_u:u.u,to_u:f,status:'accepted',created_at:iso(3000)})}}));
+  if(db.users['david.s']&&db.users['elev.demo'])reqs.push({from_u:'david.s',to_u:'elev.demo',status:'pending',created_at:iso(40)});
+  let id=0;const M=(from_u,grp,body,min,to_u)=>({id:++id,from_u,to_u:to_u||null,grp:grp||null,body,created_at:iso(min)});
+  const msgs=[M('ioana.r','investitii','A încercat cineva un ETF pe S&P 500? Am citit că e mai sigur decât acțiunile individuale.',300),
+   M('ana.m','investitii','Da, împarți riscul pe 500 de firme. Dar banii trebuie lăsați acolo ani de zile, nu luni.',280),
+   M('mihai.p','tepe','Atenție: mi-a venit un SMS „coletul e blocat, plătește 3 lei”. E țeapă, nu apăsați pe link!',120),
+   M('sara.t','economisire','Eu am o regulă: din orice bani primesc, 20% merg direct deoparte. Funcționează!',90),
+   M('david.s','general','Salut! Cine mai dă testul final săptămâna asta?',30),
+   M('ana.m',null,'Ai terminat lecția cu bugetul 50/30/20?',60,'elev.demo'),
+   M('elev.demo',null,'Da, mâine o încep pe cea cu abonamentele 😅',55,'ana.m')].filter(m=>db.users[m.from_u]&&(!m.to_u||db.users[m.to_u]));
+  db.social={reqs,msgs,nextId:id};store.set(DB_KEY,JSON.stringify(db));
+ }
+ social=db.social;social.ok=true;
+}
+async function loadSocial(){
+ if(isDemo())return;
+ try{
+  const [r,m]=await Promise.all([sb.from('friend_requests').select('from_u,to_u,status,created_at'),sb.from('messages').select('id,from_u,to_u,grp,body,created_at').order('id',{ascending:false}).limit(500)]);
+  if(r.error||m.error)throw (r.error||m.error);
+  social={reqs:r.data,msgs:m.data.reverse(),ok:true};
+ }catch(e){social={reqs:[],msgs:[],ok:false};console.warn('Comunitate indisponibilă:',e&&e.message)}
+ startRealtime();
+}
+function startRealtime(){
+ if(isDemo()||rtChan||!sb||!cloudUser||!social.ok)return;
+ rtChan=sb.channel('c18-social')
+  .on('postgres_changes',{event:'*',schema:'public',table:'friend_requests'},()=>{reloadReqs().catch(()=>{})})
+  .on('postgres_changes',{event:'INSERT',schema:'public',table:'messages'},p=>{const m=p.new;if(m&&!social.msgs.some(x=>x.id===m.id)){social.msgs.push(m);onSocialChange()}})
+  .subscribe();
+}
+function stopRealtime(){if(rtChan&&sb){sb.removeChannel(rtChan)}rtChan=null}
+async function reloadReqs(){const r=await sb.from('friend_requests').select('from_u,to_u,status,created_at');if(r.error)return;const ch=JSON.stringify(r.data)!==JSON.stringify(social.reqs);social.reqs=r.data;if(ch){syncFriends();onSocialChange()}}
+async function pollSocial(){
+ if(isDemo()||!cloudUser||!social.ok)return;
+ const last=social.msgs.reduce((a,m)=>Math.max(a,m.id),0);
+ const m=await sb.from('messages').select('id,from_u,to_u,grp,body,created_at').gt('id',last).order('id').limit(200);
+ let ch=false;if(!m.error)m.data.forEach(x=>{if(!social.msgs.some(y=>y.id===x.id)){social.msgs.push(x);ch=true}});
+ if(ch)onSocialChange();
+ await reloadReqs();
+}
+function onSocialChange(){
+ if(state.run||$('#sheet').classList.contains('on')||!me())return;
+ const inp=document.querySelector('form[data-f=sendmsg] input[name=body]');
+ const a=document.activeElement;
+ if(a&&/INPUT|TEXTAREA|SELECT/.test(a.tagName)&&a!==inp)return;
+ const val=inp?inp.value:null,foc=inp&&a===inp;
+ render();
+ const n=document.querySelector('form[data-f=sendmsg] input[name=body]');if(n&&val!=null){n.value=val;if(foc)n.focus()}
+}
+async function sendRequest(to){
+ const u=me();if(!u)return;const f=db.users[to];
+ if(!f)return toast('Nu există utilizatorul @'+to);
+ if(f.u===u.u)return toast('Nu te poți adăuga pe tine 🙂');
+ if(f.role!=='elev')return toast('Poți adăuga doar elevi');
+ const rel=relation(u.u,f.u);
+ if(rel==='friends')return toast('Sunteți deja prieteni');
+ if(rel==='out')return toast('Cererea e deja trimisă');
+ if(rel==='in')return acceptRequest(f.u);
+ if(!isDemo()){const {error}=await sb.from('friend_requests').insert({from_u:u.u,to_u:f.u});if(error)return toast('Eroare: '+error.message)}
+ social.reqs.push({from_u:u.u,to_u:f.u,status:'pending',created_at:new Date().toISOString()});
+ if(isDemo())save();toast(`Cerere de prietenie trimisă către ${f.name}`);render();
+}
+async function acceptRequest(from){
+ const u=me();const r=social.reqs.find(x=>x.from_u===from&&x.to_u===u.u&&x.status==='pending');if(!r)return;
+ if(!isDemo()){const {error}=await sb.from('friend_requests').update({status:'accepted'}).eq('from_u',from).eq('to_u',u.u);if(error)return toast('Eroare: '+error.message)}
+ r.status='accepted';syncFriends();if(isDemo())save();
+ const f=db.users[from];toast(`Tu și ${f?f.name:from} sunteți acum prieteni 🎉`);render();
+}
+async function removeRel(other,msg){
+ const u=me();
+ if(!isDemo()){const a=await sb.from('friend_requests').delete().eq('from_u',u.u).eq('to_u',other);const b=await sb.from('friend_requests').delete().eq('from_u',other).eq('to_u',u.u);if(a.error||b.error)return toast('Eroare: '+(a.error||b.error).message)}
+ social.reqs=social.reqs.filter(x=>!((x.from_u===u.u&&x.to_u===other)||(x.from_u===other&&x.to_u===u.u)));
+ syncFriends();if(isDemo())save();if(msg)toast(msg);render();
+}
+async function sendMessage(kind,id,body){
+ const u=me();body=String(body||'').trim().slice(0,500);if(!u||!body)return;
+ if(kind==='dm'&&relation(u.u,id)!=='friends')return toast('Puteți vorbi doar dacă sunteți prieteni');
+ if(kind==='g'&&!GROUP[id])return;
+ const row={from_u:u.u,to_u:kind==='dm'?id:null,grp:kind==='g'?id:null,body};
+ if(isDemo()){row.id=social.nextId=(social.nextId||0)+1;row.created_at=new Date().toISOString();social.msgs.push(row);save();render();return}
+ const {data,error}=await sb.from('messages').insert(row).select('id,from_u,to_u,grp,body,created_at').single();
+ if(error)return toast('Mesajul nu s-a trimis: '+error.message);
+ if(!social.msgs.some(x=>x.id===data.id))social.msgs.push(data);
+ render();
+}
+function relBtn(u,p){const r=relation(u.u,p.u);
+ return r==='friends'?`<span class="small muted">Prieteni ✓</span>`
+  :r==='out'?`<button class="btn sm ghost" data-a="cancelreq" data-u="${p.u}">Trimisă ✕</button>`
+  :r==='in'?`<button class="btn sm gold" data-a="acceptreq" data-u="${p.u}">Acceptă</button>`
+  :`<button class="btn sm" data-a="addf" data-u="${p.u}">+ Cerere</button>`}
+
 /* ================= UI DE BAZĂ ================= */
 const state={run:null,sitAns:{},fSort:'save',fScope:'friends'};
 let toastT;
@@ -387,14 +519,15 @@ let lastRoute='';
 function shell(u,inner,tab){
  const T=u.role==='profesor'
   ?[['class','🏫','Clase'],['learn','📚','Lecții'],['sit','💡','Situații'],['profile',u.avatar,'Profil']]
-  :[['learn','📚','Învață'],['sit','💡','Situații'],['capital','🪙','Capital 18'],['friends','👥','Prieteni'],['profile',u.avatar,'Profil']];
+  :[['learn','📚','Învață'],['sit','💡','Situații'],['capital','🪙','Capital 18'],['friends','👥','Prieteni'],['community','💬','Chat'],['profile',u.avatar,'Profil']];
+ const BD=u.role==='elev'?{friends:incoming(u.u).length,community:unreadDm(u.u)}:{};
  const top=u.role==='profesor'
   ?`<div class="logo">Capital<b>18</b></div><span class="pill">Profesor</span>`
   :`<div class="logo">Capital<b>18</b></div><div class="stats"><span class="stat fire" title="Serie de zile">🔥${streakNow(u)}</span><span class="stat xp" title="XP">⚡${fmt(u.xp)}</span><span class="stat coin" title="Fondul tău virtual">🪙${fmt(u.fund)}</span></div>`;
- return `<header class="top">${top}</header><main>${inner}</main><nav class="nav">${T.map(([k,i,l])=>`<a href="#/${k}" class="${tab===k?'on':''}"><span class="i">${i}</span>${l}</a>`).join('')}</nav>`;
+ return `<header class="top">${top}</header><main>${inner}</main><nav class="nav">${T.map(([k,i,l])=>`<a href="#/${k}" class="${tab===k?'on':''}"><span class="i">${i}</span>${BD[k]?`<span class="bd">${BD[k]>9?'9+':BD[k]}</span>`:''}${l}</a>`).join('')}</nav>`;
 }
 function render(){
- const u=me();const parts=location.hash.replace(/^#\/?/,'').split('/');const r=parts[0]||'';
+ const u=me();if(u&&u.role==='elev')syncFriends();const parts=location.hash.replace(/^#\/?/,'').split('/');const r=parts[0]||'';
  const app=$('#app');let html,tab=r,full=false;
  if(!u){html=r==='register'?viewRegister():r==='login'?viewLogin():viewLanding();full=true}
  else if(r==='run'&&state.run){html=viewRun();full=true}
@@ -405,6 +538,8 @@ function render(){
    case 'sit':html=parts[1]&&SIT[parts[1]]?viewSit(u,parts[1]):viewSits(u);break;
    case 'capital':html=u.role==='elev'?viewCapital(u):viewLearn(u);break;
    case 'friends':html=u.role==='elev'?viewFriends(u):viewLearn(u);break;
+   case 'community':html=u.role==='elev'?viewCommunity(u):viewLearn(u);break;
+   case 'chat':html=u.role==='elev'?viewChat(u,parts[1],decodeURIComponent(parts[2]||'')):viewLearn(u);tab='community';break;
    case 'profile':html=viewProfile(u);break;
    case 'class':html=u.role==='profesor'?(parts[1]&&db.classes[parts[1]]?viewClass(u,parts[1]):viewClasses(u)):viewLearn(u);if(u.role!=='profesor')tab='learn';break;
    default:return go('#/learn');
@@ -412,6 +547,7 @@ function render(){
  }
  app.innerHTML=full?html:shell(u,html,tab);
  if(location.hash!==lastRoute){window.scrollTo(0,0);lastRoute=location.hash}
+ if(r==='chat'&&u)window.scrollTo(0,document.body.scrollHeight);
 }
 
 /* ================= AUTENTIFICARE ================= */
@@ -569,23 +705,68 @@ function budgetForm(u){return `<form data-f="budget"><label class="f">Bani primi
 /* ================= PRIETENI ================= */
 function viewFriends(u){
  const c=classOf(u);const scope=state.fScope==='class'&&c?'class':'friends';
- let people=scope==='class'?studentsOf(u.classCode):u.friends.map(f=>db.users[f]).filter(Boolean).concat([u]);
+ let people=scope==='class'?studentsOf(u.classCode):friendsList(u.u).map(f=>db.users[f]).filter(Boolean).concat([u]);
  const key={save:x=>goalPct(x),lessons:x=>nDone(x),xp:x=>weekXp(x)}[state.fSort];
  people=people.slice().sort((a,b)=>key(b)-key(a)||b.xp-a.xp);
  const label={save:'Obiectiv economisire',lessons:'Lecții făcute',xp:'XP săptămâna asta'}[state.fSort];
+ const inc=incoming(u.u).map(x=>db.users[x]).filter(Boolean),out=outgoing(u.u).map(x=>db.users[x]).filter(Boolean);
  let h=`<h1>👥 Prieteni</h1>
- <form data-f="addfriend" class="row"><input name="u" placeholder="Adaugă după nume de utilizator" autocapitalize="none" autocorrect="off" spellcheck="false" required><button class="btn sm">Adaugă</button></form>
- <div class="mt"></div>
- ${c?`<div class="seg"><button class="${scope==='friends'?'on':''}" data-a="fscope" data-v="friends">Prieteni</button><button class="${scope==='class'?'on':''}" data-a="fscope" data-v="class">Clasa ${esc(c.name)}</button></div><div style="height:8px"></div>`:''}
+ <form data-f="addfriend" class="row"><input name="u" placeholder="Nume de utilizator, ex: andrei.p" autocapitalize="none" autocorrect="off" spellcheck="false" required><button class="btn sm">Trimite cerere</button></form>
+ <div class="mt"></div>`;
+ if(inc.length)h+=`<div class="card gold"><h3>📨 Cereri de prietenie (${inc.length})</h3>${inc.map(p=>`<div class="li"><div class="av">${p.avatar}</div><div class="grow"><b>${esc(p.name)}</b><div class="small muted">@${esc(p.u)}${p.grade?' · clasa a '+esc(p.grade)+'-a':''}</div></div><button class="btn sm" data-a="acceptreq" data-u="${p.u}">Acceptă</button><button class="x small" style="font-size:1rem" data-a="declinereq" data-u="${p.u}" aria-label="Refuză">✕</button></div>`).join('')}</div>`;
+ h+=`${c?`<div class="seg"><button class="${scope==='friends'?'on':''}" data-a="fscope" data-v="friends">Prieteni</button><button class="${scope==='class'?'on':''}" data-a="fscope" data-v="class">Clasa ${esc(c.name)}</button></div><div style="height:8px"></div>`:''}
  <div class="seg"><button class="${state.fSort==='save'?'on':''}" data-a="fsort" data-v="save">🐷 Economisire</button><button class="${state.fSort==='lessons'?'on':''}" data-a="fsort" data-v="lessons">📚 Lecții</button><button class="${state.fSort==='xp'?'on':''}" data-a="fsort" data-v="xp">⚡ XP</button></div>
  <p class="small muted mt">Clasament după: <b>${label}</b>. La economisire contează procentul din obiectivul tău, nu suma, ca să fie corect pentru toată lumea.</p>
  <div class="card">`;
- if(people.length<=1&&scope==='friends')h+=`<p class="center muted">Încă nu ai prieteni adăugați. Cere-le numele de utilizator${c?' sau adaugă colegi din clasă mai jos':''}.</p>`;
- people.forEach((p,i)=>{const val=state.fSort==='save'?(p.budget?goalPct(p)+'%':'—'):state.fSort==='lessons'?nDone(p)+'/'+TOTAL:fmt(weekXp(p))+' XP';
-  h+=`<div class="li ${p.u===u.u?'me':''}"><div class="rank">${i<3?['🥇','🥈','🥉'][i]:i+1}</div><div class="av">${p.avatar}</div><div class="grow"><b>${esc(p.name)}${p.u===u.u?' (tu)':''}</b><div class="metrics"><span>🐷 ${p.budget?goalPct(p)+'%':'—'}</span><span>📚 ${nDone(p)}</span><span>🔥 ${streakNow(p)}</span></div></div><b>${val}</b>${p.u!==u.u&&scope==='friends'?`<button class="x small" style="font-size:1rem" data-a="unfriend" data-u="${p.u}" aria-label="Șterge">✕</button>`:''}</div>`});
+ if(people.length<=1&&scope==='friends')h+=`<p class="center muted">Încă nu ai prieteni. Trimite o cerere după numele de utilizator sau caută persoane noi în Chat.</p><div class="center"><button class="btn sm" data-a="ctab" data-v="people">💬 Cunoaște persoane noi</button></div>`;
+ people.forEach((p,i)=>{const val=state.fSort==='save'?(p.budget?goalPct(p)+'%':'—'):state.fSort==='lessons'?nDone(p)+'/'+TOTAL:fmt(weekXp(p))+' XP';const fr=p.u!==u.u&&relation(u.u,p.u)==='friends';
+  h+=`<div class="li ${p.u===u.u?'me':''}"><div class="rank">${i<3?['🥇','🥈','🥉'][i]:i+1}</div><div class="av">${p.avatar}</div><div class="grow"><b>${esc(p.name)}${p.u===u.u?' (tu)':''}</b><div class="metrics"><span>🐷 ${p.budget?goalPct(p)+'%':'—'}</span><span>📚 ${nDone(p)}</span><span>🔥 ${streakNow(p)}</span></div></div><b>${val}</b>${fr?`<a class="x small" style="font-size:1rem;text-decoration:none" href="#/chat/dm/${encodeURIComponent(p.u)}" aria-label="Mesaj">💬</a>${scope==='friends'?`<button class="x small" style="font-size:1rem" data-a="unfriend" data-u="${p.u}" aria-label="Șterge">✕</button>`:''}`:''}</div>`});
  h+=`</div>`;
- if(c){const sug=studentsOf(u.classCode).filter(s=>s.u!==u.u&&!u.friends.includes(s.u));if(sug.length)h+=`<h3>Colegi din clasa ta</h3><div class="card">${sug.map(s=>`<div class="li"><div class="av">${s.avatar}</div><div class="grow"><b>${esc(s.name)}</b><div class="small muted">@${esc(s.u)}</div></div><button class="btn sm" data-a="addf" data-u="${s.u}">+ Adaugă</button></div>`).join('')}</div>`}
- h+=`<div class="card blue small">Numele tău de utilizator: <b>@${esc(u.u)}</b>. Dă-l prietenilor ca să te adauge.</div>`;
+ if(out.length)h+=`<h3>Cereri trimise</h3><div class="card">${out.map(p=>`<div class="li"><div class="av">${p.avatar}</div><div class="grow"><b>${esc(p.name)}</b><div class="small muted">Așteaptă să accepte</div></div><button class="btn sm ghost" data-a="cancelreq" data-u="${p.u}">Anulează</button></div>`).join('')}</div>`;
+ if(c){const sug=studentsOf(u.classCode).filter(s=>s.u!==u.u&&relation(u.u,s.u)!=='friends');if(sug.length)h+=`<h3>Colegi din clasa ta</h3><div class="card">${sug.map(s=>`<div class="li"><div class="av">${s.avatar}</div><div class="grow"><b>${esc(s.name)}</b><div class="small muted">@${esc(s.u)}</div></div>${relBtn(u,s)}</div>`).join('')}</div>`}
+ h+=`<div class="card blue small">Numele tău de utilizator: <b>@${esc(u.u)}</b>. Dă-l prietenilor ca să-ți trimită o cerere.</div>`;
+ return h;
+}
+
+/* ================= COMUNITATE ================= */
+function viewCommunity(u){
+ const t=state.cTab||'msgs';const un=unreadDm(u.u);
+ let h=`<h1>💬 Comunitate</h1><div class="seg"><button class="${t==='msgs'?'on':''}" data-a="ctab" data-v="msgs">Mesaje${un?` (${un})`:''}</button><button class="${t==='groups'?'on':''}" data-a="ctab" data-v="groups">Grupuri</button><button class="${t==='people'?'on':''}" data-a="ctab" data-v="people">Persoane noi</button></div><div style="height:12px"></div>`;
+ if(!social.ok)h+=`<div class="card gold small">Comunitatea nu e disponibilă momentan. Verifică internetul sau încearcă mai târziu.</div>`;
+ if(t==='msgs'){
+  const inc=incoming(u.u).length;
+  if(inc)h+=`<a class="card gold row" href="#/friends" style="text-decoration:none;color:inherit"><div style="font-size:1.6rem">📨</div><div class="grow"><b>${inc} ${inc===1?'cerere':'cereri'} de prietenie</b><div class="small muted">Apasă ca să răspunzi</div></div></a>`;
+  const fr=friendsList(u.u).map(x=>db.users[x]).filter(Boolean);
+  if(!fr.length)h+=`<div class="card center"><div style="font-size:2.4rem">👋</div><p>Poți vorbi în privat doar cu prietenii tăi.</p><button class="btn sm" data-a="ctab" data-v="people">Găsește persoane noi</button></div>`;
+  else{const rows=fr.map(f=>{const ms=threadMsgs(u.u,'dm',f.u);return{f,last:ms[ms.length-1],n:unreadIn(u.u,'dm',f.u)}}).sort((a,b)=>(b.last?b.last.id:0)-(a.last?a.last.id:0));
+   h+=`<div class="card">${rows.map(({f,last,n})=>`<a class="li" href="#/chat/dm/${encodeURIComponent(f.u)}"><div class="av">${f.avatar}</div><div class="grow"><b>${esc(f.name)}</b><div class="small muted">${last?(last.from_u===u.u?'Tu: ':'')+esc(cut(last.body,48)):'Scrie primul mesaj'}</div></div>${n?`<span class="unread">${n}</span>`:''}</a>`).join('')}</div>`}
+ }else if(t==='groups'){
+  const rd=getRead();
+  h+=`<p class="small muted">Grupuri deschise tuturor elevilor din Capital18. Intră, întreabă, ajută-i pe alții.</p><div class="card">${GROUPS.map(g=>{const ms=threadMsgs(u.u,'g',g.id);const last=ms[ms.length-1];const n=rd['g:'+g.id]?unreadIn(u.u,'g',g.id):0;const w=last&&db.users[last.from_u];
+   return `<a class="li" href="#/chat/g/${g.id}"><div class="av">${g.e}</div><div class="grow"><b>${g.n}</b><div class="small muted">${last?esc((w?w.name.split(' ')[0]:last.from_u)+': '+cut(last.body,44)):esc(g.d)}</div></div>${n?`<span class="unread">${n}</span>`:''}</a>`}).join('')}</div>`;
+ }else{
+  const q=(state.pq||'').toLowerCase(),c=classOf(u);
+  let ps=Object.values(db.users).filter(p=>p.role==='elev'&&p.u!==u.u&&relation(u.u,p.u)!=='friends');
+  if(q)ps=ps.filter(p=>String(p.name).toLowerCase().includes(q)||p.u.includes(q));
+  const sc=p=>(relation(u.u,p.u)==='in'?1e6:0)+(c&&p.classCode===u.classCode?1e5:0)+(p.grade&&p.grade===u.grade?1e4:0)+(p.xp||0);
+  ps=ps.sort((a,b)=>sc(b)-sc(a)).slice(0,40);
+  h+=`<form data-f="psearch" class="row"><input name="q" value="${esc(state.pq||'')}" placeholder="Caută după nume" autocapitalize="none" autocorrect="off" spellcheck="false"><button class="btn sm">Caută</button></form><p class="small muted mt">Elevi care învață și ei cu Capital18. Trimite o cerere; după ce o acceptă, puteți vorbi.</p>`;
+  h+=ps.length?`<div class="card">${ps.map(p=>`<div class="li"><div class="av">${p.avatar}</div><div class="grow"><b>${esc(p.name)}</b><div class="small muted">@${esc(p.u)}${p.grade?' · a '+esc(p.grade)+'-a':''} · Nivel ${level(p)}${c&&p.classCode===u.classCode?' · 🏫 din clasa ta':''}</div></div>${relBtn(u,p)}</div>`).join('')}</div>`:`<p class="center muted">${q?'N-am găsit pe nimeni cu numele ăsta.':'Încă nu sunt alți elevi. Invită-ți colegii!'}</p>`;
+ }
+ return h;
+}
+function viewChat(u,kind,id){
+ const g=kind==='g'?GROUP[id]:null,f=kind==='dm'?db.users[id]:null;
+ if(!g&&!f){state.cTab='msgs';return viewCommunity(u)}
+ const ms=threadMsgs(u.u,kind,id),th=(g?'g:':'dm:')+id;
+ markRead(th,ms.length?ms[ms.length-1].id:0.5);
+ const can=!!g||relation(u.u,id)==='friends';
+ let h=`<button class="link" data-a="back" data-to="#/community">← Comunitate</button>
+ <div class="row" style="margin:8px 0 4px"><div class="av">${g?g.e:f.avatar}</div><div class="grow"><h2 style="margin:0">${esc(g?g.n:f.name)}</h2><div class="small muted">${g?esc(g.d):'@'+esc(f.u)}</div></div></div>`;
+ if(g)h+=`<div class="card blue small">🛡️ Fii respectuos. Nu da adresa, telefonul sau datele cardului. Nimeni de aici nu are nevoie de banii tăi.</div>`;
+ h+=`<div class="msgs">${ms.length?ms.map(m=>{const mine=m.from_u===u.u,w=db.users[m.from_u];return `<div class="bub ${mine?'me':''}">${!mine&&g?`<div class="who">${w?w.avatar+' '+esc(w.name):'@'+esc(m.from_u)}</div>`:''}${esc(m.body)}<div class="tm">${hm(m.created_at)}</div></div>`}).join(''):`<p class="center muted small">Niciun mesaj încă. Scrie tu primul!</p>`}</div>`;
+ h+=can?`<form data-f="sendmsg" class="row chatbar"><input type="hidden" name="k" value="${kind}"><input type="hidden" name="id" value="${esc(id)}"><input name="body" maxlength="500" placeholder="Scrie un mesaj…" autocomplete="off" required><button class="btn sm">Trimite</button></form>`
+  :`<div class="card small center">Nu mai sunteți prieteni, deci nu poți trimite mesaje.</div>`;
  return h;
 }
 
@@ -661,7 +842,11 @@ const A={
  fsort(el){state.fSort=el.dataset.v;render()},
  fscope(el){state.fScope=el.dataset.v;render()},
  addf(el){addFriend(me(),el.dataset.u)},
- unfriend(el){const u=me(),f=db.users[el.dataset.u];if(!f||!confirm(`Ștergi pe ${f.name} din prieteni?`))return;u.friends=u.friends.filter(x=>x!==f.u);if(isDemo())f.friends=f.friends.filter(x=>x!==u.u);save();render()},
+ unfriend(el){const f=db.users[el.dataset.u];if(!f||!confirm(`Ștergi pe ${f.name} din prieteni?`))return;removeRel(f.u,`${f.name} nu mai e în lista ta de prieteni`)},
+ acceptreq(el){acceptRequest(el.dataset.u)},
+ declinereq(el){removeRel(el.dataset.u,'Cerere refuzată')},
+ cancelreq(el){removeRel(el.dataset.u,'Cerere anulată')},
+ ctab(el){state.cTab=el.dataset.v;go('#/community')},
  avatar(el){const u=me(),a=AVATARS.find(x=>x[0]===el.dataset.e);if(level(u)<a[1])return toast(`🔒 Se deblochează la nivelul ${a[1]}`);u.avatar=a[0];save();render()},
  leaveclass(){const u=me();if(!confirm('Ieși din clasă?'))return;u.classCode=null;save();render()},
  install(){if(deferredPrompt){deferredPrompt.prompt();deferredPrompt.userChoice.finally(()=>{deferredPrompt=null});return}
@@ -672,12 +857,12 @@ const A={
  sharecode(el){const c=db.classes[el.dataset.code];const url=location.href.split('#')[0];const text=`Intră în clasa „${c.name}” pe Capital18. Fă-ți cont și scrie codul ${c.code} la „Clasa mea”.`;if(navigator.share)navigator.share({title:'Capital18',text,url}).catch(()=>{});else copy(text+' '+url,'Mesajul a fost copiat')},
  delhw(el){const c=db.classes[el.dataset.code];c.hw=c.hw.filter(w=>w.id!==el.dataset.id);save();render()},
  kick(el){const s=db.users[el.dataset.u];if(!s||!confirm(`Scoți pe ${s.name} din clasă?`))return;s.classCode=null;if(isDemo()){save();render();return}sb.rpc('scoate_din_clasa',{p_username:s.u}).then(({error})=>{if(error)toast('Eroare: '+error.message);render()})},
- logout(){state.run=null;if(isDemo()){store.del(SES_KEY);if(sb){store.del(MODE_KEY);db=emptyDb()}go('#/');return}
+ logout(){state.run=null;state.cTab='msgs';state.pq='';stopRealtime();social={reqs:[],msgs:[],ok:false};if(isDemo()){store.del(SES_KEY);if(sb){store.del(MODE_KEY);db=emptyDb()}go('#/');return}
   pushNow().catch(()=>{}).finally(()=>sb.auth.signOut().finally(()=>{cloudUser=null;authId=null;db=emptyDb();go('#/')}))},
  reset(){if(!confirm('Ștergi TOATE conturile și datele de pe acest dispozitiv și refaci conturile demo?'))return;store.del(DB_KEY);store.del(SES_KEY);loadDb();go('#/')}
 };
 function copy(t,msg){(navigator.clipboard?navigator.clipboard.writeText(t):Promise.reject()).then(()=>toast(msg)).catch(()=>prompt('Copiază:',t))}
-function addFriend(u,name,retried){const f=db.users[name];if(!f){if(!isDemo()&&!retried)return refresh().then(()=>addFriend(me(),name,true)).catch(()=>toast('Verifică internetul'));return toast('Nu există utilizatorul @'+name)}if(f.u===u.u)return toast('Nu te poți adăuga pe tine 🙂');if(f.role!=='elev')return toast('Poți adăuga doar elevi');if(u.friends.includes(f.u))return toast('Sunteți deja prieteni');u.friends.push(f.u);if(isDemo()&&!f.friends.includes(u.u))f.friends.push(u.u);const nb=checkBadges(u);save();toast(nb.length?`🏅 Insignă nouă: ${nb[0].n}`:`${f.name} e acum prietenul tău`);render()}
+function addFriend(u,name,retried){if(!db.users[name]&&!isDemo()&&!retried)return refresh().then(()=>addFriend(me(),name,true)).catch(()=>toast('Verifică internetul'));sendRequest(name)}
 
 /* ================= CONTURI ONLINE ================= */
 function busy(form,on,label){const b=document.querySelector(`form[data-f=${form}] button`);if(b){b.disabled=on;if(label)b.textContent=label}}
@@ -739,6 +924,8 @@ const F={
   toast(nb.length?`🏅 Insignă nouă: ${nb[0].n}`:goalPct(u)>=100&&before<100?'🎉 Obiectivul lunii e atins!':`+${v} lei în pușculiță 🐷`);render()},
  budget(f){const u=me();const d=new FormData(f);const b=Math.round(+d.get('budget'));if(!(b>0))return;u.budget=b;u.goalPct=+d.get('goal')||20;checkBadges(u);save();closeSheet();toast('Obiectiv salvat');render()},
  challenge(f){const u=me();const d=new FormData(f);const c=CHALLENGES.find(x=>x.id===d.get('id'));if(!c)return;u.ch[c.id]=dayKey();(u.chLog=u.chLog||[]).push({id:c.id,date:dayKey(),text:String(d.get('proof')).slice(0,300)});const nb=award(u,c.xp,c.fund);save();closeSheet();toast(nb.length?`🏅 Insignă nouă: ${nb[0].n}`:`+${c.fund} lei în Capitalul tău 🪙`);render()},
+ sendmsg(f){const d=new FormData(f);const inp=f.querySelector('input[name=body]');const b=inp.value;inp.value='';sendMessage(d.get('k'),d.get('id'),b)},
+ psearch(f){state.pq=String(new FormData(f).get('q')||'').trim();render()},
  addfriend(f){addFriend(me(),String(new FormData(f).get('u')).trim().toLowerCase().replace(/^@/,''))},
  join(f,retried){const u=me();const code=String(new FormData(f).get('code')).trim().toUpperCase();if(!db.classes[code]&&!isDemo()&&!retried){refresh().then(()=>F.join(f,true)).catch(()=>toast('Verifică internetul'));return}if(!db.classes[code])return toast('Codul nu există. Verifică-l cu profesorul.');u.classCode=code;save();toast('Ai intrat în clasa '+db.classes[code].name);render()},
  newclass(f){const u=me();const name=String(new FormData(f).get('name')).trim();if(!name)return;const A='ABCDEFGHJKLMNPQRSTUVWXYZ23456789';let code;do{code=Array.from({length:6},()=>A[Math.floor(Math.random()*A.length)]).join('')}while(db.classes[code]);db.classes[code]={code,name,teacher:u.u,created:dayKey(),hw:[]};save();go('#/class/'+code)},
@@ -755,6 +942,7 @@ const typing=()=>{const a=document.activeElement;return a&&/INPUT|TEXTAREA|SELEC
 function softRefresh(){if(isDemo()||!cloudUser||state.run||typing()||$('#sheet').classList.contains('on'))return;refresh().then(()=>{if(!state.run&&!typing())render()}).catch(()=>{})}
 document.addEventListener('visibilitychange',()=>{if(document.visibilityState==='hidden')pushNow().catch(()=>{});else softRefresh()});
 setInterval(()=>{if(document.visibilityState==='visible')softRefresh()},60000);
+setInterval(()=>{if(document.visibilityState==='visible'&&/^#\/(chat|community|friends)/.test(location.hash))pollSocial().catch(()=>{})},5000);
 async function boot(){
  if(isDemo()){loadDb();render();return}
  $('#app').innerHTML='<div class="landing"><div class="logo" style="font-size:1.5rem;justify-content:center">Capital<b>18</b></div><p class="center muted">Se încarcă…</p></div>';
